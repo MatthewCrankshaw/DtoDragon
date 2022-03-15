@@ -1,0 +1,22 @@
+{
+    "name": "matthewcrankshaw/dto-dragon",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "DtoDragon\\": "src/",
+            "DtoDragon\\Test\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matthew Crankshaw",
+            "email": "mhcrankshaw2@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    }
+}
