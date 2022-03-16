@@ -70,17 +70,4 @@ class DtoReflectorTest extends DtoDragonTestCase
             $this->assertTrue($property->isPrivate());
         }
     }
-
-    /**
-     * @dataProvider providerCalenderItemDto
-     */
-    public function testGetPropertyNames(array $array): void
-    {
-        $dto = new CalendarItemDto($array);
-        $dtoReflector = new DtoReflector($dto);
-        $propertyNames = $dtoReflector->getPropertyNames();
-        $expected = ['id', 'name', 'client', 'services', 'tags'];
-
-        $this->assertSame($expected, $propertyNames);
-    }
 }

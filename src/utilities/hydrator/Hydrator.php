@@ -6,6 +6,7 @@ use DtoDragon\DataTransferObject;
 use DtoDragon\interfaces\HydratorInterface;
 use DtoDragon\Test\dtos\ClientDto;
 use DtoDragon\utilities\DtoReflector;
+use DtoDragon\utilities\DtoReflectorFactory;
 use ReflectionProperty;
 
 class Hydrator implements HydratorInterface
@@ -14,10 +15,10 @@ class Hydrator implements HydratorInterface
 
     private DtoReflector $reflector;
 
-    public function __construct(DataTransferObject $dto)
+    public function __construct(DataTransferObject $dto, DtoReflectorFactory $factory)
     {
         $this->dto = $dto;
-        $this->reflector = new DtoReflector($dto);
+        $this->reflector = $factory->create($dto);
     }
 
     public function hydrate(array $data): DataTransferObject

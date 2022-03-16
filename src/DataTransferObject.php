@@ -2,6 +2,7 @@
 
 namespace DtoDragon;
 
+use DtoDragon\utilities\DtoReflectorFactory;
 use DtoDragon\utilities\extractor\Extractor;
 use DtoDragon\utilities\hydrator\Hydrator;
 
@@ -33,8 +34,9 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
-        $this->extractor = new Extractor($this);
-        $this->hydrator = new Hydrator($this);
+        $factory = new DtoReflectorFactory();
+        $this->extractor = new Extractor($this, $factory);
+        $this->hydrator = new Hydrator($this, $factory);
         if (!empty($data)) {
             $this->hydrator->hydrate($data);
         }

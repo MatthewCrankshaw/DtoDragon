@@ -6,18 +6,16 @@ use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\interfaces\ExtractorInterface;
 use DtoDragon\utilities\DtoReflector;
+use DtoDragon\utilities\DtoReflectorFactory;
 use ReflectionProperty;
 
 class Extractor implements ExtractorInterface
 {
-    private DataTransferObject $dto;
-
     private DtoReflector $reflector;
 
-    public function __construct(DataTransferObject $dto)
+    public function __construct(DataTransferObject $dto, DtoReflectorFactory $factory)
     {
-        $this->dto = $dto;
-        $this->reflector = new DtoReflector($dto);
+        $this->reflector = $factory->create($dto);
     }
 
     public function extract(): array

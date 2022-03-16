@@ -4,10 +4,11 @@ namespace DtoDragon\utilities;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
+use DtoDragon\interfaces\DtoReflectorInterface;
 use ReflectionClass;
 use ReflectionProperty;
 
-class DtoReflector
+class DtoReflector implements DtoReflectorInterface
 {
     private DataTransferObject $dto;
 
@@ -32,23 +33,6 @@ class DtoReflector
     public function getProperties(): array
     {
         return $this->dtoReflection->getProperties();
-    }
-
-    /**
-     * Get the dto property names
-     *
-     * @return string[]
-     */
-    public function getPropertyNames(): array
-    {
-        $properties = $this->getProperties();
-        $propertyNames = [];
-
-        foreach ($properties as $property) {
-            $propertyNames[] = $property->getName();
-        }
-
-        return $propertyNames;
     }
 
     /**
