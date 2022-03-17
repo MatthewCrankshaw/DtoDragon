@@ -4,6 +4,7 @@ namespace DtoDragon\Test;
 
 use DtoDragon\Test\dtos\CalendarItemCollection;
 use DtoDragon\Test\dtos\CalendarItemDto;
+use DtoDragon\Test\dtos\Date;
 
 class CalendarItemCollectionTest extends DtoDragonTestCase
 {
@@ -29,6 +30,7 @@ class CalendarItemCollectionTest extends DtoDragonTestCase
                     'client' => null,
                     'services' => null,
                     'tags' => null,
+                    'date' => new Date(1, 2, 1992),
                 ]),
             ],
         ];

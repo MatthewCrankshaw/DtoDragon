@@ -4,6 +4,7 @@ namespace DtoDragon\Test\utilities;
 
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\dtos\CalendarItemDto;
+use DtoDragon\Test\dtos\Date;
 use DtoDragon\utilities\DtoReflector;
 
 class DtoReflectorTest extends DtoDragonTestCase
@@ -28,7 +29,8 @@ class DtoReflectorTest extends DtoDragonTestCase
                 'tags' => [
                     'test 1',
                     'test 2',
-                ]
+                ],
+                'date' => new Date(1, 1, 2000),
             ]],
         ];
     }
@@ -54,7 +56,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $dtoReflector = new DtoReflector($dto);
         $properties = $dtoReflector->getProperties();
 
-        $this->assertCount(5, $properties);
+        $this->assertCount(6, $properties);
     }
 
     /**

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace DtoDragon\interfaces;
-
 
 interface ExtractorInterface
 {

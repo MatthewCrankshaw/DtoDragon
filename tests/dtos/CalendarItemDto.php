@@ -16,6 +16,8 @@ class CalendarItemDto extends DataTransferObject
 
     private ?array $tags;
 
+    private ?Date $date;
+
     public function getId(): int
     {
         return $this->id;
