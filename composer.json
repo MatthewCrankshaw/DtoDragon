@@ -1,5 +1,7 @@
 {
     "name": "matthewcrankshaw/dto-dragon",
+    "description": "A powerful data transfer object (DTO) library",
+    "license": "proprietary",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^9.5"
