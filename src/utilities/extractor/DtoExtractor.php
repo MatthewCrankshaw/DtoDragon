@@ -4,26 +4,26 @@ namespace DtoDragon\utilities\extractor;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\interfaces\ExtractorInterface;
+use DtoDragon\interfaces\DtoExtractorInterface;
 use DtoDragon\singletons\CastersSingleton;
 use DtoDragon\Test\Caster\DateCaster;
 use DtoDragon\utilities\DtoReflector;
 use DtoDragon\utilities\DtoReflectorFactory;
 use ReflectionProperty;
 
-class Extractor implements ExtractorInterface
+class DtoExtractor implements DtoExtractorInterface
 {
     private DtoReflector $reflector;
 
-    private CastersSingleton $casters;
-
-    public function __construct(DataTransferObject $dto, DtoReflectorFactory $factory)
+    public function __construct(DtoReflectorFactory $factory)
     {
-        $this->reflector = $factory->create($dto);
-        $this->casters = CastersSingleton::getInstance();
-        $this->casters->register(new DateCaster());
+        $this->reflector = $factory->create();
+        CastersSingleton::getInstance()->register(new DateCaster());
     }
 
+    /**
+     * @inheritDoc
+     */
     public function extract(): array
     {
         $array = [];
@@ -35,12 +35,13 @@ class Extractor implements ExtractorInterface
 
     private function extractProperty(ReflectionProperty $property, array &$array): void
     {
+        $casters = CastersSingleton::getInstance();
         $propertyName = $property->getName();
-        $value = $this->reflector->getProperty($property);
+        $value = $this->reflector->getPropertyValue($property);
         if ($this->isNestedDto($value)) {
             $value = $value->toArray();
-        } elseif ($this->casters->hasCaster($value)) {
-            $caster = $this->casters->getCaster($value);
+        } elseif ($casters->hasCaster($value)) {
+            $caster = $casters->getCaster($value);
             $value = $caster->cast($value);
         }
         $array[$propertyName] = $value;

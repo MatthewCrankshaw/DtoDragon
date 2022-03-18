@@ -3,15 +3,22 @@
 namespace DtoDragon\utilities;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\interfaces\DtoReflectorInterface;
+use DtoDragon\interfaces\ReflectorInterface;
 
 class DtoReflectorFactory
 {
+    public DataTransferObject $dto;
+
+    public function __construct(DataTransferObject $dto)
+    {
+        $this->dto = $dto;
+    }
+
     /**
      * @return DtoReflector
      */
-    public function create(DataTransferObject $dto): DtoReflectorInterface
+    public function create(): ReflectorInterface
     {
-        return new DtoReflector($dto);
+        return new DtoReflector($this->dto);
     }
 }

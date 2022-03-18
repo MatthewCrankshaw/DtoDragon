@@ -11,14 +11,11 @@ use ReflectionProperty;
 
 class Hydrator implements HydratorInterface
 {
-    private DataTransferObject $dto;
-
     private DtoReflector $reflector;
 
-    public function __construct(DataTransferObject $dto, DtoReflectorFactory $factory)
+    public function __construct(DtoReflectorFactory $factory)
     {
-        $this->dto = $dto;
-        $this->reflector = $factory->create($dto);
+        $this->reflector = $factory->create();
     }
 
     public function hydrate(array $data): DataTransferObject
@@ -27,7 +24,7 @@ class Hydrator implements HydratorInterface
         foreach ($properties as $property) {
             $this->hydrateProperty($property, $data);
         }
-        return $this->dto;
+        return $this->reflector->getDto();
     }
 
     private function hydrateProperty(ReflectionProperty $property, array $data)
@@ -36,14 +33,14 @@ class Hydrator implements HydratorInterface
 
         if (is_array($value)) {
             if ($this->reflector->propertyIsDto($property)) {
-                $this->reflector->setProperty($property, new ClientDto($value));
+                $this->reflector->setPropertyValue($property, new ClientDto($value));
             } elseif ($this->reflector->propertyIsCollection($property)) {
                 $this->hydrateCollection($property, $value);
             } elseif ($this->reflector->propertyIsArray($property)) {
-                $this->reflector->setProperty($property, $value);
+                $this->reflector->setPropertyValue($property, $value);
             }
         } else {
-            $this->reflector->setProperty($property, $value);
+            $this->reflector->setPropertyValue($property, $value);
         }
     }
 
@@ -56,14 +53,14 @@ class Hydrator implements HydratorInterface
             $dtoType = $collection::dtoType();
             $collectArray[] = new $dtoType($item);
         }
-        $this->reflector->setProperty($property, new $collection($collectArray));
+        $this->reflector->setPropertyValue($property, new $collection($collectArray));
     }
 
     private function isPropertyValueProvided(string $propertyName, array $data): bool
     {
         if (!array_key_exists($propertyName, $data)) {
             throw new \Exception(
-                'Expected property (' . $propertyName . ') to exist in ' . get_class($this->dto)
+                'Expected property (' . $propertyName . ') to exist in ' . get_class($this->reflector->getDto())
             );
         }
         return true;

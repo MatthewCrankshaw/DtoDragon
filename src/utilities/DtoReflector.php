@@ -4,11 +4,11 @@ namespace DtoDragon\utilities;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\interfaces\DtoReflectorInterface;
+use DtoDragon\interfaces\ReflectorInterface;
 use ReflectionClass;
 use ReflectionProperty;
 
-class DtoReflector implements DtoReflectorInterface
+class DtoReflector implements ReflectorInterface
 {
     private DataTransferObject $dto;
 
@@ -17,18 +17,21 @@ class DtoReflector implements DtoReflectorInterface
     public function __construct(DataTransferObject $dto)
     {
         $this->dto = $dto;
-        $this->dtoReflection = $this->createReflection();
+        $this->dtoReflection = $this->createClassReflection();
     }
 
-    private function createReflection(): ReflectionClass
+    private function createClassReflection(): ReflectionClass
     {
         return new ReflectionClass($this->dto);
     }
 
+    public function getDto(): DataTransferObject
+    {
+        return $this->dto;
+    }
+
     /**
-     * Get the reflection properties for the data transfer object
-     *
-     * @return ReflectionProperty[]
+     * @inheritDoc
      */
     public function getProperties(): array
     {
@@ -36,24 +39,18 @@ class DtoReflector implements DtoReflectorInterface
     }
 
     /**
-     * Gets the value of a reflected class regardless of accessibility
-     *
-     * @param ReflectionProperty $property
-     *
-     * @return mixed
+     * @inheritDoc
      */
-    public function getProperty(ReflectionProperty $property)
+    public function getPropertyValue(ReflectionProperty $property)
     {
         $property->setAccessible(true);
         return $property->getValue($this->dto);
     }
 
     /**
-     * @param ReflectionProperty $property
-     *
-     * @param mixed $value
+     * @inheritDoc
      */
-    public function setProperty(ReflectionProperty $property, $value)
+    public function setPropertyValue(ReflectionProperty $property, $value): void
     {
         $property->setAccessible(true);
         $property->setValue($this->dto, $value);
@@ -62,28 +59,18 @@ class DtoReflector implements DtoReflectorInterface
     public function propertyIsDto(ReflectionProperty $property): bool
     {
         $type = $property->getType()->getName();
-        return $this->isDataTransferObject($type);
+        return is_subclass_of($type, DataTransferObject::class);
     }
 
     public function propertyIsCollection(ReflectionProperty $property): bool
     {
         $type = $property->getType()->getName();
-        return $this->isCollection($type);
+        return is_subclass_of($type, DataTransferObjectCollection::class);
     }
 
     public function propertyIsArray(ReflectionProperty $property): bool
     {
         $type = $property->getType()->getName();
         return $type === 'array';
-    }
-
-    private function isDataTransferObject($object): bool
-    {
-        return is_subclass_of($object, DataTransferObject::class);
-    }
-
-    private function isCollection($object): bool
-    {
-        return is_subclass_of($object, DataTransferObjectCollection::class);
     }
 }

@@ -28,8 +28,8 @@ class HydratorTest extends DtoDragonTestCase
     public function testHydrate(array $data): void
     {
         $dto = new MultiTypeDto();
-        $factory = new DtoReflectorFactory();
-        $hydrator = new Hydrator($dto, $factory);
+        $factory = new DtoReflectorFactory($dto);
+        $hydrator = new Hydrator($factory);
 
         $actual = $hydrator->hydrate($data);
 

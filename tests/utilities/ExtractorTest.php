@@ -5,7 +5,7 @@ namespace DtoDragon\Test\utilities;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\dtos\MultiTypeDto;
 use DtoDragon\utilities\DtoReflectorFactory;
-use DtoDragon\utilities\extractor\Extractor;
+use DtoDragon\utilities\extractor\DtoExtractor;
 
 class ExtractorTest extends DtoDragonTestCase
 {
@@ -27,8 +27,8 @@ class ExtractorTest extends DtoDragonTestCase
     public function testHydrate(array $data): void
     {
         $dto = new MultiTypeDto($data);
-        $factory = new DtoReflectorFactory();
-        $extractor = new Extractor($dto, $factory);
+        $factory = new DtoReflectorFactory($dto);
+        $extractor = new DtoExtractor($factory);
 
         $actual = $extractor->extract();
 
