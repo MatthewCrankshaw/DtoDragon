@@ -3,13 +3,13 @@
 namespace DtoDragon\utilities\hydrator;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\interfaces\HydratorInterface;
+use DtoDragon\interfaces\DtoHydratorInterface;
 use DtoDragon\Test\dtos\ClientDto;
 use DtoDragon\utilities\DtoReflector;
 use DtoDragon\utilities\DtoReflectorFactory;
 use ReflectionProperty;
 
-class Hydrator implements HydratorInterface
+class DtoHydrator implements DtoHydratorInterface
 {
     private DtoReflector $reflector;
 

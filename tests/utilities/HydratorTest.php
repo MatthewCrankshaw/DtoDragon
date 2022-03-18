@@ -6,7 +6,7 @@ use DtoDragon\DataTransferObject;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\dtos\MultiTypeDto;
 use DtoDragon\utilities\DtoReflectorFactory;
-use DtoDragon\utilities\hydrator\Hydrator;
+use DtoDragon\utilities\hydrator\DtoHydrator;
 
 class HydratorTest extends DtoDragonTestCase
 {
@@ -29,7 +29,7 @@ class HydratorTest extends DtoDragonTestCase
     {
         $dto = new MultiTypeDto();
         $factory = new DtoReflectorFactory($dto);
-        $hydrator = new Hydrator($factory);
+        $hydrator = new DtoHydrator($factory);
 
         $actual = $hydrator->hydrate($data);
 

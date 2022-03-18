@@ -3,7 +3,7 @@
 namespace DtoDragon\interfaces;
 
 /**
- * Defines the interface of an extractor
+ * Defines the interface of a DTO extractor
  * Extractors are responsible for extracting data from a data transfer object
  * and returning the data in an array format
  *

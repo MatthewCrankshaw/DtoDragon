@@ -40,9 +40,11 @@ class DtoExtractor implements DtoExtractorInterface
         $value = $this->reflector->getPropertyValue($property);
         if ($this->isNestedDto($value)) {
             $value = $value->toArray();
-        } elseif ($casters->hasCaster($value)) {
-            $caster = $casters->getCaster($value);
-            $value = $caster->cast($value);
+        } elseif (is_object($value)) {
+            if ($casters->hasCaster($value)) {
+                $caster = $casters->getCaster($value);
+                $value = $caster->cast($value);
+            }
         }
         $array[$propertyName] = $value;
     }

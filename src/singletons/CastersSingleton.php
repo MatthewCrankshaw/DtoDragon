@@ -5,14 +5,25 @@ namespace DtoDragon\singletons;
 use DtoDragon\interfaces\CasterInterface;
 use Exception;
 
+/**
+ * Singleton to manage an array of casters
+ *
+ * @package DtoDragon\singletons
+ *
+ * @author Matthew Crankshaw
+ */
 class CastersSingleton extends Singleton
 {
     /**
+     * The array of Casters
+     *
      * @var CasterInterface $casters
      */
     private array $casters = [];
 
     /**
+     * Registers a new caster for this singleton to manage
+     *
      * @param CasterInterface $caster
      *
      * @return void
@@ -20,37 +31,38 @@ class CastersSingleton extends Singleton
     public function register(CasterInterface $caster): void
     {
         if (!in_array($caster, $this->casters)) {
-            $this->casters[] = $caster;
+            print_r($caster->getType());
+            $this->casters[$caster->getType()] = $caster;
         }
     }
 
     /**
-     * @param $object
+     * Returns true if there is a caster for this object type
+     *
+     * @param object $object
      *
      * @return bool
      */
-    public function hasCaster($object): bool
+    public function hasCaster(object $object): bool
     {
-        foreach ($this->casters as $caster) {
-            if (is_a($object, $caster->getType())) {
-                return true;
-            }
+        if (isset($this->casters[$object::class])) {
+            return true;
         }
         return false;
     }
 
     /**
-     * @param $object
+     * Get the caster based on the object's type provided
      *
-     * @throws Exception
+     * @param object $object
+     *
+     * @throws Exception - If a caster for the type provided does not exist
      * @return object
      */
-    public function getCaster($object): object
+    public function getCaster(object $object): object
     {
-        foreach ($this->casters as $caster) {
-            if (is_a($object, $caster->getType())) {
-                return $caster;
-            }
+        if ($this->hasCaster($object)) {
+            return $this->casters[$object::class];
         }
 
         throw new Exception('Caster was not found for ' . $object::class . '!');

@@ -4,7 +4,7 @@ namespace DtoDragon;
 
 use DtoDragon\utilities\DtoReflectorFactory;
 use DtoDragon\utilities\extractor\DtoExtractor;
-use DtoDragon\utilities\hydrator\Hydrator;
+use DtoDragon\utilities\hydrator\DtoHydrator;
 
 /**
  * Class DataTransferObject
@@ -21,9 +21,9 @@ class DataTransferObject
 
     /**
      * The hydrator responsible for filling data transfer objects with data
-     * @var Hydrator
+     * @var DtoHydrator
      */
-    private Hydrator $hydrator;
+    private DtoHydrator $hydrator;
 
     /**
      * Construct a new data transfer object
@@ -36,7 +36,7 @@ class DataTransferObject
     {
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
-        $this->hydrator = new Hydrator($factory);
+        $this->hydrator = new DtoHydrator($factory);
         if (!empty($data)) {
             $this->hydrator->hydrate($data);
         }
