@@ -2,6 +2,13 @@
 
 namespace DtoDragon\singletons;
 
+/**
+ * Base class for DtoDragons singletons
+ *
+ * @package  DtoDragon\singletons
+ *
+ * @author   Matthew Crankshaw <mhcrankshaw2@gmail.com>\
+ */
 class Singleton
 {
     private static $instances = [];

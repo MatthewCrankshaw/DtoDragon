@@ -24,7 +24,10 @@ abstract class DataTransferObjectCollection implements Iterator
     {
         foreach ($array as $key => $item) {
             if (!is_a($item, DataTransferObject::class)) {
-                throw new \Exception('Each item in the collection must be a child class of ' . DataTransferObject::class);
+                throw new \Exception(
+                    'Each item in the collection must be a child class of '
+                    . DataTransferObject::class
+                );
             }
         }
         return true;

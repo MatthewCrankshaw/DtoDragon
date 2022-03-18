@@ -24,6 +24,6 @@
     },
     "scripts": {
         "test": "phpunit tests",
-        "linter": "./vendor/bin/phpcs ./src"
+        "linter": "./vendor/bin/phpcs --standard=psr12 ./src/  "
     }
 }
