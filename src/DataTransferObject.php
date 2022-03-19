@@ -2,14 +2,21 @@
 
 namespace DtoDragon;
 
+use DtoDragon\singletons\CastersSingleton;
+use DtoDragon\Test\Caster\DateCaster;
 use DtoDragon\utilities\DtoReflectorFactory;
 use DtoDragon\utilities\extractor\DtoExtractor;
 use DtoDragon\utilities\hydrator\DtoHydrator;
 
 /**
- * Class DataTransferObject
+ * The base implementation of a data transfer object
+ * All data transfer objects will extend this class
+ * Contains an extractor for extracting data to an array
+ * and a hydrator for hydrating the DTO with data from an array
  *
  * @package DtoDragon
+ *
+ * @author Matthew Crankshaw
  */
 class DataTransferObject
 {
@@ -34,6 +41,7 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
+        CastersSingleton::getInstance()->register(new DateCaster());
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
         $this->hydrator = new DtoHydrator($factory);
