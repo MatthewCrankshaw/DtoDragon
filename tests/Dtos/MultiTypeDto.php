@@ -8,5 +8,7 @@ class MultiTypeDto extends DataTransferObject
 {
     private int $id;
 
-    public string $testString;
+    private string $testString;
+
+    private Date $date;
 }

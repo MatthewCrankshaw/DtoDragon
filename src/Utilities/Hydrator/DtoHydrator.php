@@ -4,7 +4,9 @@ namespace DtoDragon\Utilities\Hydrator;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\Interfaces\DtoHydratorInterface;
+use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Test\Dtos\ClientDto;
+use DtoDragon\Test\Dtos\ServiceCollection;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use Exception;
@@ -65,6 +67,7 @@ class DtoHydrator implements DtoHydratorInterface
      */
     private function hydrateProperty(ReflectionProperty $property, $value)
     {
+        $parsers = ParsersSingleton::getInstance();
         if (is_array($value)) {
             if ($this->reflector->propertyIsDto($property)) {
                 $this->reflector->setPropertyValue($property, new ClientDto($value));
@@ -74,7 +77,21 @@ class DtoHydrator implements DtoHydratorInterface
                 $this->reflector->setPropertyValue($property, $value);
             }
         } else {
-            $this->reflector->setPropertyValue($property, $value);
+            $type = $property->getType()->getName();
+            if (!in_array($type, ['int', 'string', 'float']) && is_string($value)) {
+                if ($parsers->hasParser($type)) {
+                    $parser = $parsers->getParser($type);
+                    $value = $parser->parse($value);
+                } else {
+                    throw new Exception(
+                        'Cannot implicitly convert from string to '
+                        . $type . '. Define a parser and register it to the ParsersSingleton.'
+                    );
+                }
+                $this->reflector->setPropertyValue($property, $value);
+            } else {
+                $this->reflector->setPropertyValue($property, $value);
+            }
         }
     }
 

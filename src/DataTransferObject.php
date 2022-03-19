@@ -3,7 +3,9 @@
 namespace DtoDragon;
 
 use DtoDragon\Singletons\CastersSingleton;
+use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Test\Caster\DateCaster;
+use DtoDragon\Test\Parser\DateParser;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;

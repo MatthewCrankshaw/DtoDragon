@@ -10,12 +10,6 @@ use Exception;
 
 class CalendarItemTest extends DtoDragonTestCase
 {
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-        CastersSingleton::getInstance()->register(new DateCaster());
-    }
-
     public function providerCalenderItemDto(): array
     {
         $serviceA = [
@@ -66,7 +60,7 @@ class CalendarItemTest extends DtoDragonTestCase
                         'test 1',
                         'test 2',
                     ],
-                    'date' => new Date(11, 11, 2022),
+                    'date' => '11-11-2022',
                 ],
                 [
                     'id' => 10,
@@ -97,7 +91,7 @@ class CalendarItemTest extends DtoDragonTestCase
                         $serviceC,
                     ],
                     'tags' => null,
-                    'date' => new Date(14, 12, 2019),
+                    'date' => '14-12-2019',
                 ],
                 [
                     'id' => 10,

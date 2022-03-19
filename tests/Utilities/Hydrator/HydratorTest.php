@@ -16,7 +16,8 @@ class HydratorTest extends DtoDragonTestCase
             'flat hydrate' => [
                 [
                     'id' => 10,
-                    'testString' => 'this is a string'
+                    'testString' => 'this is a string',
+                    'date' => '12-10-2012',
                 ]
             ],
         ];

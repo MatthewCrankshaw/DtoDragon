@@ -7,8 +7,9 @@ use Exception;
 
 /**
  * Singleton to manage an array of casters
+ * The casters will be responsible for casting an object to string
  *
- * @package DtoDragon\singletons
+ * @package DtoDragon\Singletons
  *
  * @author Matthew Crankshaw
  */
@@ -17,7 +18,7 @@ class CastersSingleton extends Singleton
     /**
      * The array of Casters
      *
-     * @var CasterInterface $casters
+     * @var CasterInterface[] $casters
      */
     private array $casters = [];
 
@@ -31,7 +32,6 @@ class CastersSingleton extends Singleton
     public function register(CasterInterface $caster): void
     {
         if (!in_array($caster, $this->casters)) {
-            print_r($caster->getType());
             $this->casters[$caster->getType()] = $caster;
         }
     }
@@ -57,9 +57,9 @@ class CastersSingleton extends Singleton
      * @param object $object
      *
      * @throws Exception - If a caster for the type provided does not exist
-     * @return object
+     * @return CasterInterface
      */
-    public function getCaster(object $object): object
+    public function getCaster(object $object): CasterInterface
     {
         if ($this->hasCaster($object)) {
             return $this->casters[$object::class];

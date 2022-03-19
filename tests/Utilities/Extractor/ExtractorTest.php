@@ -9,22 +9,23 @@ use DtoDragon\Utilities\Extractor\DtoExtractor;
 
 class ExtractorTest extends DtoDragonTestCase
 {
-    public function provideHydrate():array
+    public function provideExtract():array
     {
         return [
-            'flat hydrate' => [
+            'flat extract' => [
                 [
                     'id' => 10,
-                    'testString' => 'this is a string'
+                    'testString' => 'this is a string',
+                    'date' => '12-05-2012',
                 ]
             ],
         ];
     }
 
     /**
-     * @dataProvider provideHydrate
+     * @dataProvider provideExtract
      */
-    public function testHydrate(array $data): void
+    public function testExtract(array $data): void
     {
         $dto = new MultiTypeDto($data);
         $factory = new DtoReflectorFactory($dto);
