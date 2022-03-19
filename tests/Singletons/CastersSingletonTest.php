@@ -1,11 +1,11 @@
 <?php
 
-namespace DtoDragon\Test\singletons;
+namespace DtoDragon\Test\Singletons;
 
-use DtoDragon\singletons\CastersSingleton;
+use DtoDragon\Singletons\CastersSingleton;
 use DtoDragon\Test\Caster\DateCaster;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\dtos\Date;
+use DtoDragon\Test\Dtos\Date;
 
 class CastersSingletonTest extends DtoDragonTestCase
 {

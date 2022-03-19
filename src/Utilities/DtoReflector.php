@@ -1,10 +1,10 @@
 <?php
 
-namespace DtoDragon\utilities;
+namespace DtoDragon\Utilities;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\interfaces\ReflectorInterface;
+use DtoDragon\Interfaces\ReflectorInterface;
 use ReflectionClass;
 use ReflectionProperty;
 

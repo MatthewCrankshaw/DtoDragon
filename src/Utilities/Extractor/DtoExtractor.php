@@ -1,14 +1,14 @@
 <?php
 
-namespace DtoDragon\utilities\extractor;
+namespace DtoDragon\Utilities\Extractor;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\interfaces\DtoExtractorInterface;
-use DtoDragon\interfaces\ReflectorInterface;
-use DtoDragon\singletons\CastersSingleton;
-use DtoDragon\utilities\DtoReflector;
-use DtoDragon\utilities\DtoReflectorFactory;
+use DtoDragon\Interfaces\DtoExtractorInterface;
+use DtoDragon\Interfaces\ReflectorInterface;
+use DtoDragon\Singletons\CastersSingleton;
+use DtoDragon\Utilities\DtoReflector;
+use DtoDragon\Utilities\DtoReflectorFactory;
 use ReflectionProperty;
 
 /**

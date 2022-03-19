@@ -2,14 +2,35 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Test\dtos\CalendarItemDto;
-use DtoDragon\Test\dtos\Date;
+use DtoDragon\Singletons\CastersSingleton;
+use DtoDragon\Test\Caster\DateCaster;
+use DtoDragon\Test\Dtos\CalendarItemDto;
+use DtoDragon\Test\Dtos\Date;
 use Exception;
 
 class CalendarItemTest extends DtoDragonTestCase
 {
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        CastersSingleton::getInstance()->register(new DateCaster());
+    }
+
     public function providerCalenderItemDto(): array
     {
+        $serviceA = [
+            'id' => 1,
+            'type' => 'travel',
+        ];
+        $serviceB = [
+            'id' => 2,
+            'type' => 'a given service',
+        ];
+        $serviceC = [
+            'id' => 3,
+            'type' => 'additional charges',
+        ];
+
         return [
             'minimum calendar item' => [
                 [
@@ -39,10 +60,7 @@ class CalendarItemTest extends DtoDragonTestCase
                         'lastName' => 'Petrie',
                     ],
                     'services' => [
-                        [
-                            'id' => 3,
-                            'type' => 'travel',
-                        ]
+                        $serviceA
                     ],
                     'tags' => [
                         'test 1',
@@ -59,16 +77,39 @@ class CalendarItemTest extends DtoDragonTestCase
                         'lastName' => 'Petrie',
                     ],
                     'services' => [
-                        [
-                            'id' => 3,
-                            'type' => 'travel',
-                        ]
+                        $serviceA
                     ],
                     'tags' => [
                         'test 1',
                         'test 2',
                     ],
                     'date' => '11-11-2022',
+                ],
+            ],
+            'calendar item many services' => [
+                [
+                    'id' => 10,
+                    'name' => 'hello world',
+                    'client' => null,
+                    'services' => [
+                        $serviceA,
+                        $serviceB,
+                        $serviceC,
+                    ],
+                    'tags' => null,
+                    'date' => new Date(14, 12, 2019),
+                ],
+                [
+                    'id' => 10,
+                    'name' => 'hello world',
+                    'client' => null,
+                    'services' => [
+                        $serviceA,
+                        $serviceB,
+                        $serviceC,
+                    ],
+                    'tags' => null,
+                    'date' => '14-12-2019',
                 ],
             ],
         ];
@@ -83,7 +124,7 @@ class CalendarItemTest extends DtoDragonTestCase
 
         $array = $calendarItem->toArray();
 
-        $this->assertIsArray($expected);
+        $this->assertIsArray($array);
     }
 
     /**

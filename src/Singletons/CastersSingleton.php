@@ -1,8 +1,8 @@
 <?php
 
-namespace DtoDragon\singletons;
+namespace DtoDragon\Singletons;
 
-use DtoDragon\interfaces\CasterInterface;
+use DtoDragon\Interfaces\CasterInterface;
 use Exception;
 
 /**

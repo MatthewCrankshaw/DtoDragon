@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\interfaces;
+namespace DtoDragon\Interfaces;
 
 use DtoDragon\DataTransferObject;
 

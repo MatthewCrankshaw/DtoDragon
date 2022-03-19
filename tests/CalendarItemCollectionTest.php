@@ -2,9 +2,9 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Test\dtos\CalendarItemCollection;
-use DtoDragon\Test\dtos\CalendarItemDto;
-use DtoDragon\Test\dtos\Date;
+use DtoDragon\Test\Dtos\CalendarItemCollection;
+use DtoDragon\Test\Dtos\CalendarItemDto;
+use DtoDragon\Test\Dtos\Date;
 
 class CalendarItemCollectionTest extends DtoDragonTestCase
 {

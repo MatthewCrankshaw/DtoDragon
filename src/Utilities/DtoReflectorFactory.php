@@ -1,9 +1,9 @@
 <?php
 
-namespace DtoDragon\utilities;
+namespace DtoDragon\Utilities;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\interfaces\ReflectorInterface;
+use DtoDragon\Interfaces\ReflectorInterface;
 
 /**
  * Factory for creating DTO Reflectors for a particular DTO

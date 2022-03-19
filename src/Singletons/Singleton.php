@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\singletons;
+namespace DtoDragon\Singletons;
 
 /**
  * Base singleton class
@@ -8,7 +8,7 @@ namespace DtoDragon\singletons;
  *
  * @package DtoDragon\singletons
  *
- * @author Matthew Crankshaw <mhcrankshaw2@gmail.com>
+ * @author Matthew Crankshaw
  */
 class Singleton
 {

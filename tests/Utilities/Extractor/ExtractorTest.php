@@ -1,14 +1,13 @@
 <?php
 
-namespace DtoDragon\Test\utilities;
+namespace DtoDragon\Test\Utilities\Extractor;
 
-use DtoDragon\DataTransferObject;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\dtos\MultiTypeDto;
-use DtoDragon\utilities\DtoReflectorFactory;
-use DtoDragon\utilities\hydrator\DtoHydrator;
+use DtoDragon\Test\Dtos\MultiTypeDto;
+use DtoDragon\Utilities\DtoReflectorFactory;
+use DtoDragon\Utilities\Extractor\DtoExtractor;
 
-class HydratorTest extends DtoDragonTestCase
+class ExtractorTest extends DtoDragonTestCase
 {
     public function provideHydrate():array
     {
@@ -27,12 +26,12 @@ class HydratorTest extends DtoDragonTestCase
      */
     public function testHydrate(array $data): void
     {
-        $dto = new MultiTypeDto();
+        $dto = new MultiTypeDto($data);
         $factory = new DtoReflectorFactory($dto);
-        $hydrator = new DtoHydrator($factory);
+        $extractor = new DtoExtractor($factory);
 
-        $actual = $hydrator->hydrate($data);
+        $actual = $extractor->extract();
 
-        $this->assertInstanceOf(DataTransferObject::class, $actual);
+        $this->assertIsArray($actual);
     }
 }

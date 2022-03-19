@@ -2,8 +2,8 @@
 
 namespace DtoDragon\Test\Caster;
 
-use DtoDragon\interfaces\CasterInterface;
-use DtoDragon\Test\dtos\Date;
+use DtoDragon\Interfaces\CasterInterface;
+use DtoDragon\Test\Dtos\Date;
 
 class DateCaster implements CasterInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace DtoDragon\Test\utilities;
+namespace DtoDragon\Test\Utilities;
 
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\dtos\CalendarItemDto;
-use DtoDragon\Test\dtos\Date;
-use DtoDragon\utilities\DtoReflector;
+use DtoDragon\Test\Dtos\CalendarItemDto;
+use DtoDragon\Test\Dtos\Date;
+use DtoDragon\Utilities\DtoReflector;
 
 class DtoReflectorTest extends DtoDragonTestCase
 {

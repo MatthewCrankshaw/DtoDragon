@@ -1,12 +1,12 @@
 <?php
 
-namespace DtoDragon\utilities\hydrator;
+namespace DtoDragon\Utilities\Hydrator;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\interfaces\DtoHydratorInterface;
-use DtoDragon\Test\dtos\ClientDto;
-use DtoDragon\utilities\DtoReflector;
-use DtoDragon\utilities\DtoReflectorFactory;
+use DtoDragon\Interfaces\DtoHydratorInterface;
+use DtoDragon\Test\Dtos\ClientDto;
+use DtoDragon\Utilities\DtoReflector;
+use DtoDragon\Utilities\DtoReflectorFactory;
 use Exception;
 use ReflectionProperty;
 
