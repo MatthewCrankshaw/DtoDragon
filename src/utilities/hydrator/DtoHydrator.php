@@ -7,30 +7,64 @@ use DtoDragon\interfaces\DtoHydratorInterface;
 use DtoDragon\Test\dtos\ClientDto;
 use DtoDragon\utilities\DtoReflector;
 use DtoDragon\utilities\DtoReflectorFactory;
+use Exception;
 use ReflectionProperty;
 
+/**
+ * A hydrator class for hydrating dto's from a given array
+ *
+ * @package DtoDragon\utilities\hydrator
+ *
+ * @author Matthew Crankshaw
+ */
 class DtoHydrator implements DtoHydratorInterface
 {
+    /**
+     * The class reflector for the given dto
+     * Hydration occurs through the reflector
+     *
+     * @var DtoReflector
+     */
     private DtoReflector $reflector;
 
+    /**
+     * Construct the DtoHydrator object
+     *
+     * @param DtoReflectorFactory $factory
+     */
     public function __construct(DtoReflectorFactory $factory)
     {
         $this->reflector = $factory->create();
     }
 
+    /**
+     * Hydrate the dto object with data from the provided array
+     *
+     * @param array $data
+     *
+     * @return DataTransferObject
+     */
     public function hydrate(array $data): DataTransferObject
     {
         $properties = $this->reflector->getProperties();
         foreach ($properties as $property) {
-            $this->hydrateProperty($property, $data);
+            $value = $this->getPropertyValue($property, $data);
+            $this->hydrateProperty($property, $value);
         }
         return $this->reflector->getDto();
     }
 
-    private function hydrateProperty(ReflectionProperty $property, array $data)
+    /**
+     * Hydrate a single property with the data from the given value
+     * If the value is an array then recursively hydrate the nested DTO's
+     *
+     * @param ReflectionProperty $property
+     * @param mixed $data
+     *
+     * @return void
+     */
+    private function hydrateProperty(ReflectionProperty $property, $value)
     {
-        $value = $this->getPropertyValue($property, $data);
-
         if (is_array($value)) {
             if ($this->reflector->propertyIsDto($property)) {
                 $this->reflector->setPropertyValue($property, new ClientDto($value));
@@ -44,6 +78,14 @@ class DtoHydrator implements DtoHydratorInterface
         }
     }
 
+    /**
+     * Hydrate a property that is a nested collection of DTOs
+     *
+     * @param ReflectionProperty $property
+     * @param array $collectionArray
+     *
+     * @return void
+     */
     private function hydrateCollection(ReflectionProperty $property, array $collectionArray): void
     {
         $propertyType = $property->getType();
@@ -56,7 +98,34 @@ class DtoHydrator implements DtoHydratorInterface
         $this->reflector->setPropertyValue($property, new $collection($collectArray));
     }
 
-    private function isPropertyValueProvided(string $propertyName, array $data): bool
+    /**
+     * Get the value of the property from the data array based on the property name
+     *
+     * @param ReflectionProperty $property
+     * @param array $data
+     *
+     * @return mixed
+     */
+    private function getPropertyValue(ReflectionProperty $property, array $data)
+    {
+        $propertyName = $property->getName();
+        if ($this->validatePropertyExists($propertyName, $data)) {
+            return $data[$propertyName];
+        }
+    }
+
+    /**
+     * Validate that the property exists in the data array
+     * If the property does not exist throw an exception
+     * Otherwise return true
+     *
+     * @param string $propertyName
+     * @param array $data
+     *
+     * @throws Exception - If the property does not exist in the DTO
+     * @return bool
+     */
+    private function validatePropertyExists(string $propertyName, array $data): bool
     {
         if (!array_key_exists($propertyName, $data)) {
             throw new \Exception(
@@ -64,13 +133,5 @@ class DtoHydrator implements DtoHydratorInterface
             );
         }
         return true;
-    }
-
-    private function getPropertyValue(ReflectionProperty $property, array $data)
-    {
-        $propertyName = $property->getName();
-        if ($this->isPropertyValueProvided($propertyName, $data)) {
-            return $data[$propertyName];
-        }
     }
 }
