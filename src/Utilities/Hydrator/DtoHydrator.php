@@ -5,8 +5,6 @@ namespace DtoDragon\Utilities\Hydrator;
 use DtoDragon\DataTransferObject;
 use DtoDragon\Interfaces\DtoHydratorInterface;
 use DtoDragon\Singletons\ParsersSingleton;
-use DtoDragon\Test\Dtos\ClientDto;
-use DtoDragon\Test\Dtos\ServiceCollection;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use Exception;
@@ -70,7 +68,8 @@ class DtoHydrator implements DtoHydratorInterface
         $parsers = ParsersSingleton::getInstance();
         if (is_array($value)) {
             if ($this->reflector->propertyIsDto($property)) {
-                $this->reflector->setPropertyValue($property, new ClientDto($value));
+                $dtoType = $property->getType()->getName();
+                $this->reflector->setPropertyValue($property, new $dtoType($value));
             } elseif ($this->reflector->propertyIsCollection($property)) {
                 $this->hydrateCollection($property, $value);
             } elseif ($this->reflector->propertyIsArray($property)) {
