@@ -4,15 +4,23 @@ namespace DtoDragon\Test\Parser;
 
 use DtoDragon\Interfaces\ParserInterface;
 use DtoDragon\Test\Dtos\Date;
+use ReflectionProperty;
 
 class DateParser implements ParserInterface
 {
-    public function getType(): string
+    public function getTypes(): array
     {
-        return Date::class;
+        return [Date::class];
     }
 
-    public function parse(string $value): object
+    /**
+     *
+     *
+     * @param string $value
+     *
+     * @return object
+     */
+    public function parse(ReflectionProperty $property, $value): object
     {
         $dateParts = explode('-', $value);
         return new Date($dateParts[0], $dateParts[1], $dateParts[2]);

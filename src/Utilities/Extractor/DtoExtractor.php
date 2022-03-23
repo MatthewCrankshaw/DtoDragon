@@ -40,7 +40,8 @@ class DtoExtractor implements DtoExtractorInterface
     {
         $array = [];
         foreach ($this->reflector->getProperties() as $property) {
-            $this->extractProperty($property, $array);
+            $propertyName = $property->getName();
+            $array[$propertyName] = $this->extractProperty($property);
         }
         return $array;
     }
@@ -50,24 +51,22 @@ class DtoExtractor implements DtoExtractorInterface
      * If the property is a nested object it will recursively extract that object to an array
      *
      * @param ReflectionProperty $property
-     * @param array $array
      *
-     * @return void
+     * @return mixed
      */
-    private function extractProperty(ReflectionProperty $property, array &$array): void
+    private function extractProperty(ReflectionProperty $property)
     {
         $casters = CastersSingleton::getInstance();
-        $propertyName = $property->getName();
         $value = $this->reflector->getPropertyValue($property);
         if ($this->isNestedDto($value)) {
-            $value = $value->toArray();
+            return $value->toArray();
         } elseif (is_object($value)) {
             if ($casters->hasCaster($value)) {
                 $caster = $casters->getCaster($value);
-                $value = $caster->cast($value);
+                return $caster->cast($value);
             }
         }
-        $array[$propertyName] = $value;
+        return $value;
     }
 
     /**

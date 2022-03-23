@@ -2,10 +2,7 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Singletons\CastersSingleton;
-use DtoDragon\Test\Caster\DateCaster;
 use DtoDragon\Test\Dtos\CalendarItemDto;
-use DtoDragon\Test\Dtos\Date;
 use Exception;
 
 class CalendarItemTest extends DtoDragonTestCase
@@ -34,6 +31,7 @@ class CalendarItemTest extends DtoDragonTestCase
                     'services' => null,
                     'tags' => null,
                     'date' => null,
+                    'taxRate' => 1.1234
                 ],
                 [
                     'id' => 10,
@@ -42,6 +40,7 @@ class CalendarItemTest extends DtoDragonTestCase
                     'services' => null,
                     'tags' => null,
                     'date' => null,
+                    'taxRate' => 1.1234
                 ],
             ],
             'full calendar item' => [
@@ -61,6 +60,7 @@ class CalendarItemTest extends DtoDragonTestCase
                         'test 2',
                     ],
                     'date' => '11-11-2022',
+                    'taxRate' => 12324.999
                 ],
                 [
                     'id' => 10,
@@ -78,6 +78,7 @@ class CalendarItemTest extends DtoDragonTestCase
                         'test 2',
                     ],
                     'date' => '11-11-2022',
+                    'taxRate' => 12324.999
                 ],
             ],
             'calendar item many services' => [
@@ -92,6 +93,7 @@ class CalendarItemTest extends DtoDragonTestCase
                     ],
                     'tags' => null,
                     'date' => '14-12-2019',
+                    'taxRate' => 33.33
                 ],
                 [
                     'id' => 10,
@@ -104,6 +106,7 @@ class CalendarItemTest extends DtoDragonTestCase
                     ],
                     'tags' => null,
                     'date' => '14-12-2019',
+                    'taxRate' => 33.33
                 ],
             ],
         ];
@@ -145,5 +148,19 @@ class CalendarItemTest extends DtoDragonTestCase
     {
         $this->expectException(Exception::class);
         $calendarItem = new CalendarItemDto(['nonexist' => 'hello']);
+    }
+
+    public function testCalendarItemNonNullableProperty(): void
+    {
+        $this->expectException(Exception::class);
+        $calendarItem = new CalendarItemDto([
+            'id' => null,
+            'name' => 'hello world',
+            'client' => null,
+            'services' => null,
+            'tags' => null,
+            'date' => null,
+            'taxRate' => 1.1234
+        ]);
     }
 }

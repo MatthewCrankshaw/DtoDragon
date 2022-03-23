@@ -2,13 +2,13 @@
 
 namespace DtoDragon;
 
-use DtoDragon\Singletons\CastersSingleton;
 use DtoDragon\Singletons\ParsersSingleton;
-use DtoDragon\Test\Caster\DateCaster;
-use DtoDragon\Test\Parser\DateParser;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
+use DtoDragon\Utilities\Hydrator\Parsers\CollectionParser;
+use DtoDragon\Utilities\Hydrator\Parsers\DtoParser;
+use DtoDragon\Utilities\Hydrator\Parsers\PrimitiveParser;
 
 /**
  * The base implementation of a data transfer object
@@ -43,6 +43,9 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
+        ParsersSingleton::getInstance()->register(new PrimitiveParser());
+        ParsersSingleton::getInstance()->register(new DtoParser());
+        ParsersSingleton::getInstance()->register(new CollectionParser());
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
         $this->hydrator = new DtoHydrator($factory);

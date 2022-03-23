@@ -66,52 +66,27 @@ class DtoHydrator implements DtoHydratorInterface
     private function hydrateProperty(ReflectionProperty $property, $value)
     {
         $parsers = ParsersSingleton::getInstance();
-        if (is_array($value)) {
-            if ($this->reflector->propertyIsDto($property)) {
-                $dtoType = $property->getType()->getName();
-                $this->reflector->setPropertyValue($property, new $dtoType($value));
-            } elseif ($this->reflector->propertyIsCollection($property)) {
-                $this->hydrateCollection($property, $value);
-            } elseif ($this->reflector->propertyIsArray($property)) {
-                $this->reflector->setPropertyValue($property, $value);
-            }
-        } else {
-            $type = $property->getType()->getName();
-            if (!in_array($type, ['int', 'string', 'float']) && is_string($value)) {
-                if ($parsers->hasParser($type)) {
-                    $parser = $parsers->getParser($type);
-                    $value = $parser->parse($value);
-                } else {
-                    throw new Exception(
-                        'Cannot implicitly convert from string to '
-                        . $type . '. Define a parser and register it to the ParsersSingleton.'
-                    );
-                }
-                $this->reflector->setPropertyValue($property, $value);
-            } else {
-                $this->reflector->setPropertyValue($property, $value);
-            }
-        }
-    }
+        $type = $property->getType()->getName();
 
-    /**
-     * Hydrate a property that is a nested collection of DTOs
-     *
-     * @param ReflectionProperty $property
-     * @param array $collectionArray
-     *
-     * @return void
-     */
-    private function hydrateCollection(ReflectionProperty $property, array $collectionArray): void
-    {
-        $propertyType = $property->getType();
-        $collection = $propertyType->getName();
-        $collectArray = [];
-        foreach ($collectionArray as $item) {
-            $dtoType = $collection::dtoType();
-            $collectArray[] = new $dtoType($item);
+        if (is_null($value)) {
+            if ($this->reflector->propertyIsNullable($property)) {
+                $this->reflector->setPropertyValue($property, null);
+            } else {
+                throw new Exception(
+                    'Trying to fill property (' . $property->getName() . ') 
+                    With null value when it is not nullable.'
+                );
+            }
+        } elseif ($parsers->hasParser($type)) {
+            $parser = $parsers->getParser($type);
+            $value = $parser->parse($property, $value);
+            $this->reflector->setPropertyValue($property, $value);
+        } else {
+            throw new Exception(
+                'Unknown hydration type '
+                . $type . '. Define a parser and register it to the ParsersSingleton.'
+            );
         }
-        $this->reflector->setPropertyValue($property, new $collection($collectArray));
     }
 
     /**

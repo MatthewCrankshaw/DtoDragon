@@ -2,6 +2,8 @@
 
 namespace DtoDragon\Interfaces;
 
+use ReflectionProperty;
+
 /**
  * Defines the interface of a parser
  * A parser is responsible for converting a string to an object
@@ -16,16 +18,16 @@ interface ParserInterface
      * Get the type of the object that can be parsed
      * When the hydrator sees this type it will parse it to an object using the parse method
      *
-     * @return string
+     * @return string[]
      */
-    public function getType(): string;
+    public function getTypes(): array;
 
     /**
-     * Parse the given string to an object
+     * Parse the given value to the data transfer object's property
      *
-     * @param string $value
+     * @param mixed $value
      *
-     * @return object
+     * @return mixed
      */
-    public function parse(string $value): object;
+    public function parse(ReflectionProperty $property, $value);
 }

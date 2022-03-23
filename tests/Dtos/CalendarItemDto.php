@@ -18,6 +18,8 @@ class CalendarItemDto extends DataTransferObject
 
     private ?Date $date;
 
+    private float $taxRate;
+
     public function getId(): int
     {
         return $this->id;
@@ -41,5 +43,10 @@ class CalendarItemDto extends DataTransferObject
     public function getServices(): ServiceCollection
     {
         return $this->services;
+    }
+
+    public function getTaxRate(): float
+    {
+        return $this->taxRate;
     }
 }

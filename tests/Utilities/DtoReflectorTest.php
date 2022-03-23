@@ -30,7 +30,8 @@ class DtoReflectorTest extends DtoDragonTestCase
                     'test 1',
                     'test 2',
                 ],
-                'date' => new Date(1, 1, 2000),
+                'date' => '1-1-2000',
+                'taxRate' => 77.345
             ]],
         ];
     }
@@ -56,7 +57,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $dtoReflector = new DtoReflector($dto);
         $properties = $dtoReflector->getProperties();
 
-        $this->assertCount(6, $properties);
+        $this->assertCount(7, $properties);
     }
 
     /**
