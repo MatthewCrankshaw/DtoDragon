@@ -77,7 +77,7 @@ class DtoHydrator implements DtoHydratorInterface
                     With null value when it is not nullable.'
                 );
             }
-        } else if ($parsers->hasParser($type)) {
+        } elseif ($parsers->hasParser($type)) {
             $parser = $parsers->getParser($type);
             $value = $parser->parse($property, $value);
             $this->reflector->setPropertyValue($property, $value);
