@@ -30,7 +30,8 @@ class CalendarItemCollectionTest extends DtoDragonTestCase
                     'client' => null,
                     'services' => null,
                     'tags' => null,
-                    'date' => new Date(1, 2, 1992),
+                    'date' => '1-2-1992',
+                    'taxRate' => 33.33
                 ]),
             ],
         ];

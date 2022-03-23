@@ -3,7 +3,6 @@
 namespace DtoDragon\Utilities;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\Interfaces\ReflectorInterface;
 use ReflectionClass;
 use ReflectionProperty;
@@ -78,45 +77,8 @@ class DtoReflector implements ReflectorInterface
         $property->setValue($this->dto, $value);
     }
 
-    /**
-     * Returns true if the reflection property provided is a DTO
-     * Otherwise false
-     *
-     * @param ReflectionProperty $property
-     *
-     * @return bool
-     */
-    public function propertyIsDto(ReflectionProperty $property): bool
+    public function propertyIsNullable(ReflectionProperty $property): bool
     {
-        $type = $property->getType()->getName();
-        return is_subclass_of($type, DataTransferObject::class);
-    }
-
-    /**
-     * Returns true if the reflection property provided is a collection
-     * Otherwise false
-     *
-     * @param ReflectionProperty $property
-     *
-     * @return bool
-     */
-    public function propertyIsCollection(ReflectionProperty $property): bool
-    {
-        $type = $property->getType()->getName();
-        return is_subclass_of($type, DataTransferObjectCollection::class);
-    }
-
-    /**
-     * Returns true if the reflection property provided is an array
-     * Otherwise false
-     *
-     * @param ReflectionProperty $property
-     *
-     * @return bool
-     */
-    public function propertyIsArray(ReflectionProperty $property): bool
-    {
-        $type = $property->getType()->getName();
-        return $type === 'array';
+        return $property->getType()->allowsNull();
     }
 }

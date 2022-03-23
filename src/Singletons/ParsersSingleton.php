@@ -2,6 +2,8 @@
 
 namespace DtoDragon\Singletons;
 
+use DtoDragon\DataTransferObject;
+use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\Interfaces\ParserInterface;
 use Exception;
 
@@ -31,8 +33,8 @@ class ParsersSingleton extends Singleton
      */
     public function register(ParserInterface $parser): void
     {
-        if (!in_array($parser, $this->parsers)) {
-            $this->parsers[$parser->getType()] = $parser;
+        foreach ($parser->getTypes() as $type) {
+            $this->parsers[$type] = $parser;
         }
     }
 
@@ -45,6 +47,12 @@ class ParsersSingleton extends Singleton
      */
     public function hasParser(string $type): bool
     {
+        if ($this->isDto($type)) {
+            return isset($this->parsers[DataTransferObject::class]);
+        } elseif ($this->isCollection($type)) {
+            return isset($this->parsers[DataTransferObjectCollection::class]);
+        }
+
         if (isset($this->parsers[$type])) {
             return true;
         }
@@ -61,10 +69,26 @@ class ParsersSingleton extends Singleton
      */
     public function getParser(string $type): ParserInterface
     {
+        if ($this->isDto($type)) {
+            return $this->parsers[DataTransferObject::class];
+        } elseif ($this->isCollection($type)) {
+            return $this->parsers[DataTransferObjectCollection::class];
+        }
+
         if ($this->hasParser($type)) {
             return $this->parsers[$type];
         }
 
         throw new Exception('Parser was not found for ' . $type . '!');
+    }
+
+    private function isDto(string $type): bool
+    {
+        return is_subclass_of($type, DataTransferObject::class);
+    }
+
+    private function isCollection(string $type): bool
+    {
+        return is_subclass_of($type, DataTransferObjectCollection::class);
     }
 }
