@@ -4,6 +4,7 @@ namespace DtoDragon\Singletons;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
+use DtoDragon\Exceptions\ParserNotFoundException;
 use DtoDragon\Interfaces\ParserInterface;
 use Exception;
 
@@ -79,7 +80,7 @@ class ParsersSingleton extends Singleton
             return $this->parsers[$type];
         }
 
-        throw new Exception('Parser was not found for ' . $type . '!');
+        throw new ParserNotFoundException('Parser was not found for ' . $type . '!');
     }
 
     private function isDto(string $type): bool
