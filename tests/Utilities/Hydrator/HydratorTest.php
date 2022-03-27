@@ -3,6 +3,8 @@
 namespace DtoDragon\Test\Utilities\Hydrator;
 
 use DtoDragon\DataTransferObject;
+use DtoDragon\Exceptions\NonNullablePropertyException;
+use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\Dtos\MultiTypeDto;
 use DtoDragon\Utilities\DtoReflectorFactory;
@@ -35,5 +37,24 @@ class HydratorTest extends DtoDragonTestCase
         $actual = $hydrator->hydrate($data);
 
         $this->assertInstanceOf(DataTransferObject::class, $actual);
+    }
+
+    public function testHydrateNonNullableWithNull(): void
+    {
+        $this->expectException(NonNullablePropertyException::class);
+        $dto = new MultiTypeDto([
+            'id' => null,
+            'testString' => 'string',
+            'date' => '15-05-2020'
+        ]);
+    }
+
+    public function testHydrateParserNotFound(): void
+    {
+        $this->expectException(PropertyDataNotProvidedException::class);
+        $dto = new MultiTypeDto([
+            'id' => 1,
+            'date' => '15-05-2020'
+        ]);
     }
 }

@@ -3,6 +3,9 @@
 namespace DtoDragon\Utilities\Hydrator;
 
 use DtoDragon\DataTransferObject;
+use DtoDragon\Exceptions\NonNullablePropertyException;
+use DtoDragon\Exceptions\ParserNotFoundException;
+use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Interfaces\DtoHydratorInterface;
 use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Utilities\DtoReflector;
@@ -48,7 +51,7 @@ class DtoHydrator implements DtoHydratorInterface
     {
         $properties = $this->reflector->getProperties();
         foreach ($properties as $property) {
-            $value = $this->getPropertyValue($property, $data);
+            $value = $this->getPropertyValueFromDataArray($property, $data);
             $this->hydrateProperty($property, $value);
         }
         return $this->reflector->getDto();
@@ -72,20 +75,14 @@ class DtoHydrator implements DtoHydratorInterface
             if ($this->reflector->propertyIsNullable($property)) {
                 $this->reflector->setPropertyValue($property, null);
             } else {
-                throw new Exception(
-                    'Trying to fill property (' . $property->getName() . ') 
-                    With null value when it is not nullable.'
-                );
+                throw new NonNullablePropertyException($property->getName());
             }
         } elseif ($parsers->hasParser($type)) {
             $parser = $parsers->getParser($type);
             $value = $parser->parse($property, $value);
             $this->reflector->setPropertyValue($property, $value);
         } else {
-            throw new Exception(
-                'Unknown hydration type '
-                . $type . '. Define a parser and register it to the ParsersSingleton.'
-            );
+            throw new ParserNotFoundException($type);
         }
     }
 
@@ -97,30 +94,32 @@ class DtoHydrator implements DtoHydratorInterface
      *
      * @return mixed
      */
-    private function getPropertyValue(ReflectionProperty $property, array $data)
+    private function getPropertyValueFromDataArray(ReflectionProperty $property, array $data)
     {
         $propertyName = $property->getName();
-        if ($this->validatePropertyExists($propertyName, $data)) {
+        if ($this->validatePropertyDataProvided($propertyName, $data)) {
             return $data[$propertyName];
         }
     }
 
     /**
-     * Validate that the property exists in the data array
+     * Validate that the dto property exists in the data array
      * If the property does not exist throw an exception
      * Otherwise return true
      *
      * @param string $propertyName
      * @param array $data
      *
-     * @throws Exception - If the property does not exist in the DTO
+     * @throws Exception - If the property does not exist in the data array
      * @return bool
      */
-    private function validatePropertyExists(string $propertyName, array $data): bool
+    private function validatePropertyDataProvided(string $propertyName, array $data): bool
     {
         if (!array_key_exists($propertyName, $data)) {
-            throw new \Exception(
-                'Expected property (' . $propertyName . ') to exist in ' . get_class($this->reflector->getDto())
+            throw new PropertyDataNotProvidedException(
+                $propertyName,
+                get_class($this->reflector->getDto()),
+                $data
             );
         }
         return true;
