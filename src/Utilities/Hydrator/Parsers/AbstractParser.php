@@ -18,7 +18,7 @@ abstract class AbstractParser implements ParserInterface
     /**
      * @inheritDoc
      */
-    public abstract function registeredType(): string;
+    abstract public function registeredType(): string;
 
     /**
      * Parse the value from the data array to a DTO compatible value
