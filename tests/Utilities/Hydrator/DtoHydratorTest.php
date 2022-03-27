@@ -10,7 +10,7 @@ use DtoDragon\Test\Dtos\MultiTypeDto;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
 
-class HydratorTest extends DtoDragonTestCase
+class DtoHydratorTest extends DtoDragonTestCase
 {
     public function provideHydrate():array
     {

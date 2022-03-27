@@ -82,11 +82,25 @@ class ParsersSingleton extends Singleton
         throw new ParserNotFoundException($type);
     }
 
+    /**
+     * Check to see if the provided class name is a type of DataTransferObject
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
     private function isDto(string $type): bool
     {
         return is_subclass_of($type, DataTransferObject::class);
     }
 
+    /**
+     * Check to see if the provided class name is a type of DataTransferObjectCollection
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
     private function isCollection(string $type): bool
     {
         return is_subclass_of($type, DataTransferObjectCollection::class);
