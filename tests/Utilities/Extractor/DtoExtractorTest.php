@@ -7,7 +7,7 @@ use DtoDragon\Test\Dtos\MultiTypeDto;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
 
-class ExtractorTest extends DtoDragonTestCase
+class DtoExtractorTest extends DtoDragonTestCase
 {
     public function provideExtract():array
     {

@@ -2,8 +2,9 @@
 
 namespace DtoDragon\Test;
 
+use DtoDragon\Exceptions\NonNullablePropertyException;
+use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Test\Dtos\CalendarItemDto;
-use Exception;
 
 class CalendarItemTest extends DtoDragonTestCase
 {
@@ -146,13 +147,13 @@ class CalendarItemTest extends DtoDragonTestCase
 
     public function testCalendarItemHydrateNonExistantProperty(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(PropertyDataNotProvidedException::class);
         $calendarItem = new CalendarItemDto(['nonexist' => 'hello']);
     }
 
     public function testCalendarItemNonNullableProperty(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(NonNullablePropertyException::class);
         $calendarItem = new CalendarItemDto([
             'id' => null,
             'name' => 'hello world',

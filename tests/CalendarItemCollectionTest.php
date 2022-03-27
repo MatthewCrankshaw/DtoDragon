@@ -4,7 +4,6 @@ namespace DtoDragon\Test;
 
 use DtoDragon\Test\Dtos\CalendarItemCollection;
 use DtoDragon\Test\Dtos\CalendarItemDto;
-use DtoDragon\Test\Dtos\Date;
 
 class CalendarItemCollectionTest extends DtoDragonTestCase
 {
@@ -12,12 +11,6 @@ class CalendarItemCollectionTest extends DtoDragonTestCase
     {
         $collection = new CalendarItemCollection([]);
         $this->assertEmpty($collection->items());
-    }
-
-    public function testIsNotAnArrayOfDtos(): void
-    {
-        $this->expectException(\Exception::class);
-        $collection = new CalendarItemCollection([1, 2, 3]);
     }
 
     public function provideCalendarItemCollection(): array

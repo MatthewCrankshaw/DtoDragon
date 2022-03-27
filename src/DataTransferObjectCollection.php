@@ -33,21 +33,7 @@ abstract class DataTransferObjectCollection implements Iterator
     public function __construct(array $items)
     {
         $this->position = 0;
-        $this->validate($items);
         $this->items = $items;
-    }
-
-    private function validate(array $array): bool
-    {
-        foreach ($array as $key => $item) {
-            if (!is_a($item, DataTransferObject::class)) {
-                throw new \Exception(
-                    'Each item in the collection must be a child class of '
-                    . DataTransferObject::class
-                );
-            }
-        }
-        return true;
     }
 
     /**

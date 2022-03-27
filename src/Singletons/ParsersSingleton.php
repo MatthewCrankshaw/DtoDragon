@@ -4,8 +4,8 @@ namespace DtoDragon\Singletons;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
+use DtoDragon\Exceptions\ParserNotFoundException;
 use DtoDragon\Interfaces\ParserInterface;
-use Exception;
 
 /**
  * Singleton to manage an array of parsers
@@ -64,7 +64,7 @@ class ParsersSingleton extends Singleton
      *
      * @param string $type
      *
-     * @throws Exception - If a parser for the type provided does not exist
+     * @throws ParserNotFoundException - If a parser for the type provided does not exist
      * @return object
      */
     public function getParser(string $type): ParserInterface
@@ -79,14 +79,28 @@ class ParsersSingleton extends Singleton
             return $this->parsers[$type];
         }
 
-        throw new Exception('Parser was not found for ' . $type . '!');
+        throw new ParserNotFoundException($type);
     }
 
+    /**
+     * Check to see if the provided class name is a type of DataTransferObject
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
     private function isDto(string $type): bool
     {
         return is_subclass_of($type, DataTransferObject::class);
     }
 
+    /**
+     * Check to see if the provided class name is a type of DataTransferObjectCollection
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
     private function isCollection(string $type): bool
     {
         return is_subclass_of($type, DataTransferObjectCollection::class);
