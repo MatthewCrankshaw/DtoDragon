@@ -46,7 +46,7 @@ class ParsersSingletonTest extends DtoDragonTestCase
         $parsers->register(
             new class implements ParserInterface  {
 
-                public function getTypes(): array
+                public function registerTypes(): array
                 {
                     return ['type'];
                 }
@@ -74,7 +74,7 @@ class ParsersSingletonTest extends DtoDragonTestCase
         $parsers->register(
             new class implements ParserInterface  {
 
-                public function getTypes(): array
+                public function registerTypes(): array
                 {
                     return ['type1', 'type2', 'type3'];
                 }

@@ -16,7 +16,7 @@ use ReflectionProperty;
 /**
  * A hydrator class for hydrating dto's from a given array
  *
- * @package DtoDragon\utilities\hydrator
+ * @package DtoDragon\Utilities\Hydrator
  *
  * @author Matthew Crankshaw
  */

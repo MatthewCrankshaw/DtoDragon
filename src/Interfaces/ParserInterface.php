@@ -15,12 +15,12 @@ use ReflectionProperty;
 interface ParserInterface
 {
     /**
-     * Get the type of the object that can be parsed
-     * When the hydrator sees this type it will parse it to an object using the parse method
+     * Get the types of the data that can be parsed by this parser
+     * When the hydrator sees one this type it will parse it using the parse method
      *
      * @return string[]
      */
-    public function getTypes(): array;
+    public function registerTypes(): array;
 
     /**
      * Parse the given value to the data transfer object's property

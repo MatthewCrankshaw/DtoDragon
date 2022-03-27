@@ -6,13 +6,31 @@ use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\Interfaces\ParserInterface;
 use ReflectionProperty;
 
+/**
+ * Parser that converts array data to a data transfer object collection
+ *
+ * @package DtoDragon\Utilities\Hydrator\Parsers
+ *
+ * @author Matthew Crankshaw
+ */
 class CollectionParser implements ParserInterface
 {
-    public function getTypes(): array
+    /**
+     * @inheritDoc
+     */
+    public function registerTypes(): array
     {
         return [DataTransferObjectCollection::class];
     }
 
+    /**
+     * Parse an array of data to a DataTransferObjectCollection
+     *
+     * @param ReflectionProperty $property
+     * @param mixed $value
+     *
+     * @return DataTransferObjectCollection
+     */
     public function parse(ReflectionProperty $property, $value)
     {
         $propertyType = $property->getType();

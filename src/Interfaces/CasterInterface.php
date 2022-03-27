@@ -6,7 +6,7 @@ namespace DtoDragon\Interfaces;
  * Defines the interface of a caster
  * A caster is responsible for converting an object to a string
  *
- * @package DtoDragon\interfaces
+ * @package DtoDragon\Interfaces
  *
  * @author Matthew Crankshaw
  */

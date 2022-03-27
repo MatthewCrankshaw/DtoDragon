@@ -6,7 +6,7 @@ namespace DtoDragon\Singletons;
  * Base singleton class
  * Manages the singleton instances providing a way of registering and retrieving each singleton
  *
- * @package DtoDragon\singletons
+ * @package DtoDragon\Singletons
  *
  * @author Matthew Crankshaw
  */

@@ -7,7 +7,7 @@ namespace DtoDragon\Interfaces;
  * Extractors are responsible for extracting data from a data transfer object
  * and returning the data in an array format
  *
- * @package DtoDragon\interfaces
+ * @package DtoDragon\Interfaces
  *
  * @author Matthew Crankshaw
  */

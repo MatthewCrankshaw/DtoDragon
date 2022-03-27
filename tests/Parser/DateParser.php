@@ -8,7 +8,7 @@ use ReflectionProperty;
 
 class DateParser implements ParserInterface
 {
-    public function getTypes(): array
+    public function registerTypes(): array
     {
         return [Date::class];
     }
