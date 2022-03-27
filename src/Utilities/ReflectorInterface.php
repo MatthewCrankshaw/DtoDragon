@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\Interfaces;
+namespace DtoDragon\Utilities;
 
 use ReflectionProperty;
 
@@ -8,7 +8,7 @@ use ReflectionProperty;
  * Defines the interface of a reflector
  * A DtoReflector is responsible for reporting and interacting the properties of the dto
  *
- * @package DtoDragon\interfaces
+ * @package DtoDragon\Interfaces
  *
  * @author Matthew Crankshaw
  */

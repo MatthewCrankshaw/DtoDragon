@@ -4,18 +4,17 @@ namespace DtoDragon\Utilities\Extractor;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\Interfaces\DtoExtractorInterface;
-use DtoDragon\Interfaces\ReflectorInterface;
 use DtoDragon\Singletons\CastersSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
+use DtoDragon\Utilities\ReflectorInterface;
 use ReflectionProperty;
 
 /**
  * An extractor class for extracting data from a dto and presenting it as an array
  * The extractor will also use casters to cast values to strings if the appropriate caster is available
  *
- * @package DtoDragon\utilities\extractor
+ * @package DtoDragon\Utilities\Extractor
  *
  * @author Matthew Crankshaw
  */

@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\Interfaces;
+namespace DtoDragon\Utilities\Hydrator;
 
 use DtoDragon\DataTransferObject;
 
@@ -8,7 +8,7 @@ use DtoDragon\DataTransferObject;
  * Defines the interface of a DTO hydrator
  * Hydrators are responsible for hydrating a data transfer object from an array of data
  *
- * @package DtoDragon\interfaces
+ * @package DtoDragon\Interfaces
  *
  * @author Matthew Crankshaw
  */

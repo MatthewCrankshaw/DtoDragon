@@ -2,7 +2,7 @@
 
 namespace DtoDragon\Singletons;
 
-use DtoDragon\Interfaces\CasterInterface;
+use DtoDragon\Utilities\Extractor\Casters\CasterInterface;
 use Exception;
 
 /**

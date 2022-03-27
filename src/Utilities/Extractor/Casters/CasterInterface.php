@@ -1,12 +1,12 @@
 <?php
 
-namespace DtoDragon\Interfaces;
+namespace DtoDragon\Utilities\Extractor\Casters;
 
 /**
  * Defines the interface of a caster
  * A caster is responsible for converting an object to a string
  *
- * @package DtoDragon\interfaces
+ * @package DtoDragon\Interfaces
  *
  * @author Matthew Crankshaw
  */

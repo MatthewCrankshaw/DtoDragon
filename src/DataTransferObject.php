@@ -2,13 +2,16 @@
 
 namespace DtoDragon;
 
-use DtoDragon\Singletons\ParsersSingleton;
+use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
-use DtoDragon\Utilities\Hydrator\Parsers\CollectionParser;
-use DtoDragon\Utilities\Hydrator\Parsers\DtoParser;
-use DtoDragon\Utilities\Hydrator\Parsers\PrimitiveParser;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\ArrayPropertyHydrator;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\DtoPropertyHydrator;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\FloatPropertyHydrator;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
 
 /**
  * The base implementation of a data transfer object
@@ -43,15 +46,28 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
-        ParsersSingleton::getInstance()->register(new PrimitiveParser());
-        ParsersSingleton::getInstance()->register(new DtoParser());
-        ParsersSingleton::getInstance()->register(new CollectionParser());
+        $this->registerBasicPropertyHydrators();
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
         $this->hydrator = new DtoHydrator($factory);
         if (!empty($data)) {
             $this->hydrator->hydrate($data);
         }
+    }
+
+    /**
+     * Register the property hydrators used to hydrate the DTO's
+     *
+     * @return void
+     */
+    private function registerBasicPropertyHydrators(): void
+    {
+        PropertyHydratorsSingleton::getInstance()->register(new IntegerPropertyHydrator());
+        PropertyHydratorsSingleton::getInstance()->register(new StringPropertyHydrator());
+        PropertyHydratorsSingleton::getInstance()->register(new ArrayPropertyHydrator());
+        PropertyHydratorsSingleton::getInstance()->register(new FloatPropertyHydrator());
+        PropertyHydratorsSingleton::getInstance()->register(new DtoPropertyHydrator());
+        PropertyHydratorsSingleton::getInstance()->register(new CollectionPropertyHydrator());
     }
 
     /**

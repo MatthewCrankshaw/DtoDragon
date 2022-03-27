@@ -1,13 +1,13 @@
 <?php
 
-namespace DtoDragon\Interfaces;
+namespace DtoDragon\Utilities\Extractor;
 
 /**
  * Defines the interface of a DTO extractor
  * Extractors are responsible for extracting data from a data transfer object
  * and returning the data in an array format
  *
- * @package DtoDragon\interfaces
+ * @package DtoDragon\Interfaces
  *
  * @author Matthew Crankshaw
  */
