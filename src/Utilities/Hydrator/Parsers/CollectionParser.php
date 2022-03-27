@@ -17,9 +17,9 @@ class CollectionParser implements ParserInterface
     /**
      * @inheritDoc
      */
-    public function registerTypes(): array
+    public function registeredType(): string
     {
-        return [DataTransferObjectCollection::class];
+        return DataTransferObjectCollection::class;
     }
 
     /**

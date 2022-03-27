@@ -46,9 +46,9 @@ class ParsersSingletonTest extends DtoDragonTestCase
         $parsers->register(
             new class implements ParserInterface  {
 
-                public function registerTypes(): array
+                public function registeredType(): string
                 {
-                    return ['type'];
+                    return 'type';
                 }
 
                 public function parse(ReflectionProperty $property, $value)
@@ -60,42 +60,6 @@ class ParsersSingletonTest extends DtoDragonTestCase
 
         $parser = $parsers->getParser('type');
         $this->assertInstanceOf(ParserInterface::class, $parser);
-    }
-
-    /**
-     * Successfully register a multi-type parser
-     * All the types will return the same parser
-     *
-     * @return void
-     */
-    public function testRegisterMultiTypeParser(): void
-    {
-        $parsers = ParsersSingleton::getInstance();
-        $parsers->register(
-            new class implements ParserInterface  {
-
-                public function registerTypes(): array
-                {
-                    return ['type1', 'type2', 'type3'];
-                }
-
-                public function parse(ReflectionProperty $property, $value)
-                {
-                    return null;
-                }
-            }
-        );
-
-        $parser1 = $parsers->getParser('type1');
-        $parser2 = $parsers->getParser('type2');
-        $parser3 = $parsers->getParser('type3');
-
-        $this->assertInstanceOf(ParserInterface::class, $parser1);
-        $this->assertInstanceOf(ParserInterface::class, $parser2);
-        $this->assertInstanceOf(ParserInterface::class, $parser3);
-
-        $this->assertSame($parser1, $parser2);
-        $this->assertSame($parser2, $parser3);
     }
 
     /**

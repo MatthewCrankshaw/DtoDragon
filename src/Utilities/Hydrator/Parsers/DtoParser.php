@@ -17,9 +17,9 @@ class DtoParser implements ParserInterface
     /**
      * @inheritDoc
      */
-    public function registerTypes(): array
+    public function registeredType(): string
     {
-        return [DataTransferObject::class];
+        return DataTransferObject::class;
     }
 
     /**

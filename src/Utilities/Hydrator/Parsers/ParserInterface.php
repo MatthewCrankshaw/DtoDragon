@@ -6,7 +6,7 @@ use ReflectionProperty;
 
 /**
  * Defines the interface of a parser
- * A parser is responsible for converting data within an array to an object,
+ * A parser is responsible for moving data within an array to a DTO and transforming the data as necessary,
  * The data might be as simple as a primitive type or as complex as an object.
  *
  * @package DtoDragon\Interfaces
@@ -16,13 +16,13 @@ use ReflectionProperty;
 interface ParserInterface
 {
     /**
-     * Register the types that this class is able to parse
+     * Register the type that this class is able to parse
      * When hydrating a DTO property with a given piece of data in the array,
-     * these types show whether the parser supports parsing that particular data type
+     * this type shows whether the parser supports parsing that particular data type
      *
-     * @return string[]
+     * @return string
      */
-    public function registerTypes(): array;
+    public function registeredType(): string;
 
     /**
      * Parse the given value based on the type of the property

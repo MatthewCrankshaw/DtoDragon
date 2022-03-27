@@ -33,9 +33,7 @@ class ParsersSingleton extends Singleton
      */
     public function register(ParserInterface $parser): void
     {
-        foreach ($parser->registerTypes() as $type) {
-            $this->parsers[$type] = $parser;
-        }
+        $this->parsers[$parser->registeredType()] = $parser;
     }
 
     /**

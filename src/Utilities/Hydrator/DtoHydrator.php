@@ -9,7 +9,6 @@ use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
-use Exception;
 use ReflectionProperty;
 
 /**
@@ -109,7 +108,7 @@ class DtoHydrator implements DtoHydratorInterface
      * @param string $propertyName
      * @param array $data
      *
-     * @throws Exception - If the property does not exist in the data array
+     * @throws PropertyDataNotProvidedException - If the property does not exist in the data array
      * @return bool
      */
     private function validatePropertyDataProvided(string $propertyName, array $data): bool

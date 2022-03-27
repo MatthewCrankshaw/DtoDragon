@@ -8,9 +8,9 @@ use ReflectionProperty;
 
 class DateParser implements ParserInterface
 {
-    public function registerTypes(): array
+    public function registeredType(): string
     {
-        return [Date::class];
+        return Date::class;
     }
 
     /**

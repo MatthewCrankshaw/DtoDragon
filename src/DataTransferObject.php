@@ -6,9 +6,12 @@ use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
+use DtoDragon\Utilities\Hydrator\Parsers\ArrayParser;
 use DtoDragon\Utilities\Hydrator\Parsers\CollectionParser;
 use DtoDragon\Utilities\Hydrator\Parsers\DtoParser;
-use DtoDragon\Utilities\Hydrator\Parsers\PrimitiveParser;
+use DtoDragon\Utilities\Hydrator\Parsers\FloatParser;
+use DtoDragon\Utilities\Hydrator\Parsers\IntegerParser;
+use DtoDragon\Utilities\Hydrator\Parsers\StringParser;
 
 /**
  * The base implementation of a data transfer object
@@ -43,15 +46,28 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
-        ParsersSingleton::getInstance()->register(new PrimitiveParser());
-        ParsersSingleton::getInstance()->register(new DtoParser());
-        ParsersSingleton::getInstance()->register(new CollectionParser());
+        $this->registerBasicParsers();
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
         $this->hydrator = new DtoHydrator($factory);
         if (!empty($data)) {
             $this->hydrator->hydrate($data);
         }
+    }
+
+    /**
+     * Register the parsers used to hydrate the DTO's
+     *
+     * @return void
+     */
+    private function registerBasicParsers(): void
+    {
+        ParsersSingleton::getInstance()->register(new IntegerParser());
+        ParsersSingleton::getInstance()->register(new StringParser());
+        ParsersSingleton::getInstance()->register(new ArrayParser());
+        ParsersSingleton::getInstance()->register(new FloatParser());
+        ParsersSingleton::getInstance()->register(new DtoParser());
+        ParsersSingleton::getInstance()->register(new CollectionParser());
     }
 
     /**
