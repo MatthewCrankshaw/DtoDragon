@@ -6,7 +6,6 @@ use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\ParserNotFoundException;
 use DtoDragon\Exceptions\PropertyDataNotProvidedException;
-use DtoDragon\Interfaces\DtoHydratorInterface;
 use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;

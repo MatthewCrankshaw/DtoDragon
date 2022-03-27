@@ -5,7 +5,7 @@ namespace DtoDragon\Singletons;
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\Exceptions\ParserNotFoundException;
-use DtoDragon\Interfaces\ParserInterface;
+use DtoDragon\Utilities\Hydrator\Parsers\ParserInterface;
 
 /**
  * Singleton to manage an array of parsers

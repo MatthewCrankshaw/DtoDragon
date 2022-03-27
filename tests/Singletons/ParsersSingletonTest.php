@@ -3,13 +3,13 @@
 namespace DtoDragon\Test\Singletons;
 
 use DtoDragon\Exceptions\ParserNotFoundException;
-use DtoDragon\Interfaces\ParserInterface;
 use DtoDragon\Singletons\ParsersSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\Dtos\ServiceCollection;
 use DtoDragon\Test\Dtos\ServiceDto;
 use DtoDragon\Utilities\Hydrator\Parsers\CollectionParser;
 use DtoDragon\Utilities\Hydrator\Parsers\DtoParser;
+use DtoDragon\Utilities\Hydrator\Parsers\ParserInterface;
 use ReflectionProperty;
 
 /**

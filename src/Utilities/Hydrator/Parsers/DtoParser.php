@@ -3,7 +3,6 @@
 namespace DtoDragon\Utilities\Hydrator\Parsers;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\Interfaces\ParserInterface;
 use ReflectionProperty;
 
 /**

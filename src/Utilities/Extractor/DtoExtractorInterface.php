@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\Interfaces;
+namespace DtoDragon\Utilities\Extractor;
 
 /**
  * Defines the interface of a DTO extractor

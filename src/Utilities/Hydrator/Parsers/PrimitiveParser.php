@@ -2,7 +2,6 @@
 
 namespace DtoDragon\Utilities\Hydrator\Parsers;
 
-use DtoDragon\Interfaces\ParserInterface;
 use ReflectionProperty;
 
 /**

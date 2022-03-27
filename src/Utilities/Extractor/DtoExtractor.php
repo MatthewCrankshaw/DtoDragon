@@ -4,11 +4,10 @@ namespace DtoDragon\Utilities\Extractor;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\Interfaces\DtoExtractorInterface;
-use DtoDragon\Interfaces\ReflectorInterface;
 use DtoDragon\Singletons\CastersSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
+use DtoDragon\Utilities\ReflectorInterface;
 use ReflectionProperty;
 
 /**

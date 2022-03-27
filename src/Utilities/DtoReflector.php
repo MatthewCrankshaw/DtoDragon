@@ -3,7 +3,6 @@
 namespace DtoDragon\Utilities;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\Interfaces\ReflectorInterface;
 use ReflectionClass;
 use ReflectionProperty;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\Interfaces;
+namespace DtoDragon\Utilities\Extractor\Casters;
 
 /**
  * Defines the interface of a caster
