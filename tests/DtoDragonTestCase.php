@@ -3,9 +3,9 @@
 namespace DtoDragon\Test;
 
 use DtoDragon\Singletons\CastersSingleton;
-use DtoDragon\Singletons\ParsersSingleton;
+use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\Caster\DateCaster;
-use DtoDragon\Test\Parser\DateParser;
+use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use PHPUnit\Framework\TestCase;
 
 class DtoDragonTestCase extends TestCase
@@ -13,7 +13,7 @@ class DtoDragonTestCase extends TestCase
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        ParsersSingleton::getInstance()->register(new DateParser());
+        PropertyHydratorsSingleton::getInstance()->register(new DatePropertyHydrator());
         CastersSingleton::getInstance()->register(new DateCaster());
     }
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace DtoDragon\Utilities\Hydrator\Parsers;
+namespace DtoDragon\Utilities\Hydrator\PropertyHydrators;
 
 use DtoDragon\DataTransferObject;
 use ReflectionProperty;
 
 /**
- * Parser that converts array data to a data transfer object
+ * Property hydrator that converts array data to a data transfer object
  *
- * @package DtoDragon\Utilities\Hydrator\Parsers
+ * @package DtoDragon\Utilities\Hydrator\PropertyHydrators
  *
  * @author Matthew Crankshaw
  */
-class DtoParser implements ParserInterface
+class DtoPropertyHydrator implements PropertyHydratorInterface
 {
     /**
      * @inheritDoc
@@ -23,14 +23,14 @@ class DtoParser implements ParserInterface
     }
 
     /**
-     * Parse an array of data to a DataTransferObject
+     * Hydrate DataTransferObject property from an array of data
      *
      * @param ReflectionProperty $property
      * @param mixed $value
      *
      * @return DataTransferObject
      */
-    public function parse(ReflectionProperty $property, $value)
+    public function hydrate(ReflectionProperty $property, $value)
     {
         $dtoType = $property->getType()->getName();
         return new $dtoType($value);

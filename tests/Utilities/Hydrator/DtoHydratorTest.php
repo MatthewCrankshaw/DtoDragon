@@ -49,7 +49,7 @@ class DtoHydratorTest extends DtoDragonTestCase
         ]);
     }
 
-    public function testHydrateParserNotFound(): void
+    public function testHydratePropertyHydratorNotFound(): void
     {
         $this->expectException(PropertyDataNotProvidedException::class);
         $dto = new MultiTypeDto([

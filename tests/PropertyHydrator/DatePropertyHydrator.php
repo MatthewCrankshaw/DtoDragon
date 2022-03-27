@@ -1,12 +1,12 @@
 <?php
 
-namespace DtoDragon\Test\Parser;
+namespace DtoDragon\Test\PropertyHydrator;
 
 use DtoDragon\Test\Dtos\Date;
-use DtoDragon\Utilities\Hydrator\Parsers\ParserInterface;
+use DtoDragon\Utilities\Hydrator\PropertyHydrators\PropertyHydratorInterface;
 use ReflectionProperty;
 
-class DateParser implements ParserInterface
+class DatePropertyHydrator implements PropertyHydratorInterface
 {
     public function registeredType(): string
     {
@@ -20,7 +20,7 @@ class DateParser implements ParserInterface
      *
      * @return object
      */
-    public function parse(ReflectionProperty $property, $value): object
+    public function hydrate(ReflectionProperty $property, $value): object
     {
         $dateParts = explode('-', $value);
         return new Date($dateParts[0], $dateParts[1], $dateParts[2]);

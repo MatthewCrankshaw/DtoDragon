@@ -6,13 +6,13 @@ use Exception;
 
 /**
  * Exception class to represent an unexpected situation
- * where a parser is requested but is not available for a given type
+ * where a property hydrator is requested but is not available for a given type
  *
  * @package DtoDragon\Exceptions
  *
  * @author Matthew Crankshaw
  */
-class ParserNotFoundException extends Exception
+class PropertyHydratorNotFoundException extends Exception
 {
     /**
      * Construct the exception with a given message
@@ -21,8 +21,8 @@ class ParserNotFoundException extends Exception
      */
     public function __construct(string $type)
     {
-        $message = 'Expected a parser for type (' . $type
-            . '). Define a new parser and register it to the ParsersSingleton.';
+        $message = 'Expected a property hydrator for type (' . $type
+            . '). Define a new property hydrator and register it to the PropertyHydratorSingleton.';
 
         parent::__construct($message, 500);
     }

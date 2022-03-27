@@ -4,9 +4,9 @@ namespace DtoDragon\Utilities\Hydrator;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
-use DtoDragon\Exceptions\ParserNotFoundException;
+use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
 use DtoDragon\Exceptions\PropertyDataNotProvidedException;
-use DtoDragon\Singletons\ParsersSingleton;
+use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use ReflectionProperty;
@@ -66,7 +66,7 @@ class DtoHydrator implements DtoHydratorInterface
      */
     private function hydrateProperty(ReflectionProperty $property, $value)
     {
-        $parsers = ParsersSingleton::getInstance();
+        $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $type = $property->getType()->getName();
 
         if (is_null($value)) {
@@ -75,12 +75,12 @@ class DtoHydrator implements DtoHydratorInterface
             } else {
                 throw new NonNullablePropertyException($property->getName());
             }
-        } elseif ($parsers->hasParser($type)) {
-            $parser = $parsers->getParser($type);
-            $value = $parser->parse($property, $value);
+        } elseif ($propertyHydrators->hasPropertyHydrator($type)) {
+            $hydrator = $propertyHydrators->getPropertyHydrator($type);
+            $value = $hydrator->hydrate($property, $value);
             $this->reflector->setPropertyValue($property, $value);
         } else {
-            throw new ParserNotFoundException($type);
+            throw new PropertyHydratorNotFoundException($type);
         }
     }
 
