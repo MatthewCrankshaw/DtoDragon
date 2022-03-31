@@ -22,7 +22,7 @@ class Singleton
     /**
      * Get the instance of the singleton
      * As this is late statically binded the subclass will be overriden
-     * @example CastersSingleton::getInstance() will return the instance of the CastersSingleton
+     * @example PropertyExtractorsSingleton::getInstance() will return the instance of the PropertyExtractorsSingleton
      *
      * @return Singleton
      */

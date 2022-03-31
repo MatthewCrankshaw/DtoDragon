@@ -4,15 +4,14 @@ namespace DtoDragon\Utilities\Extractor;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\Singletons\CastersSingleton;
+use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\ReflectorInterface;
 use ReflectionProperty;
 
 /**
- * An extractor class for extracting data from a dto and presenting it as an array
- * The extractor will also use casters to cast values to strings if the appropriate caster is available
+ * An extractor class for extracting data from a DTO and presenting it as an array
  *
  * @package DtoDragon\Utilities\Extractor
  *
@@ -55,14 +54,14 @@ class DtoExtractor implements DtoExtractorInterface
      */
     private function extractProperty(ReflectionProperty $property)
     {
-        $casters = CastersSingleton::getInstance();
+        $propertyExtractors = PropertyExtractorsSingleton::getInstance();
         $value = $this->reflector->getPropertyValue($property);
         if ($this->isNestedDto($value)) {
             return $value->toArray();
         } elseif (is_object($value)) {
-            if ($casters->hasCaster($value)) {
-                $caster = $casters->getCaster($value);
-                return $caster->cast($value);
+            if ($propertyExtractors->hasPropertyExtractor($value)) {
+                $propertyExtractor = $propertyExtractors->getPropertyExtractor($value);
+                return $propertyExtractor->extract($value);
             }
         }
         return $value;
