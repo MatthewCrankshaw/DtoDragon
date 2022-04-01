@@ -55,7 +55,7 @@ class DtoReflector implements ReflectorInterface
      */
     public function getProperties(): array
     {
-        return $this->dtoReflection->getProperties();
+        return $this->dtoReflection->getProperties(ReflectionProperty::IS_PRIVATE);
     }
 
     /**
@@ -76,6 +76,13 @@ class DtoReflector implements ReflectorInterface
         $property->setValue($this->dto, $value);
     }
 
+    /**
+     * Check to see if a given property is nullable
+     *
+     * @param ReflectionProperty $property
+     *
+     * @return bool
+     */
     public function propertyIsNullable(ReflectionProperty $property): bool
     {
         return $property->getType()->allowsNull();

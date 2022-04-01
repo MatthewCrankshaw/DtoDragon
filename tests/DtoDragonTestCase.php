@@ -2,9 +2,9 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Singletons\CastersSingleton;
+use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
-use DtoDragon\Test\Caster\DateCaster;
+use DtoDragon\Test\PropertyExtractor\DatePropertyExtractor;
 use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class DtoDragonTestCase extends TestCase
     {
         parent::__construct($name, $data, $dataName);
         PropertyHydratorsSingleton::getInstance()->register(new DatePropertyHydrator());
-        CastersSingleton::getInstance()->register(new DateCaster());
+        PropertyExtractorsSingleton::getInstance()->register(new DatePropertyExtractor());
     }
 
     public function callProtectedMethod($object, string $name, array $args)
