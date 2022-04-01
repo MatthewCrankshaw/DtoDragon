@@ -7,7 +7,8 @@ use DtoDragon\DataTransferObjectCollection;
 use ReflectionProperty;
 
 /**
- * Todo
+ * Extractor for the dto collection property type
+ * Subclasses of collection dto's will be extracted from a parent dto to an array using this extractor
  *
  * @package DtoDragon\Utilities\Hydrator\PropertyHydrators
  *
