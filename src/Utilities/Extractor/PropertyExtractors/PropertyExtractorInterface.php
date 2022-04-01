@@ -2,6 +2,9 @@
 
 namespace DtoDragon\Utilities\Extractor\PropertyExtractors;
 
+use DtoDragon\DataTransferObject;
+use ReflectionProperty;
+
 /**
  * Defines the interface of a property extractor
  * A property extractor is responsible for converting an object to an array
@@ -24,9 +27,9 @@ interface PropertyExtractorInterface
     /**
      * Extract the given object to an array item
      *
-     * @param object $object
+     * @param ReflectionProperty $property
      *
-     * @return string
+     * @return mixed
      */
-    public function extract(object $object): string;
+    public function extract(DataTransferObject $dto, ReflectionProperty $property);
 }

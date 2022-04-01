@@ -2,8 +2,10 @@
 
 namespace DtoDragon\Test\PropertyExtractor;
 
+use DtoDragon\DataTransferObject;
 use DtoDragon\Test\Dtos\Date;
 use DtoDragon\Utilities\Extractor\PropertyExtractors\PropertyExtractorInterface;
+use ReflectionProperty;
 
 class DatePropertyExtractor implements PropertyExtractorInterface
 {
@@ -17,8 +19,14 @@ class DatePropertyExtractor implements PropertyExtractorInterface
      *
      * @return string
      */
-    public function extract(object $object): string
+    public function extract(DataTransferObject $dto, ReflectionProperty $property): ?string
     {
-        return $object->day . '-' . $object->month . '-' . $object->year;
+        $value = $property->getValue($dto);
+
+        if (is_null($value)) {
+            return null;
+        }
+
+        return $value->day . '-' . $value->month . '-' . $value->year;
     }
 }

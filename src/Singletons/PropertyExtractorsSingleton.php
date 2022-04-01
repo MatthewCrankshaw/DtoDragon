@@ -2,6 +2,8 @@
 
 namespace DtoDragon\Singletons;
 
+use DtoDragon\DataTransferObject;
+use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\Utilities\Extractor\PropertyExtractors\PropertyExtractorInterface;
 use Exception;
 
@@ -31,40 +33,74 @@ class PropertyExtractorsSingleton extends Singleton
      */
     public function register(PropertyExtractorInterface $propertyExtractor): void
     {
-        if (!in_array($propertyExtractor, $this->propertyExtractors)) {
-            $this->propertyExtractors[$propertyExtractor->registeredType()] = $propertyExtractor;
-        }
+        $this->propertyExtractors[$propertyExtractor->registeredType()] = $propertyExtractor;
     }
 
     /**
-     * Returns true if there is a property extractor for this object type
+     * Returns true if there is a property extractor for the provided type
      *
-     * @param object $object
+     * @param string $type
      *
      * @return bool
      */
-    public function hasPropertyExtractor(object $object): bool
+    public function hasPropertyExtractor(string $type): bool
     {
-        if (isset($this->propertyExtractors[$object::class])) {
+        if ($this->isDto($type)) {
+            return isset($this->propertyExtractors[DataTransferObject::class]);
+        } elseif ($this->isCollection($type)) {
+            return isset($this->propertyExtractors[DataTransferObjectCollection::class]);
+        }
+
+        if (isset($this->propertyExtractors[$type])) {
             return true;
         }
         return false;
     }
 
     /**
-     * Get the property extractor based on the object's type provided
+     * Get the property extractor based on the provided type
      *
-     * @param object $object
+     * @param string $type
      *
      * @throws Exception - If a property extractor for the type provided does not exist
      * @return PropertyExtractorInterface
      */
-    public function getPropertyExtractor(object $object): PropertyExtractorInterface
+    public function getPropertyExtractor(string $type): PropertyExtractorInterface
     {
-        if ($this->hasPropertyExtractor($object)) {
-            return $this->propertyExtractors[$object::class];
+        if ($this->isDto($type)) {
+            return $this->propertyExtractors[DataTransferObject::class];
+        } elseif ($this->isCollection($type)) {
+            return $this->propertyExtractors[DataTransferObjectCollection::class];
         }
 
-        throw new Exception('Property extractor was not found for ' . $object::class . '!');
+        if ($this->hasPropertyExtractor($type)) {
+            return $this->propertyExtractors[$type];
+        }
+
+        throw new Exception('Property extractor was not found for ' . $type . '!');
+    }
+
+    /**
+     * Check to see if the provided class name is a type of DataTransferObject
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
+    private function isDto(string $type): bool
+    {
+        return is_subclass_of($type, DataTransferObject::class);
+    }
+
+    /**
+     * Check to see if the provided class name is a type of DataTransferObjectCollection
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
+    private function isCollection(string $type): bool
+    {
+        return is_subclass_of($type, DataTransferObjectCollection::class);
     }
 }

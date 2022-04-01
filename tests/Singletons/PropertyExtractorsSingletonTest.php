@@ -22,23 +22,23 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
         $this->propertyExtractors->register(new DatePropertyExtractor());
         $propertyExtractors = $this->getProtectedProperty($this->propertyExtractors, 'propertyExtractors');
 
-        $this->assertCount(1, $propertyExtractors);
+        $this->assertCount(7, $propertyExtractors);
     }
 
     public function testGetPropertyExtractor(): void
     {
-        $propertyExtractor = $this->propertyExtractors->getPropertyExtractor(new Date(1,1,1));
+        $propertyExtractor = $this->propertyExtractors->getPropertyExtractor(Date::class);
 
         $this->assertInstanceOf(DatePropertyExtractor::class, $propertyExtractor);
     }
 
     public function testHasPropertyExtractor(): void
     {
-        $this->assertTrue($this->propertyExtractors->hasPropertyExtractor(new Date(1,1,1)));
+        $this->assertTrue($this->propertyExtractors->hasPropertyExtractor(Date::class));
     }
 
     public function testDoesNotHavePropertyExtractor(): void
     {
-        $this->assertFalse($this->propertyExtractors->hasPropertyExtractor($this));
+        $this->assertFalse($this->propertyExtractors->hasPropertyExtractor(PropertyExtractorsSingletonTest::class));
     }
 }
