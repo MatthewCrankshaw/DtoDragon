@@ -37,3 +37,10 @@ jobs:
 
     - name: Run linter
       run: composer run-script linter
+
+    - name: phpunit-coverage-badge
+      uses: timkrase/phpunit-coverage-badge@v1.2.0
+      with:
+        coverage_badge_path: 'badge-coverage.svg'
+        push_badge: true
+        repo_token: ${{ secrets.GITHUB_TOKEN }}

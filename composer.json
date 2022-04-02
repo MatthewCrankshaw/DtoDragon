@@ -23,7 +23,7 @@
         "php": "^8.1"
     },
     "scripts": {
-        "test": "phpunit tests",
+        "test": "php -dzend_extension=xdebug -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text --configuration phpunit.xml",
         "linter": "./vendor/bin/phpcs --standard=psr12 ./src/  "
     }
 }

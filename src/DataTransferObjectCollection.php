@@ -21,14 +21,14 @@ abstract class DataTransferObjectCollection implements Iterator
      *
      * @var int
      */
-    private int $position;
+    protected int $position;
 
     /**
      * The array of DTO items
      *
      * @var DataTransferObject[]
      */
-    private array $items = [];
+    protected array $items = [];
 
     public function __construct(array $items)
     {
