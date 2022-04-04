@@ -2,23 +2,10 @@
 
 namespace DtoDragon;
 
-use DtoDragon\Singletons\PropertyExtractorsSingleton;
-use DtoDragon\Singletons\PropertyHydratorsSingleton;
+use DtoDragon\ServiceProviders\DtoServiceProvider;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\ArrayPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\CollectionPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\DtoPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\FloatPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\IntegerPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\StringPropertyExtractor;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\ArrayPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\DtoPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\FloatPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
 
 /**
  * The base implementation of a data transfer object
@@ -53,44 +40,13 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
-        $this->registerBasicPropertyHydrators();
-        $this->registerBasicPropertyExtractors();
+        DtoServiceProvider::boot();
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
         $this->hydrator = new DtoHydrator($factory);
         if (!empty($data)) {
             $this->hydrator->hydrate($data);
         }
-    }
-
-    /**
-     * Register the property hydrators used to hydrate the DTO's
-     *
-     * @return void
-     */
-    private function registerBasicPropertyHydrators(): void
-    {
-        PropertyHydratorsSingleton::getInstance()->register(new IntegerPropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new StringPropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new ArrayPropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new FloatPropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new DtoPropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new CollectionPropertyHydrator());
-    }
-
-    /**
-     * Register the property extractors used to extract the data from the DTOs
-     *
-     * @return void
-     */
-    private function registerBasicPropertyExtractors(): void
-    {
-        PropertyExtractorsSingleton::getInstance()->register(new IntegerPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new StringPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new ArrayPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new FloatPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new DtoPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new CollectionPropertyExtractor());
     }
 
     /**

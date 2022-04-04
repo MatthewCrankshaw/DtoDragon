@@ -4,9 +4,13 @@ namespace DtoDragon\Test\Utilities;
 
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\Dtos\CalendarItemDto;
-use DtoDragon\Test\Dtos\Date;
+use DtoDragon\Test\Dtos\ServiceDto;
 use DtoDragon\Utilities\DtoReflector;
 
+/**
+ * @covers \DtoDragon\Utilities\DtoReflector
+ * @package DtoDragon\Test\Utilities
+ */
 class DtoReflectorTest extends DtoDragonTestCase
 {
     public function providerCalenderItemDto(): array
@@ -24,6 +28,7 @@ class DtoReflectorTest extends DtoDragonTestCase
                     [
                         'id' => 3,
                         'type' => 'travel',
+                        'price' => 10.0
                     ]
                 ],
                 'tags' => [
@@ -72,5 +77,78 @@ class DtoReflectorTest extends DtoDragonTestCase
         foreach ($properties as $property) {
             $this->assertTrue($property->isPrivate());
         }
+    }
+
+    public function testGetPropertyValue(): void
+    {
+        $service = new ServiceDto([
+            'id' => 1,
+            'type' => 'tax',
+            'price' => 0.0123,
+        ]);
+        $reflector = new DtoReflector($service);
+        $properties = $reflector->getProperties();
+        $id = $reflector->getPropertyValue($properties[0]);
+        $type = $reflector->getPropertyValue($properties[1]);
+
+        $this->assertSame(1, $id);
+        $this->assertSame('tax', $type);
+    }
+
+    public function testSetPropertyValue(): void
+    {
+        $service = new ServiceDto([
+            'id' => 1,
+            'type' => 'tax',
+            'price' => null,
+        ]);
+
+        $reflector = new DtoReflector($service);
+        $properties = $reflector->getProperties();
+        $reflector->setPropertyValue($properties[0], 10);
+        $reflector->setPropertyValue($properties[1], 'service');
+        $id = $reflector->getPropertyValue($properties[0]);
+        $type = $reflector->getPropertyValue($properties[1]);
+
+        $this->assertSame(10, $id);
+        $this->assertSame('service', $type);
+    }
+
+    public function providePropertyIsNullable() {
+        return [
+            'null property' => [
+                [
+                    'id' => 1,
+                    'type' => 'tax',
+                    'price' => null,
+                ],
+                2,
+                true
+            ],
+            'non-null property' => [
+                [
+                    'id' => 1,
+                    'type' => 'tax',
+                    'price' => 10,
+                ],
+                1,
+                false
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider providePropertyIsNullable
+     *
+     * @return void
+     */
+    public function testPropertyIsNullable(array $data, int $propertyIndex, bool $expected) {
+        $service = new ServiceDto($data);
+
+        $reflector = new DtoReflector($service);
+        $property = $reflector->getProperties()[$propertyIndex];
+        $actual = $reflector->propertyIsNullable($property);
+
+        $this->assertSame($expected, $actual);
     }
 }

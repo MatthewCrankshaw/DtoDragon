@@ -15,6 +15,7 @@ use ReflectionProperty;
 /**
  * Tests to ensure that the property hydrators singleton registers and manages property hydrators correctly
  *
+ * @covers \DtoDragon\Singletons\PropertyHydratorsSingleton
  * @package DtoDragon\Test\Singletons
  *
  * @author Matthew Crankshaw

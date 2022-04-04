@@ -10,6 +10,8 @@ class ServiceDto extends DataTransferObject
 
     private string $type;
 
+    private ?float $price;
+
     /**
      * @return int
      */
@@ -45,6 +47,25 @@ class ServiceDto extends DataTransferObject
     public function setType(string $type): ServiceDto
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float|null $price
+     *
+     * @return ServiceDto
+     */
+    public function setPrice(?float $price): ServiceDto
+    {
+        $this->price = $price;
         return $this;
     }
 }

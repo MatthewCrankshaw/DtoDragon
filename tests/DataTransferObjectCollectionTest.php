@@ -5,6 +5,10 @@ namespace DtoDragon\Test;
 use DtoDragon\Test\Dtos\ServiceCollection;
 use DtoDragon\Test\Dtos\ServiceDto;
 
+/**
+ * @covers \DtoDragon\DataTransferObjectCollection
+ * @package DtoDragon\Test
+ */
 class DataTransferObjectCollectionTest extends DtoDragonTestCase
 {
     public function provideCollectionData(): array
@@ -15,14 +19,17 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
                     [
                         'id' => 1,
                         'type' => 'tax',
+                        'price' => null,
                     ],
                     [
                         'id' => 2,
                         'type' => 'tax',
+                        'price' => 10.0,
                     ],
                     [
                         'id' => 3,
                         'type' => 'tax',
+                        'price' => 0.11,
                     ],
                 ]
             ],

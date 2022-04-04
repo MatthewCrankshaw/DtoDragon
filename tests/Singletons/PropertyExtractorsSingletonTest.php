@@ -7,6 +7,10 @@ use DtoDragon\Test\PropertyExtractor\DatePropertyExtractor;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\Dtos\Date;
 
+/**
+ * @covers \DtoDragon\Singletons\PropertyHydratorsSingleton
+ * @package DtoDragon\Test\Singletons
+ */
 class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 {
     private PropertyExtractorsSingleton $propertyExtractors;

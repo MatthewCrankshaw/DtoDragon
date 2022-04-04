@@ -6,6 +6,10 @@ use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Singletons\Singleton;
 use DtoDragon\Test\DtoDragonTestCase;
 
+/**
+ * @covers \DtoDragon\Singletons\Singleton
+ * @package DtoDragon\Test\Singletons
+ */
 class SingletonTest extends DtoDragonTestCase
 {
     public function testBasicSingletonInstance(): void

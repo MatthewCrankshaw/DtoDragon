@@ -8,6 +8,10 @@ use DtoDragon\Test\PropertyExtractor\DatePropertyExtractor;
 use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \DtoDragon\DataTransferObject
+ * @package DtoDragon\Test
+ */
 class DtoDragonTestCase extends TestCase
 {
     public function __construct(?string $name = null, array $data = [], $dataName = '')
