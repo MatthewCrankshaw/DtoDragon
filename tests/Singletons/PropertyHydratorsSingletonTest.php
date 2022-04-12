@@ -36,6 +36,19 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         );
     }
 
+    public function testClear(): void
+    {
+        $propertyHydrators = PropertyHydratorsSingleton::getInstance();
+        $propertyHydrators->register(new DtoPropertyHydrator());
+        $propertyHydrators->register(new CollectionPropertyHydrator());
+
+        $propertyHydrators->clear();
+
+        $actual = $this->getProtectedProperty($propertyHydrators, 'propertyHydrators');
+        $this->assertIsArray($actual);
+        $this->assertEmpty($actual);
+    }
+
     /**
      * Successfully register a property hydrator
      *
@@ -63,12 +76,30 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         $this->assertInstanceOf(PropertyHydratorInterface::class, $hydrator);
     }
 
+    public function testHasDtoPropertyHydrator(): void
+    {
+        $propertyHydrators = PropertyHydratorsSingleton::getInstance();
+        $propertyHydrators->register(new DtoPropertyHydrator());
+
+        $actual = $propertyHydrators->hasPropertyHydrator(ServiceDto::class);
+        $this->assertTrue(true, $actual);
+    }
+
+    public function testHasCollectionPropertyHydrator(): void
+    {
+        $propertyHydrators = PropertyHydratorsSingleton::getInstance();
+        $propertyHydrators->register(new CollectionPropertyHydrator());
+
+        $actual = $propertyHydrators->hasPropertyHydrator(ServiceCollection::class);
+        $this->assertTrue(true, $actual);
+    }
+
     /**
      * Test that a DTO property hydrator is able to retrieve a DtoPropertyHydrator for a given Dto subclass
      *
      * @return void
      */
-    public function testDtoPropertyHydrator(): void
+    public function testGetDtoPropertyHydrator(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(new DtoPropertyHydrator());
@@ -83,7 +114,7 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
      *
      * @return void
      */
-    public function testCollectionPropertyHydrator(): void
+    public function testGetCollectionPropertyHydrator(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(new CollectionPropertyHydrator());

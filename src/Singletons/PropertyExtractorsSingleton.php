@@ -25,6 +25,16 @@ class PropertyExtractorsSingleton extends Singleton
     private array $propertyExtractors = [];
 
     /**
+     * Clear all the extractors managed by this singleton
+     *
+     * @return void
+     */
+    public function clear(): void
+    {
+        $this->propertyExtractors = [];
+    }
+
+    /**
      * Registers a new property extractor for this singleton to manage
      *
      * @param PropertyExtractorInterface $propertyExtractor

@@ -8,7 +8,7 @@ use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\Dtos\Date;
 
 /**
- * @covers \DtoDragon\Singletons\PropertyHydratorsSingleton
+ * @covers \DtoDragon\Singletons\PropertyExtractorsSingleton
  * @package DtoDragon\Test\Singletons
  */
 class PropertyExtractorsSingletonTest extends DtoDragonTestCase

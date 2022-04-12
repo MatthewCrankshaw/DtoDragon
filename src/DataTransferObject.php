@@ -2,7 +2,7 @@
 
 namespace DtoDragon;
 
-use DtoDragon\ServiceProviders\DtoServiceProvider;
+use DtoDragon\Singletons\DtoServiceProviderSingleton;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
@@ -19,6 +19,12 @@ use DtoDragon\Utilities\Hydrator\DtoHydrator;
  */
 class DataTransferObject
 {
+    /**
+     * The dto service provider for providing property extractors and hydrators
+     * @var DtoServiceProviderSingleton $provider
+     */
+    private DtoServiceProviderSingleton $provider;
+
     /**
      * The extractor responsible for extracting data to an array
      * @var DtoExtractor
@@ -40,7 +46,8 @@ class DataTransferObject
      */
     public function __construct(?array $data = null)
     {
-        DtoServiceProvider::boot();
+        $this->provider = new DtoServiceProviderSingleton();
+        $this->provider->boot();
         $factory = new DtoReflectorFactory($this);
         $this->extractor = new DtoExtractor($factory);
         $this->hydrator = new DtoHydrator($factory);

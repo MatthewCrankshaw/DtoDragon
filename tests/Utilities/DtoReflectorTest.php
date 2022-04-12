@@ -2,9 +2,11 @@
 
 namespace DtoDragon\Test\Utilities;
 
+use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\Dtos\CalendarItemDto;
 use DtoDragon\Test\Dtos\ServiceDto;
+use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use DtoDragon\Utilities\DtoReflector;
 
 /**
@@ -46,6 +48,7 @@ class DtoReflectorTest extends DtoDragonTestCase
      */
     public function testGetPropertiesIsArray(array $array): void
     {
+        PropertyHydratorsSingleton::getInstance()->register(new DatePropertyHydrator());
         $dto = new CalendarItemDto($array);
         $dtoReflector = new DtoReflector($dto);
         $properties = $dtoReflector->getProperties();

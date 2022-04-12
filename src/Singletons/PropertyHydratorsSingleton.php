@@ -25,6 +25,16 @@ class PropertyHydratorsSingleton extends Singleton
     private array $propertyHydrators = [];
 
     /**
+     * Clear all the hydrators managed by this singleton
+     *
+     * @return void
+     */
+    public function clear(): void
+    {
+        $this->propertyHydrators = [];
+    }
+
+    /**
      * Registers a new property hydrator for this singleton to manage
      *
      * @param PropertyHydratorInterface $propertyHydrator

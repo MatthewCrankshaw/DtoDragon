@@ -1,9 +1,7 @@
 <?php
 
-namespace DtoDragon\ServiceProviders;
+namespace DtoDragon\Singletons;
 
-use DtoDragon\Singletons\PropertyExtractorsSingleton;
-use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Utilities\Extractor\PropertyExtractors\ArrayPropertyExtractor;
 use DtoDragon\Utilities\Extractor\PropertyExtractors\CollectionPropertyExtractor;
 use DtoDragon\Utilities\Extractor\PropertyExtractors\DtoPropertyExtractor;
@@ -16,6 +14,7 @@ use DtoDragon\Utilities\Hydrator\PropertyHydrators\DtoPropertyHydrator;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\FloatPropertyHydrator;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
+use Symfony\Contracts\Service\ServiceProviderInterface;
 
 /**
  * Service provider for the data transfer object
@@ -26,27 +25,27 @@ use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
  *
  * @author Matthew Crankshaw
  */
-class DtoServiceProvider
+class DtoServiceProviderSingleton extends Singleton
 {
     /**
-     * Indicates whether the service provider has already been booted
+     * Stores whether the service provider has booted successfully
      *
      * @var bool
      */
-    private static bool $booted = false;
+    public bool $booted = false;
 
     /**
      * Boot the data transfer object's services
      *
      * @return void
      */
-    public static function boot(): void
+    public function boot(): void
     {
-        if (!static::$booted) {
-            static::registerBasicPropertyHydrators();
-            static::registerBasicPropertyExtractors();
+        if (!$this->booted) {
+            $this->registerBasicPropertyHydrators();
+            $this->registerBasicPropertyExtractors();
         }
-        static::$booted = true;
+        $this->booted = true;
     }
 
     /**
@@ -54,7 +53,7 @@ class DtoServiceProvider
      *
      * @return void
      */
-    private static function registerBasicPropertyHydrators(): void
+    private function registerBasicPropertyHydrators(): void
     {
         PropertyHydratorsSingleton::getInstance()->register(new IntegerPropertyHydrator());
         PropertyHydratorsSingleton::getInstance()->register(new StringPropertyHydrator());
@@ -69,7 +68,7 @@ class DtoServiceProvider
      *
      * @return void
      */
-    private static function registerBasicPropertyExtractors(): void
+    private function registerBasicPropertyExtractors(): void
     {
         PropertyExtractorsSingleton::getInstance()->register(new IntegerPropertyExtractor());
         PropertyExtractorsSingleton::getInstance()->register(new StringPropertyExtractor());

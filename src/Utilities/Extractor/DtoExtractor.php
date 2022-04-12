@@ -2,12 +2,10 @@
 
 namespace DtoDragon\Utilities\Extractor;
 
-use DtoDragon\DataTransferObject;
-use DtoDragon\DataTransferObjectCollection;
+use DtoDragon\Exceptions\PropertyExtractorNotFoundException;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\PropertyExtractorInterface;
 use DtoDragon\Utilities\ReflectorInterface;
 use ReflectionProperty;
 
@@ -63,23 +61,9 @@ class DtoExtractor implements DtoExtractorInterface
             $extractor = $propertyExtractors->getPropertyExtractor($type);
             $value = $extractor->extract($this->reflector->getDto(), $property);
         } else {
-            throw new \Exception('A Property Extractor does not exist for type ' . $type);
+            throw new PropertyExtractorNotFoundException($type);
         }
 
         return $value;
-    }
-
-    /**
-     * Check if the value provided is a data transfer object
-     * or a collection of data transfer objects
-     *
-     * @param $value
-     *
-     * @return bool
-     */
-    private function isNestedDto($value): bool
-    {
-        return is_a($value, DataTransferObject::class)
-            || is_a($value, DataTransferObjectCollection::class);
     }
 }
