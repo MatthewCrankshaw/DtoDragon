@@ -2,8 +2,8 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Test\Dtos\ServiceCollection;
-use DtoDragon\Test\Dtos\ServiceDto;
+use DtoDragon\Test\TestDtos\ServiceCollection;
+use DtoDragon\Test\TestDtos\ServiceDto;
 
 /**
  * @covers \DtoDragon\DataTransferObjectCollection

@@ -3,7 +3,7 @@
 namespace DtoDragon\Test\Utilities;
 
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\Dtos\ServiceDto;
+use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 

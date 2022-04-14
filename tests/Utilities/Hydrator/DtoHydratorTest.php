@@ -6,7 +6,7 @@ use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\Dtos\MultiTypeDto;
+use DtoDragon\Test\TestDtos\MultiTypeDto;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Hydrator\DtoHydrator;
 

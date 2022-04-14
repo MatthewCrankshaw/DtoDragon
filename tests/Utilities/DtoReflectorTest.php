@@ -4,8 +4,8 @@ namespace DtoDragon\Test\Utilities;
 
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\Dtos\CalendarItemDto;
-use DtoDragon\Test\Dtos\ServiceDto;
+use DtoDragon\Test\TestDtos\CalendarItemDto;
+use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use DtoDragon\Utilities\DtoReflector;
 

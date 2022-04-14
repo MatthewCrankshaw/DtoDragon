@@ -14,7 +14,6 @@ use DtoDragon\Utilities\Hydrator\PropertyHydrators\DtoPropertyHydrator;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\FloatPropertyHydrator;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
-use Symfony\Contracts\Service\ServiceProviderInterface;
 
 /**
  * Service provider for the data transfer object
@@ -28,11 +27,15 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 class DtoServiceProviderSingleton extends Singleton
 {
     /**
-     * Stores whether the service provider has booted successfully
+     * Clear the service provider by clearing all loaded services
      *
-     * @var bool
+     * @return void
      */
-    public bool $booted = false;
+    public function clear(): void
+    {
+        PropertyHydratorsSingleton::getInstance()->clear();
+        PropertyExtractorsSingleton::getInstance()->clear();
+    }
 
     /**
      * Boot the data transfer object's services
@@ -41,11 +44,8 @@ class DtoServiceProviderSingleton extends Singleton
      */
     public function boot(): void
     {
-        if (!$this->booted) {
-            $this->registerBasicPropertyHydrators();
-            $this->registerBasicPropertyExtractors();
-        }
-        $this->booted = true;
+        $this->registerBasicPropertyHydrators();
+        $this->registerBasicPropertyExtractors();
     }
 
     /**

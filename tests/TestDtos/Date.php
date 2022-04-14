@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\Test\Dtos;
+namespace DtoDragon\Test\TestDtos;
 
 class Date
 {
@@ -14,5 +14,4 @@ class Date
         $this->month = $month;
         $this->year = $year;
     }
-
 }

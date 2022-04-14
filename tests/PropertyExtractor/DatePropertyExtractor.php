@@ -3,7 +3,7 @@
 namespace DtoDragon\Test\PropertyExtractor;
 
 use DtoDragon\DataTransferObject;
-use DtoDragon\Test\Dtos\Date;
+use DtoDragon\Test\TestDtos\Date;
 use DtoDragon\Utilities\Extractor\PropertyExtractors\PropertyExtractorInterface;
 use ReflectionProperty;
 

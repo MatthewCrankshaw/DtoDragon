@@ -2,7 +2,7 @@
 
 namespace DtoDragon\Test\PropertyHydrator;
 
-use DtoDragon\Test\Dtos\Date;
+use DtoDragon\Test\TestDtos\Date;
 use DtoDragon\Utilities\Hydrator\PropertyHydrators\PropertyHydratorInterface;
 use ReflectionProperty;
 

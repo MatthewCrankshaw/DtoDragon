@@ -5,7 +5,7 @@ namespace DtoDragon\Test\Singletons;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Test\PropertyExtractor\DatePropertyExtractor;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\Dtos\Date;
+use DtoDragon\Test\TestDtos\Date;
 
 /**
  * @covers \DtoDragon\Singletons\PropertyExtractorsSingleton

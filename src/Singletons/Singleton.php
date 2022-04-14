@@ -26,7 +26,7 @@ class Singleton
      *
      * @return Singleton
      */
-    public static function getInstance()
+    public static function getInstance(): Singleton
     {
         $subclass = static::class;
 

@@ -7,6 +7,9 @@ use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\ReflectorInterface;
+use DtoDragon\Utilities\Strategies\ExtractedFieldMatchNameStrategy;
+use DtoDragon\Utilities\Strategies\ExtractorNamingStrategyInterface;
+use JetBrains\PhpStorm\Pure;
 use ReflectionProperty;
 
 /**
@@ -25,9 +28,18 @@ class DtoExtractor implements DtoExtractorInterface
      */
     private ReflectorInterface $reflector;
 
+    private ExtractorNamingStrategyInterface $namingStrategy;
+
     public function __construct(DtoReflectorFactory $factory)
     {
         $this->reflector = $factory->create();
+        $this->namingStrategy = $this->createNamingStrategy();
+    }
+
+    #[Pure]
+    protected function createNamingStrategy(): ExtractorNamingStrategyInterface
+    {
+        return new ExtractedFieldMatchNameStrategy();
     }
 
     /**
@@ -37,7 +49,8 @@ class DtoExtractor implements DtoExtractorInterface
     {
         $array = [];
         foreach ($this->reflector->getProperties() as $property) {
-            $propertyName = $property->getName();
+            $dtoName = $property->getName();
+            $propertyName = $this->namingStrategy->apply($dtoName);
             $array[$propertyName] = $this->extractProperty($property);
         }
         return $array;

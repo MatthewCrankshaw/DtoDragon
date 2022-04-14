@@ -2,8 +2,7 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Singletons\PropertyExtractorsSingleton;
-use DtoDragon\Singletons\PropertyHydratorsSingleton;
+use DtoDragon\Singletons\DtoServiceProviderSingleton;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,8 +14,8 @@ class DtoDragonTestCase extends TestCase
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        PropertyHydratorsSingleton::getInstance()->clear();
-        PropertyExtractorsSingleton::getInstance()->clear();
+        DtoServiceProviderSingleton::getInstance()->clear();
+        DtoServiceProviderSingleton::getInstance()->boot();
     }
 
     public function callProtectedMethod($object, string $name, array $args)

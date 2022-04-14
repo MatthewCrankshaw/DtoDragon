@@ -1,6 +1,6 @@
 <?php
 
-namespace DtoDragon\Test\Dtos;
+namespace DtoDragon\Test\TestDtos;
 
 use DtoDragon\DataTransferObjectCollection;
 
