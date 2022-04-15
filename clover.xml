@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649756412">
-  <project timestamp="1649756412">
+<coverage generated="1649980542">
+  <project timestamp="1649980542">
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObject.php">
       <class name="DtoDragon\DataTransferObject" namespace="global">
-        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
+        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
       </class>
-      <line num="47" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="43" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="45" type="stmt" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="48" type="stmt" count="0"/>
       <line num="49" type="stmt" count="0"/>
       <line num="50" type="stmt" count="0"/>
-      <line num="51" type="stmt" count="0"/>
-      <line num="52" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
-      <line num="54" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="0"/>
-      <line num="64" type="method" name="toArray" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="66" type="stmt" count="0"/>
-      <metrics loc="69" ncloc="35" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
+      <line num="59" type="method" name="toArray" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="61" type="stmt" count="0"/>
+      <metrics loc="64" ncloc="34" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObjectCollection.php">
       <class name="DtoDragon\DataTransferObjectCollection" namespace="global">
@@ -82,28 +81,29 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Singletons/DtoServiceProviderSingleton.php">
       <class name="DtoDragon\Singletons\DtoServiceProviderSingleton" namespace="global">
-        <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="19" coveredelements="19"/>
+        <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
       </class>
-      <line num="42" type="method" name="boot" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="44" type="stmt" count="1"/>
-      <line num="45" type="stmt" count="1"/>
-      <line num="46" type="stmt" count="1"/>
-      <line num="48" type="stmt" count="1"/>
-      <line num="56" type="method" name="registerBasicPropertyHydrators" visibility="private" complexity="1" crap="1" count="1"/>
-      <line num="58" type="stmt" count="1"/>
-      <line num="59" type="stmt" count="1"/>
-      <line num="60" type="stmt" count="1"/>
-      <line num="61" type="stmt" count="1"/>
-      <line num="62" type="stmt" count="1"/>
-      <line num="63" type="stmt" count="1"/>
-      <line num="71" type="method" name="registerBasicPropertyExtractors" visibility="private" complexity="1" crap="1" count="1"/>
-      <line num="73" type="stmt" count="1"/>
-      <line num="74" type="stmt" count="1"/>
-      <line num="75" type="stmt" count="1"/>
-      <line num="76" type="stmt" count="1"/>
-      <line num="77" type="stmt" count="1"/>
-      <line num="78" type="stmt" count="1"/>
-      <metrics loc="81" ncloc="52" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="19" coveredelements="19"/>
+      <line num="34" type="method" name="clear" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="36" type="stmt" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="45" type="method" name="boot" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="48" type="stmt" count="0"/>
+      <line num="56" type="method" name="registerBasicPropertyHydrators" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="58" type="stmt" count="0"/>
+      <line num="59" type="stmt" count="0"/>
+      <line num="60" type="stmt" count="0"/>
+      <line num="61" type="stmt" count="0"/>
+      <line num="62" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="0"/>
+      <line num="71" type="method" name="registerBasicPropertyExtractors" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="73" type="stmt" count="0"/>
+      <line num="74" type="stmt" count="0"/>
+      <line num="75" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="78" type="stmt" count="0"/>
+      <metrics loc="81" ncloc="52" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="20" coveredelements="0"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Singletons/PropertyExtractorsSingleton.php">
       <class name="DtoDragon\Singletons\PropertyExtractorsSingleton" namespace="global">
@@ -209,25 +209,29 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Utilities/Extractor/DtoExtractor.php">
       <class name="DtoDragon\Utilities\Extractor\DtoExtractor" namespace="global">
-        <metrics complexity="5" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
+        <metrics complexity="6" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="20" coveredelements="20"/>
       </class>
-      <line num="28" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="30" type="stmt" count="2"/>
-      <line num="36" type="method" name="extract" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="38" type="stmt" count="2"/>
-      <line num="39" type="stmt" count="2"/>
-      <line num="40" type="stmt" count="2"/>
-      <line num="41" type="stmt" count="2"/>
-      <line num="43" type="stmt" count="1"/>
-      <line num="54" type="method" name="extractProperty" visibility="private" complexity="2" crap="2" count="2"/>
-      <line num="57" type="stmt" count="2"/>
-      <line num="58" type="stmt" count="2"/>
-      <line num="60" type="stmt" count="2"/>
-      <line num="61" type="stmt" count="2"/>
-      <line num="62" type="stmt" count="2"/>
-      <line num="64" type="stmt" count="1"/>
-      <line num="67" type="stmt" count="2"/>
-      <metrics loc="70" ncloc="46" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
+      <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="2"/>
+      <line num="39" type="method" name="createNamingStrategy" visibility="protected" complexity="1" crap="1" count="2"/>
+      <line num="42" type="stmt" count="2"/>
+      <line num="48" type="method" name="extract" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="50" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="52" type="stmt" count="2"/>
+      <line num="53" type="stmt" count="2"/>
+      <line num="54" type="stmt" count="2"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="67" type="method" name="extractProperty" visibility="private" complexity="2" crap="2" count="2"/>
+      <line num="70" type="stmt" count="2"/>
+      <line num="71" type="stmt" count="2"/>
+      <line num="73" type="stmt" count="2"/>
+      <line num="74" type="stmt" count="2"/>
+      <line num="75" type="stmt" count="2"/>
+      <line num="77" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="2"/>
+      <metrics loc="83" ncloc="59" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="20" coveredelements="20"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Utilities/Extractor/DtoExtractorInterface.php">
       <metrics loc="23" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -412,6 +416,17 @@
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Utilities/ReflectorInterface.php">
       <metrics loc="41" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="33" loc="1585" ncloc="841" classes="28" methods="64" coveredmethods="36" conditionals="0" coveredconditionals="0" statements="164" coveredstatements="108" elements="228" coveredelements="144"/>
+    <file name="/home/runner/work/DtoDragon/DtoDragon/src/Utilities/Strategies/ExtractedFieldMatchNameStrategy.php">
+      <class name="DtoDragon\Utilities\Strategies\ExtractedFieldMatchNameStrategy" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="19" type="method" name="apply" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <metrics loc="24" ncloc="12" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/runner/work/DtoDragon/DtoDragon/src/Utilities/Strategies/ExtractorNamingStrategyInterface.php">
+      <metrics loc="23" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <metrics files="35" loc="1640" ncloc="874" classes="29" methods="67" coveredmethods="34" conditionals="0" coveredconditionals="0" statements="167" coveredstatements="95" elements="234" coveredelements="129"/>
   </project>
 </coverage>
