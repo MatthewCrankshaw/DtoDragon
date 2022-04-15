@@ -7,17 +7,22 @@ namespace DtoDragon\Utilities\Strategies;
  *
  * @author Matthew Crankshaw
  */
-class ExtractedFieldMatchNameStrategy implements ExtractorNamingStrategyInterface
+class MatchNameStrategy implements NamingStrategyInterface
 {
     /**
      * Maintains the DTO field name and sets it as the extracted array key
      *
-     * @param string $name
+     * @param string $field
      *
      * @return string
      */
-    public function apply(string $name): string
+    public function fieldToArrayKey(string $field): string
     {
-        return $name;
+        return $field;
+    }
+
+    public function arrayKeyToField(string $key): string
+    {
+        return $key;
     }
 }

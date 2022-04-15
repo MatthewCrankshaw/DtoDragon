@@ -6,9 +6,11 @@ use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
 use DtoDragon\Exceptions\PropertyDataNotProvidedException;
+use DtoDragon\Singletons\NamingStrategySingleton;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
+use DtoDragon\Utilities\Strategies\NamingStrategyInterface;
 use ReflectionProperty;
 
 /**
@@ -28,6 +30,8 @@ class DtoHydrator implements DtoHydratorInterface
      */
     private DtoReflector $reflector;
 
+    private NamingStrategyInterface $namingStrategy;
+
     /**
      * Construct the DtoHydrator object
      *
@@ -36,6 +40,7 @@ class DtoHydrator implements DtoHydratorInterface
     public function __construct(DtoReflectorFactory $factory)
     {
         $this->reflector = $factory->create();
+        $this->namingStrategy = NamingStrategySingleton::getInstance()->get();
     }
 
     /**
@@ -94,9 +99,10 @@ class DtoHydrator implements DtoHydratorInterface
      */
     private function getPropertyValueFromDataArray(ReflectionProperty $property, array $data)
     {
-        $propertyName = $property->getName();
-        if ($this->validatePropertyDataProvided($propertyName, $data)) {
-            return $data[$propertyName];
+        $fieldName = $property->getName();
+        $key = $this->namingStrategy->fieldToArrayKey($fieldName);
+        if ($this->validatePropertyDataProvided($key, $data)) {
+            return $data[$key];
         }
     }
 

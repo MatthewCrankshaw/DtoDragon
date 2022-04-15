@@ -17,7 +17,7 @@ class PropertyDataNotProvidedException extends Exception
     public function __construct(string $propertyName, string $dtoType, array $dataArray)
     {
         $message = 'Expected property ('
-            . $propertyName . ') for the DTO being hydrated ('
+            . $propertyName . ') to exist in the DTO being hydrated ('
             . $dtoType . ') ['
             . json_encode($dataArray) . ']';
 

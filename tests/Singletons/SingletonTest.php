@@ -28,6 +28,6 @@ class SingletonTest extends DtoDragonTestCase
     {
         $singleton = new Singleton();
         $instances = $this->getProtectedProperty($singleton, 'instances');
-        $this->assertCount(4, $instances);
+        $this->assertCount(5, $instances);
     }
 }

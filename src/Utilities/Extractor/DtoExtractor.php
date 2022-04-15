@@ -3,12 +3,13 @@
 namespace DtoDragon\Utilities\Extractor;
 
 use DtoDragon\Exceptions\PropertyExtractorNotFoundException;
+use DtoDragon\Singletons\NamingStrategySingleton;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Utilities\DtoReflector;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\ReflectorInterface;
-use DtoDragon\Utilities\Strategies\ExtractedFieldMatchNameStrategy;
-use DtoDragon\Utilities\Strategies\ExtractorNamingStrategyInterface;
+use DtoDragon\Utilities\Strategies\MatchNameStrategy;
+use DtoDragon\Utilities\Strategies\NamingStrategyInterface;
 use JetBrains\PhpStorm\Pure;
 use ReflectionProperty;
 
@@ -28,18 +29,18 @@ class DtoExtractor implements DtoExtractorInterface
      */
     private ReflectorInterface $reflector;
 
-    private ExtractorNamingStrategyInterface $namingStrategy;
+    private NamingStrategyInterface $namingStrategy;
 
     public function __construct(DtoReflectorFactory $factory)
     {
         $this->reflector = $factory->create();
-        $this->namingStrategy = $this->createNamingStrategy();
+        $this->namingStrategy = NamingStrategySingleton::getInstance()->get();
     }
 
     #[Pure]
-    protected function createNamingStrategy(): ExtractorNamingStrategyInterface
+    protected function createNamingStrategy(): NamingStrategyInterface
     {
-        return new ExtractedFieldMatchNameStrategy();
+        return new MatchNameStrategy();
     }
 
     /**
@@ -49,9 +50,9 @@ class DtoExtractor implements DtoExtractorInterface
     {
         $array = [];
         foreach ($this->reflector->getProperties() as $property) {
-            $dtoName = $property->getName();
-            $propertyName = $this->namingStrategy->apply($dtoName);
-            $array[$propertyName] = $this->extractProperty($property);
+            $fieldName = $property->getName();
+            $key = $this->namingStrategy->fieldToArrayKey($fieldName);
+            $array[$key] = $this->extractProperty($property);
         }
         return $array;
     }

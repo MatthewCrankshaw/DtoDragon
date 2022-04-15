@@ -10,7 +10,7 @@ use DtoDragon\Test\TestDtos\MultiTypeDto;
 use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use DtoDragon\Utilities\DtoReflectorFactory;
 use DtoDragon\Utilities\Extractor\DtoExtractor;
-use DtoDragon\Utilities\Strategies\ExtractedFieldMatchNameStrategy;
+use DtoDragon\Utilities\Strategies\MatchNameStrategy;
 
 /**
  * @covers \DtoDragon\Utilities\Extractor\DtoExtractor
@@ -38,7 +38,7 @@ class DtoExtractorTest extends DtoDragonTestCase
     {
         $dto = new MultiTypeDto($data);
         $factory = new DtoReflectorFactory($dto);
-        $namingStrategy = new ExtractedFieldMatchNameStrategy();
+        $namingStrategy = new MatchNameStrategy();
         $extractor = new DtoExtractor($factory, $namingStrategy);
 
         $actual = $extractor->extract();
@@ -56,7 +56,7 @@ class DtoExtractorTest extends DtoDragonTestCase
             'date' => '12-05-2012',
         ]);
         $factory = new DtoReflectorFactory($dto);
-        $namingStrategy = new ExtractedFieldMatchNameStrategy();
+        $namingStrategy = new MatchNameStrategy();
         $extractor = new DtoExtractor($factory, $namingStrategy);
 
         $this->expectException(PropertyExtractorNotFoundException::class);
