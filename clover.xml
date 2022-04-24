@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650061946">
-  <project timestamp="1650061946">
+<coverage generated="1650064231">
+  <project timestamp="1650064231">
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObject.php">
       <class name="DtoDragon\DataTransferObject" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
@@ -118,33 +118,33 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Singletons/PropertyExtractorsSingleton.php">
       <class name="DtoDragon\Singletons\PropertyExtractorsSingleton" namespace="global">
-        <metrics complexity="12" methods="6" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="12" elements="24" coveredelements="15"/>
+        <metrics complexity="12" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
       </class>
-      <line num="32" type="method" name="clear" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="44" type="method" name="register" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="46" type="stmt" count="1"/>
-      <line num="56" type="method" name="hasPropertyExtractor" visibility="public" complexity="4" crap="4.37" count="3"/>
-      <line num="58" type="stmt" count="3"/>
-      <line num="59" type="stmt" count="0"/>
-      <line num="60" type="stmt" count="3"/>
-      <line num="61" type="stmt" count="0"/>
-      <line num="64" type="stmt" count="3"/>
+      <line num="32" type="method" name="clear" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="44" type="method" name="register" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="46" type="stmt" count="6"/>
+      <line num="56" type="method" name="hasPropertyExtractor" visibility="public" complexity="4" crap="4" count="6"/>
+      <line num="58" type="stmt" count="6"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="5"/>
+      <line num="61" type="stmt" count="1"/>
+      <line num="64" type="stmt" count="4"/>
       <line num="65" type="stmt" count="2"/>
-      <line num="67" type="stmt" count="1"/>
-      <line num="78" type="method" name="getPropertyExtractor" visibility="public" complexity="4" crap="5.26" count="1"/>
-      <line num="80" type="stmt" count="1"/>
-      <line num="81" type="stmt" count="0"/>
-      <line num="82" type="stmt" count="1"/>
-      <line num="83" type="stmt" count="0"/>
-      <line num="86" type="stmt" count="1"/>
+      <line num="67" type="stmt" count="2"/>
+      <line num="78" type="method" name="getPropertyExtractor" visibility="public" complexity="4" crap="4" count="4"/>
+      <line num="80" type="stmt" count="4"/>
+      <line num="81" type="stmt" count="1"/>
+      <line num="82" type="stmt" count="3"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="86" type="stmt" count="2"/>
       <line num="87" type="stmt" count="1"/>
-      <line num="90" type="stmt" count="0"/>
-      <line num="100" type="method" name="isDto" visibility="private" complexity="1" crap="1" count="3"/>
-      <line num="102" type="stmt" count="3"/>
-      <line num="112" type="method" name="isCollection" visibility="private" complexity="1" crap="1" count="3"/>
-      <line num="114" type="stmt" count="3"/>
-      <metrics loc="117" ncloc="63" classes="1" methods="6" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="12" elements="24" coveredelements="15"/>
+      <line num="90" type="stmt" count="1"/>
+      <line num="100" type="method" name="isDto" visibility="private" complexity="1" crap="1" count="8"/>
+      <line num="102" type="stmt" count="8"/>
+      <line num="112" type="method" name="isCollection" visibility="private" complexity="1" crap="1" count="6"/>
+      <line num="114" type="stmt" count="6"/>
+      <metrics loc="117" ncloc="63" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="24" coveredelements="24"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Singletons/PropertyHydratorsSingleton.php">
       <class name="DtoDragon\Singletons\PropertyHydratorsSingleton" namespace="global">
@@ -442,6 +442,6 @@
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Utilities/Strategies/NamingStrategyInterface.php">
       <metrics loc="25" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="36" loc="1678" ncloc="912" classes="30" methods="70" coveredmethods="33" conditionals="0" coveredconditionals="0" statements="173" coveredstatements="96" elements="243" coveredelements="129"/>
+    <metrics files="36" loc="1678" ncloc="912" classes="30" methods="70" coveredmethods="36" conditionals="0" coveredconditionals="0" statements="173" coveredstatements="102" elements="243" coveredelements="138"/>
   </project>
 </coverage>
