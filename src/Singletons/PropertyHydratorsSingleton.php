@@ -5,7 +5,7 @@ namespace DtoDragon\Singletons;
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\PropertyHydratorInterface;
+use DtoDragon\Services\Hydrator\PropertyHydrators\PropertyHydratorInterface;
 
 /**
  * Singleton to manage an array of property hydrators
@@ -32,6 +32,7 @@ class PropertyHydratorsSingleton extends Singleton
     public function clear(): void
     {
         $this->propertyHydrators = [];
+        DtoServiceProviderSingleton::getInstance()->setBooted(false);
     }
 
     /**

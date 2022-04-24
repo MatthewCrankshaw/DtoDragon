@@ -3,17 +3,15 @@
 namespace DtoDragon\Test\Singletons;
 
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
-use DtoDragon\Test\PropertyExtractor\DatePropertyExtractor;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\TestDtos\Date;
 use DtoDragon\Test\TestDtos\ServiceCollection;
 use DtoDragon\Test\TestDtos\ServiceDto;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\CollectionPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\DtoPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\CollectionPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\DtoPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\IntegerPropertyExtractor;
 
 /**
  * @covers \DtoDragon\Singletons\PropertyExtractorsSingleton
- * @package DtoDragon\Test\Singletons
  */
 class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 {
@@ -27,8 +25,6 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testClear(): void
     {
-        $this->singleton->register(new DatePropertyExtractor());
-
         $propertyExtractors = $this->getProtectedProperty($this->singleton, 'propertyExtractors');
         $this->assertNotEmpty($propertyExtractors);
 
@@ -39,7 +35,7 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testRegister(): void
     {
-        $this->singleton->register(new DatePropertyExtractor());
+        $this->singleton->register(new IntegerPropertyExtractor());
         $propertyExtractors = $this->getProtectedProperty($this->singleton, 'propertyExtractors');
 
         $this->assertCount(1, $propertyExtractors);
@@ -47,14 +43,15 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testGetPropertyExtractor(): void
     {
-        $propertyExtractor = $this->singleton->getPropertyExtractor(Date::class);
+        $this->singleton->register(new IntegerPropertyExtractor());
+        $propertyExtractor = $this->singleton->getPropertyExtractor('int');
 
-        $this->assertInstanceOf(DatePropertyExtractor::class, $propertyExtractor);
+        $this->assertInstanceOf(IntegerPropertyExtractor::class, $propertyExtractor);
     }
 
     public function testHasPropertyExtractor(): void
     {
-        $this->assertTrue($this->singleton->hasPropertyExtractor(Date::class));
+        $this->assertTrue($this->singleton->hasPropertyExtractor('int'));
     }
 
     public function testHasDtoPropertyExtractor(): void

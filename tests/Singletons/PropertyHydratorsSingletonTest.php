@@ -7,16 +7,15 @@ use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\TestDtos\ServiceCollection;
 use DtoDragon\Test\TestDtos\ServiceDto;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\DtoPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\PropertyHydratorInterface;
+use DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\DtoPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\PropertyHydratorInterface;
 use ReflectionProperty;
 
 /**
  * Tests to ensure that the property hydrators singleton registers and manages property hydrators correctly
  *
  * @covers \DtoDragon\Singletons\PropertyHydratorsSingleton
- * @package DtoDragon\Test\Singletons
  *
  * @author Matthew Crankshaw
  */

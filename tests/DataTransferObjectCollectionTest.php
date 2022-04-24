@@ -7,7 +7,6 @@ use DtoDragon\Test\TestDtos\ServiceDto;
 
 /**
  * @covers \DtoDragon\DataTransferObjectCollection
- * @package DtoDragon\Test
  */
 class DataTransferObjectCollectionTest extends DtoDragonTestCase
 {

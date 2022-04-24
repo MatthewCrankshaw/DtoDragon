@@ -2,7 +2,7 @@
 
 namespace DtoDragon\Singletons;
 
-use DtoDragon\Utilities\Strategies\NamingStrategyInterface;
+use DtoDragon\Services\Strategies\NamingStrategyInterface;
 
 class NamingStrategySingleton extends Singleton
 {

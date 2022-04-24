@@ -2,18 +2,18 @@
 
 namespace DtoDragon\Singletons;
 
-use DtoDragon\Utilities\Extractor\PropertyExtractors\ArrayPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\CollectionPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\DtoPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\FloatPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\IntegerPropertyExtractor;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\StringPropertyExtractor;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\ArrayPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\DtoPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\FloatPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
-use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
+use DtoDragon\Services\Extractor\PropertyExtractors\ArrayPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\CollectionPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\DtoPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\FloatPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\IntegerPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\StringPropertyExtractor;
+use DtoDragon\Services\Hydrator\PropertyHydrators\ArrayPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\DtoPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\FloatPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
+use DtoDragon\Services\Hydrator\PropertyHydrators\StringPropertyHydrator;
 
 /**
  * Service provider for the data transfer object
@@ -26,6 +26,8 @@ use DtoDragon\Utilities\Hydrator\PropertyHydrators\StringPropertyHydrator;
  */
 class DtoServiceProviderSingleton extends Singleton
 {
+    private bool $booted;
+
     /**
      * Clear the service provider by clearing all loaded services
      *
@@ -35,6 +37,7 @@ class DtoServiceProviderSingleton extends Singleton
     {
         PropertyHydratorsSingleton::getInstance()->clear();
         PropertyExtractorsSingleton::getInstance()->clear();
+        $this->booted = false;
     }
 
     /**
@@ -44,8 +47,11 @@ class DtoServiceProviderSingleton extends Singleton
      */
     public function boot(): void
     {
-        $this->registerBasicPropertyHydrators();
-        $this->registerBasicPropertyExtractors();
+        if (!$this->booted) {
+            $this->registerBasicPropertyHydrators();
+            $this->registerBasicPropertyExtractors();
+        }
+        $this->booted = true;
     }
 
     /**
@@ -76,5 +82,10 @@ class DtoServiceProviderSingleton extends Singleton
         PropertyExtractorsSingleton::getInstance()->register(new FloatPropertyExtractor());
         PropertyExtractorsSingleton::getInstance()->register(new DtoPropertyExtractor());
         PropertyExtractorsSingleton::getInstance()->register(new CollectionPropertyExtractor());
+    }
+
+    public function setBooted(bool $booted): void
+    {
+        $this->booted = $booted;
     }
 }

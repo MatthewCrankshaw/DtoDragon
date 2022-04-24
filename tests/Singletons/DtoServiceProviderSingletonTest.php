@@ -3,7 +3,9 @@
 namespace DtoDragon\Test\Singletons;
 
 use DtoDragon\Singletons\DtoServiceProviderSingleton;
+use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
+use DtoDragon\Services\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
 
 /**
  * Test the DTO service provider
@@ -19,13 +21,11 @@ class DtoServiceProviderSingletonTest extends DtoDragonTestCase
      */
     public function testBooted(): void
     {
-        $provider = $this->getMockBuilder(DtoServiceProviderSingleton::class)
-            ->onlyMethods(['boot'])
-            ->getMock();
-
-        $provider->expects($this->once())
-            ->method('boot');
+        $provider = DtoServiceProviderSingleton::getInstance();
 
         $provider->boot();
+
+        $booted = $this->getProtectedProperty($provider, 'booted');
+        $this->assertTrue($booted);
     }
 }

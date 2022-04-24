@@ -4,12 +4,12 @@ namespace DtoDragon;
 
 use DtoDragon\Singletons\DtoServiceProviderSingleton;
 use DtoDragon\Singletons\NamingStrategySingleton;
-use DtoDragon\Utilities\DtoReflectorFactory;
-use DtoDragon\Utilities\Extractor\DtoExtractor;
-use DtoDragon\Utilities\Extractor\DtoExtractorInterface;
-use DtoDragon\Utilities\Hydrator\DtoHydrator;
-use DtoDragon\Utilities\Hydrator\DtoHydratorInterface;
-use DtoDragon\Utilities\Strategies\MatchNameStrategy;
+use DtoDragon\Services\DtoReflectorFactory;
+use DtoDragon\Services\Extractor\DtoExtractor;
+use DtoDragon\Services\Extractor\DtoExtractorInterface;
+use DtoDragon\Services\Hydrator\DtoHydrator;
+use DtoDragon\Services\Hydrator\DtoHydratorInterface;
+use DtoDragon\Services\Strategies\MatchNameStrategy;
 
 /**
  * The base implementation of a data transfer object

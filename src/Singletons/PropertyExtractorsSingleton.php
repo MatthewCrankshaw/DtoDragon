@@ -4,7 +4,7 @@ namespace DtoDragon\Singletons;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
-use DtoDragon\Utilities\Extractor\PropertyExtractors\PropertyExtractorInterface;
+use DtoDragon\Services\Extractor\PropertyExtractors\PropertyExtractorInterface;
 use Exception;
 
 /**
@@ -32,6 +32,7 @@ class PropertyExtractorsSingleton extends Singleton
     public function clear(): void
     {
         $this->propertyExtractors = [];
+        DtoServiceProviderSingleton::getInstance()->setBooted(false);
     }
 
     /**
