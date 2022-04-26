@@ -7,8 +7,6 @@ use DtoDragon\DataTransferObject;
 /**
  * Factory for creating DTO Reflectors for a particular DTO
  *
- * @package DtoDragon\utilities
- *
  * @author Matthew Crankshaw
  */
 class DtoReflectorFactory

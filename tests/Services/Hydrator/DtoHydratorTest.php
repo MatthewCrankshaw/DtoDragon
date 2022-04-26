@@ -12,8 +12,7 @@ use DtoDragon\Services\DtoReflectorFactory;
 use DtoDragon\Services\Hydrator\DtoHydrator;
 
 /**
- * @covers \DtoDragon\Utilities\Hydrator\DtoHydrator
- * @package DtoDragon\Test\Utilities\Hydrator
+ * @covers \DtoDragon\Services\Hydrator\DtoHydrator
  */
 class DtoHydratorTest extends DtoDragonTestCase
 {
@@ -52,9 +51,6 @@ class DtoHydratorTest extends DtoDragonTestCase
         ]);
     }
 
-    /**
-     * @covers /DtoDragon/Utilities/Hydrator/Dto
-     */
     public function testHydratePropertyHydratorNotFound(): void
     {
         $this->expectException(PropertyDataNotProvidedException::class);

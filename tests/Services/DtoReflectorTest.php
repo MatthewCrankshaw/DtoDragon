@@ -9,7 +9,7 @@ use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Services\DtoReflector;
 
 /**
- * @covers \DtoDragon\Utilities\DtoReflector
+ * @covers \DtoDragon\Services\DtoReflector
  */
 class DtoReflectorTest extends DtoDragonTestCase
 {

@@ -8,7 +8,6 @@ use DtoDragon\Test\DtoDragonTestCase;
 
 /**
  * @covers \DtoDragon\Singletons\Singleton
- * @package DtoDragon\Test\Singletons
  */
 class SingletonTest extends DtoDragonTestCase
 {

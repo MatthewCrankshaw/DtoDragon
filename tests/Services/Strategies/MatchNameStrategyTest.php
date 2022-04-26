@@ -1,10 +1,13 @@
 <?php
 
-namespace DtoDragon\Test\Utilities\Strategies;
+namespace DtoDragon\Test\Services\Strategies;
 
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Services\Strategies\MatchNameStrategy;
 
+/**
+ * @covers \DtoDragon\Services\Strategies\MatchNameStrategy
+ */
 class MatchNameStrategyTest extends DtoDragonTestCase
 {
     public function provideData(): array

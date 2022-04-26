@@ -13,7 +13,7 @@ use DtoDragon\Services\Extractor\DtoExtractor;
 use DtoDragon\Services\Strategies\MatchNameStrategy;
 
 /**
- * @covers \DtoDragon\Utilities\Extractor\DtoExtractor
+ * @covers \DtoDragon\Services\Extractor\DtoExtractor
  */
 class DtoExtractorTest extends DtoDragonTestCase
 {

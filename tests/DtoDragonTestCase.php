@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \DtoDragon\DataTransferObject
- * @package DtoDragon\Test
  */
 class DtoDragonTestCase extends TestCase
 {

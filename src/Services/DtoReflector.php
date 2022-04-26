@@ -7,9 +7,7 @@ use ReflectionClass;
 use ReflectionProperty;
 
 /**
- * Class that reports information about the data transfer object class and properties
- *
- * @package DtoDragon\utilities
+ * Class that reports information about the data transfer object class and properties\utilities
  *
  * @author Matthew Crankshaw
  */

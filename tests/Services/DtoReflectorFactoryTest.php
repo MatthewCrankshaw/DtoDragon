@@ -8,7 +8,7 @@ use DtoDragon\Services\DtoReflector;
 use DtoDragon\Services\DtoReflectorFactory;
 
 /**
- * @covers \DtoDragon\Utilities\DtoReflectorFactory
+ * @covers \DtoDragon\Services\DtoReflectorFactory
  */
 class DtoReflectorFactoryTest extends DtoDragonTestCase
 {
