@@ -23,14 +23,14 @@ class DataTransferObject
 {
     /**
      * The extractor responsible for extracting data to an array
-     * 
+     *
      * @var DtoExtractorInterface
      */
     private DtoExtractorInterface $extractor;
 
     /**
      * The hydrator responsible for filling data transfer objects with data
-     * 
+     *
      * @var DtoHydratorInterface
      */
     private DtoHydratorInterface $hydrator;

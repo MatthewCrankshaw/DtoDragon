@@ -91,7 +91,7 @@ class DtoServiceProviderSingleton extends Singleton
      * Sets whether or not the service provider has booted
      *
      * @param boolean $booted
-     * 
+     *
      * @return void
      */
     public function setBooted(bool $booted): void

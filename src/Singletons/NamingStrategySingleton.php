@@ -7,13 +7,13 @@ use DtoDragon\Services\Strategies\NamingStrategyInterface;
 /**
  * Defines the singleton that manages the naming strategies
  * Naming strategies are used to match property names when hydrating and extracting data from DTO's
- * 
+ *
  * @author Matthew Crankshaw
  */
 class NamingStrategySingleton extends Singleton
 {
     /**
-     * The registered naming stratergy 
+     * The registered naming stratergy
      *
      * @var NamingStrategyInterface
      */
@@ -23,7 +23,7 @@ class NamingStrategySingleton extends Singleton
      * Register a naming strategy
      *
      * @param NamingStrategyInterface $strategy
-     * 
+     *
      * @return void
      */
     public function register(NamingStrategyInterface $strategy): void
