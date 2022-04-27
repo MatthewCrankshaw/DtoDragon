@@ -5,6 +5,8 @@ namespace DtoDragon\Test\Utilities\Hydrator;
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyDataNotProvidedException;
+use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
+use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\TestDtos\MultiTypeDto;
 use DtoDragon\Test\TestDtos\ServiceDto;
@@ -51,7 +53,7 @@ class DtoHydratorTest extends DtoDragonTestCase
         ]);
     }
 
-    public function testHydratePropertyHydratorNotFound(): void
+    public function testHydratePropertyDataNotProvider(): void
     {
         $this->expectException(PropertyDataNotProvidedException::class);
         $emptyDto = new MultiTypeDto();
@@ -60,6 +62,21 @@ class DtoHydratorTest extends DtoDragonTestCase
         $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
         $actual = $dtoHydrator->hydrate([
             'id' => 1,
+        ]);
+    }
+
+    public function testHydratePropertyHydratorNotFound(): void
+    {
+        $this->expectException(PropertyHydratorNotFoundException::class);
+        $emptyDto = new MultiTypeDto();
+
+        PropertyHydratorsSingleton::getInstance()->clear();
+
+        $dtoReflectorFactory = new DtoReflectorFactory($emptyDto);
+        $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
+        $actual = $dtoHydrator->hydrate([
+            'id' => 1,
+            'testString' => 'string',
         ]);
     }
 

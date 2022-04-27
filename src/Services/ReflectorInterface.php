@@ -8,8 +8,6 @@ use ReflectionProperty;
  * Defines the interface of a reflector
  * A DtoReflector is responsible for reporting and interacting the properties of the dto
  *
- * @package DtoDragon\Interfaces
- *
  * @author Matthew Crankshaw
  */
 interface ReflectorInterface

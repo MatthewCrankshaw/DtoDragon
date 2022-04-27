@@ -16,8 +16,6 @@ use ReflectionProperty;
 /**
  * An extractor class for extracting data from a DTO and presenting it as an array
  *
- * @package DtoDragon\Utilities\Extractor
- *
  * @author Matthew Crankshaw
  */
 class DtoExtractor implements DtoExtractorInterface

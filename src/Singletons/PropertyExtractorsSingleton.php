@@ -11,8 +11,6 @@ use Exception;
  * Singleton to manage an array of property extractors
  * The property extractors will be responsible for extracting properties from a DTO to an array item
  *
- * @package DtoDragon\Singletons
- *
  * @author Matthew Crankshaw
  */
 class PropertyExtractorsSingleton extends Singleton

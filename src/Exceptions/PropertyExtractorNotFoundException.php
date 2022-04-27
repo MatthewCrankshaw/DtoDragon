@@ -8,8 +8,6 @@ use Exception;
  * Exception class to represent an unexpected situation
  * where a property extractor is requested but is not available for a given type
  *
- * @package DtoDragon\Exceptions
- *
  * @author Matthew Crankshaw
  */
 class PropertyExtractorNotFoundException extends Exception

@@ -20,12 +20,15 @@ use DtoDragon\Services\Hydrator\PropertyHydrators\StringPropertyHydrator;
  * Boots the relevant services that are used by the DtoDragon system for transforming
  * and manipulating the relevant data
  *
- * @package DtoDragon\ServiceProviders
- *
  * @author Matthew Crankshaw
  */
 class DtoServiceProviderSingleton extends Singleton
 {
+    /**
+     * Identifies whether a the service provider is booted
+     *
+     * @var boolean
+     */
     private bool $booted;
 
     /**
@@ -84,6 +87,13 @@ class DtoServiceProviderSingleton extends Singleton
         PropertyExtractorsSingleton::getInstance()->register(new CollectionPropertyExtractor());
     }
 
+    /**
+     * Sets whether or not the service provider has booted
+     *
+     * @param boolean $booted
+     * 
+     * @return void
+     */
     public function setBooted(bool $booted): void
     {
         $this->booted = $booted;

@@ -11,8 +11,6 @@ use DtoDragon\Services\Hydrator\PropertyHydrators\PropertyHydratorInterface;
  * Singleton to manage an array of property hydrators
  * The property hydrators will be responsible for hydrating  to an object
  *
- * @package DtoDragon\Singletons
- *
  * @author Matthew Crankshaw
  */
 class PropertyHydratorsSingleton extends Singleton

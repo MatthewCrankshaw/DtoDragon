@@ -8,8 +8,6 @@ use Exception;
  * Exception class to represent an unexpected situation
  * where the hydrating array for the DTO, is missing one of the DTO's properties
  *
- * @package DtoDragon\Exceptions
- *
  * @author Matthew Crankshaw
  */
 class PropertyDataNotProvidedException extends Exception

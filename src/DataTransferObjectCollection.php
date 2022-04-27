@@ -9,8 +9,6 @@ use Iterator;
  * All DTO collections will extend this class
  * Contains utilities for iterating and handling a collection of DTO's
  *
- * @package DtoDragon
- *
  * @author Matthew Crankshaw
  */
 abstract class DataTransferObjectCollection implements Iterator
@@ -30,6 +28,11 @@ abstract class DataTransferObjectCollection implements Iterator
      */
     protected array $items = [];
 
+    /**
+     * Construct a data transfer object collection
+     *
+     * @param array $items
+     */
     public function __construct(array $items)
     {
         $this->position = 0;

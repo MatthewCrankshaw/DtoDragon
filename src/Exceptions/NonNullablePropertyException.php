@@ -8,8 +8,6 @@ use Exception;
  * Exception class to represent an unexpected situation
  * where a dto property is trying to be filled with a null value when the property is not nullable
  *
- * @package DtoDragon\Exceptions
- *
  * @author Matthew Crankshaw
  */
 class NonNullablePropertyException extends Exception
