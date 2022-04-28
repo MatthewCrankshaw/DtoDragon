@@ -37,3 +37,13 @@ contact me.
 ---
 
 The DtoDragon library is open-sourced software under the [MIT License](https://opensource.org/licenses/MIT)
+
+## Thanks
+Thank you to JetBrains for powering our development with their Open Source development licences.<br>
+<a href="https://jb.gg/OpenSourceSupport">
+   <img 
+     width="100px" 
+     height="100px" 
+     src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" 
+     alt="JetBrains Logo (Main) logo.">
+ </a>
