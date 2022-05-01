@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651051360">
-  <project timestamp="1651051360">
+<coverage generated="1651133191">
+  <project timestamp="1651133191">
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObject.php">
       <class name="DtoDragon\DataTransferObject" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
@@ -331,13 +331,13 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Singletons/NamingStrategySingleton.php">
       <class name="DtoDragon\Singletons\NamingStrategySingleton" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </class>
-      <line num="29" type="method" name="register" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="39" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <metrics loc="44" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+      <line num="29" type="method" name="register" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="39" type="method" name="get" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <metrics loc="44" ncloc="21" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Singletons/PropertyExtractorsSingleton.php">
       <class name="DtoDragon\Singletons\PropertyExtractorsSingleton" namespace="global">
@@ -412,6 +412,6 @@
       <line num="35" type="stmt" count="2"/>
       <metrics loc="38" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
     </file>
-    <metrics files="32" loc="1565" ncloc="855" classes="26" methods="67" coveredmethods="39" conditionals="0" coveredconditionals="0" statements="170" coveredstatements="110" elements="237" coveredelements="149"/>
+    <metrics files="32" loc="1565" ncloc="855" classes="26" methods="67" coveredmethods="41" conditionals="0" coveredconditionals="0" statements="170" coveredstatements="112" elements="237" coveredelements="153"/>
   </project>
 </coverage>
