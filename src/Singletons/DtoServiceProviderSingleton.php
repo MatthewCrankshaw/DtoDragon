@@ -29,7 +29,7 @@ class DtoServiceProviderSingleton extends Singleton
      *
      * @var boolean
      */
-    private bool $booted;
+    protected bool $booted;
 
     /**
      * Clear the service provider by clearing all loaded services
@@ -62,7 +62,7 @@ class DtoServiceProviderSingleton extends Singleton
      *
      * @return void
      */
-    private function registerBasicPropertyHydrators(): void
+    protected function registerBasicPropertyHydrators(): void
     {
         PropertyHydratorsSingleton::getInstance()->register(new IntegerPropertyHydrator());
         PropertyHydratorsSingleton::getInstance()->register(new StringPropertyHydrator());
@@ -77,7 +77,7 @@ class DtoServiceProviderSingleton extends Singleton
      *
      * @return void
      */
-    private function registerBasicPropertyExtractors(): void
+    protected function registerBasicPropertyExtractors(): void
     {
         PropertyExtractorsSingleton::getInstance()->register(new IntegerPropertyExtractor());
         PropertyExtractorsSingleton::getInstance()->register(new StringPropertyExtractor());
