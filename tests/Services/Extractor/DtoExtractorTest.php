@@ -1,13 +1,13 @@
 <?php
 
-namespace DtoDragon\Test\Utilities\Extractor;
+namespace DtoDragon\Test\Services\Extractor;
 
 use DtoDragon\Exceptions\PropertyExtractorNotFoundException;
+use DtoDragon\Services\Strategies\NamingStrategyInterface;
+use DtoDragon\Singletons\NamingStrategySingleton;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
-use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\TestDtos\MultiTypeDto;
-use DtoDragon\Test\PropertyHydrator\DatePropertyHydrator;
 use DtoDragon\Services\DtoReflectorFactory;
 use DtoDragon\Services\Extractor\DtoExtractor;
 use DtoDragon\Services\Strategies\MatchNameStrategy;
@@ -57,5 +57,15 @@ class DtoExtractorTest extends DtoDragonTestCase
 
         $this->expectException(PropertyExtractorNotFoundException::class);
         $extractor->extract();
+    }
+
+    public function testCreateNamingStrategy(): void
+    {
+        NamingStrategySingleton::getInstance()->register(new MatchNameStrategy());
+        $factory = $this->createMock(DtoReflectorFactory::class);
+        $extractor = new DtoExtractor($factory);
+
+        $actual = $this->callProtectedMethod($extractor, 'createNamingStrategy', []);
+        $this->assertInstanceOf(NamingStrategyInterface::class, $actual);
     }
 }
