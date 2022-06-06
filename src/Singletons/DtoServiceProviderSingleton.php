@@ -29,7 +29,7 @@ class DtoServiceProviderSingleton extends Singleton
      *
      * @var boolean
      */
-    protected bool $booted;
+    protected bool $booted = false;
 
     /**
      * Clear the service provider by clearing all loaded services
