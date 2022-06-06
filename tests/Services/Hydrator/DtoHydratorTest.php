@@ -1,10 +1,9 @@
 <?php
 
-namespace DtoDragon\Test\Utilities\Hydrator;
+namespace DtoDragon\Test\Services\Hydrator;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
-use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
@@ -53,18 +52,6 @@ class DtoHydratorTest extends DtoDragonTestCase
         ]);
     }
 
-    public function testHydratePropertyDataNotProvider(): void
-    {
-        $this->expectException(PropertyDataNotProvidedException::class);
-        $emptyDto = new MultiTypeDto();
-
-        $dtoReflectorFactory = new DtoReflectorFactory($emptyDto);
-        $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
-        $actual = $dtoHydrator->hydrate([
-            'id' => 1,
-        ]);
-    }
-
     public function testHydratePropertyHydratorNotFound(): void
     {
         $this->expectException(PropertyHydratorNotFoundException::class);
@@ -93,6 +80,30 @@ class DtoHydratorTest extends DtoDragonTestCase
         $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
         $actual = $dtoHydrator->hydrate([
             'id' => 1,
+            'type' => 'string',
+            'price' => null
+        ]);
+
+        $this->assertEquals($actual, $expected);
+    }
+
+    /**
+     * You should be able to hydrate a dto partially through the constructor
+     * if the property is not filled it will be left unset
+     *
+     * @return void
+     */
+    public function testUnsetPropertyHydrator(): void
+    {
+        $expected = new ServiceDto([
+            'type' => 'string',
+            'price' => null
+        ]);
+        $emptyDto = new ServiceDto();
+
+        $dtoReflectorFactory = new DtoReflectorFactory($emptyDto);
+        $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
+        $actual = $dtoHydrator->hydrate([
             'type' => 'string',
             'price' => null
         ]);

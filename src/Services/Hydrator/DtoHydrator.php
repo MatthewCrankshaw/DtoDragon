@@ -5,7 +5,6 @@ namespace DtoDragon\Services\Hydrator;
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
-use DtoDragon\Exceptions\PropertyDataNotProvidedException;
 use DtoDragon\Singletons\NamingStrategySingleton;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Services\DtoReflector;
@@ -52,7 +51,11 @@ class DtoHydrator implements DtoHydratorInterface
     {
         $properties = $this->reflector->getProperties();
         foreach ($properties as $property) {
-            $value = $this->getPropertyValueFromDataArray($property, $data);
+            $key = $this->getPropertyDataArrayKey($property);
+            if (!array_key_exists($key, $data)) {
+                continue;
+            }
+            $value = $this->getPropertyValueFromDataArray($key, $data);
             $this->hydrateProperty($property, $value);
         }
         return $this->reflector->getDto();
@@ -88,42 +91,29 @@ class DtoHydrator implements DtoHydratorInterface
     }
 
     /**
-     * Get the value of the property from the data array based on the property name
+     * Get the value of the property from the data array
      *
-     * @param ReflectionProperty $property
+     * @param string $key
      * @param array $data
      *
      * @return mixed
      */
-    private function getPropertyValueFromDataArray(ReflectionProperty $property, array $data)
+    private function getPropertyValueFromDataArray(string $key, array $data)
     {
-        $fieldName = $property->getName();
-        $key = $this->namingStrategy->fieldToArrayKey($fieldName);
-        if ($this->validatePropertyDataProvided($key, $data)) {
-            return $data[$key];
-        }
+        return $data[$key];
     }
 
     /**
-     * Validate that the dto property exists in the data array
-     * If the property does not exist throw an exception
-     * Otherwise return true
+     * Get the key to access the array element for the given property
      *
-     * @param string $propertyName
-     * @param array $data
+     * @param ReflectionProperty $property
      *
-     * @throws PropertyDataNotProvidedException - If the property does not exist in the data array
-     * @return bool
+     * @return string
      */
-    private function validatePropertyDataProvided(string $propertyName, array $data): bool
+    protected function getPropertyDataArrayKey(ReflectionProperty $property): string
     {
-        if (!array_key_exists($propertyName, $data)) {
-            throw new PropertyDataNotProvidedException(
-                $propertyName,
-                get_class($this->reflector->getDto()),
-                $data
-            );
-        }
-        return true;
+        $fieldName = $property->getName();
+        $key = $this->namingStrategy->fieldToArrayKey($fieldName);
+        return $key;
     }
 }
