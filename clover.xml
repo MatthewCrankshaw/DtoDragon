@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1654545009">
-  <project timestamp="1654545009">
+<coverage generated="1654546371">
+  <project timestamp="1654546371">
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObject.php">
       <class name="DtoDragon\DataTransferObject" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
