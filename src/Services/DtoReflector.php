@@ -53,7 +53,9 @@ class DtoReflector implements ReflectorInterface
      */
     public function getProperties(): array
     {
-        return $this->dtoReflection->getProperties(ReflectionProperty::IS_PRIVATE);
+        return $this->dtoReflection->getProperties(
+            ReflectionProperty::IS_PRIVATE | ReflectionProperty::IS_PROTECTED
+        );
     }
 
     /**
