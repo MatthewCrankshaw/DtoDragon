@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1654546371">
-  <project timestamp="1654546371">
+<coverage generated="1654839116">
+  <project timestamp="1654839116">
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObject.php">
       <class name="DtoDragon\DataTransferObject" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="10" coveredelements="0"/>
@@ -45,7 +45,7 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/DtoReflector.php">
       <class name="DtoDragon\Services\DtoReflector" namespace="global">
-        <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="15" coveredelements="15"/>
+        <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
       </class>
       <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
       <line num="37" type="stmt" count="7"/>
@@ -54,15 +54,16 @@
       <line num="48" type="stmt" count="7"/>
       <line num="54" type="method" name="getProperties" visibility="public" complexity="1" crap="1" count="7"/>
       <line num="56" type="stmt" count="7"/>
-      <line num="62" type="method" name="getPropertyValue" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="64" type="stmt" count="2"/>
-      <line num="65" type="stmt" count="2"/>
-      <line num="71" type="method" name="setPropertyValue" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="73" type="stmt" count="7"/>
-      <line num="74" type="stmt" count="7"/>
-      <line num="84" type="method" name="propertyIsNullable" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="86" type="stmt" count="3"/>
-      <metrics loc="89" ncloc="48" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="15" coveredelements="15"/>
+      <line num="57" type="stmt" count="7"/>
+      <line num="64" type="method" name="getPropertyValue" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="66" type="stmt" count="2"/>
+      <line num="67" type="stmt" count="2"/>
+      <line num="73" type="method" name="setPropertyValue" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="75" type="stmt" count="7"/>
+      <line num="76" type="stmt" count="7"/>
+      <line num="86" type="method" name="propertyIsNullable" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="88" type="stmt" count="3"/>
+      <metrics loc="91" ncloc="50" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/DtoReflectorFactory.php">
       <class name="DtoDragon\Services\DtoReflectorFactory" namespace="global">
@@ -411,6 +412,6 @@
       <line num="35" type="stmt" count="2"/>
       <metrics loc="38" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
     </file>
-    <metrics files="32" loc="1555" ncloc="849" classes="26" methods="67" coveredmethods="47" conditionals="0" coveredconditionals="0" statements="169" coveredstatements="130" elements="236" coveredelements="177"/>
+    <metrics files="32" loc="1557" ncloc="851" classes="26" methods="67" coveredmethods="47" conditionals="0" coveredconditionals="0" statements="170" coveredstatements="131" elements="237" coveredelements="178"/>
   </project>
 </coverage>
