@@ -9,6 +9,7 @@ use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Services\Extractor\PropertyExtractors\CollectionPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\DtoPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\IntegerPropertyExtractor;
+use Exception;
 
 /**
  * @covers \DtoDragon\Singletons\PropertyExtractorsSingleton
@@ -89,7 +90,7 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testCannotGetPropertyExtractor(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->singleton->getPropertyExtractor(PropertyExtractorsSingletonTest::class);
     }
 }

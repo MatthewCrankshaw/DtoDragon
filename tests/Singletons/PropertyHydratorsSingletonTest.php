@@ -11,6 +11,7 @@ use DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\DtoPropertyHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\PropertyHydratorInterface;
 use ReflectionProperty;
+use TypeError;
 
 /**
  * Tests to ensure that the property hydrators singleton registers and manages property hydrators correctly
@@ -28,7 +29,7 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
      */
     public function testRegisterNonPropertyHydrators(): void
     {
-        $this->expectException(\TypeError::class);
+        $this->expectException(TypeError::class);
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(
             new class {}

@@ -5,12 +5,11 @@ namespace DtoDragon\Test\Services\Hydrator;
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
+use DtoDragon\Services\Hydrator\HydratorFactory;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\TestDtos\MultiTypeDto;
 use DtoDragon\Test\TestDtos\ServiceDto;
-use DtoDragon\Services\DtoReflectorFactory;
-use DtoDragon\Services\Hydrator\DtoHydrator;
 
 /**
  * @covers \DtoDragon\Services\Hydrator\DtoHydrator
@@ -35,8 +34,8 @@ class DtoHydratorTest extends DtoDragonTestCase
     public function testHydrate(array $data): void
     {
         $dto = new MultiTypeDto();
-        $factory = new DtoReflectorFactory($dto);
-        $hydrator = new DtoHydrator($factory);
+        $factory = new HydratorFactory();
+        $hydrator = $factory($dto);
 
         $actual = $hydrator->hydrate($data);
 
@@ -59,9 +58,9 @@ class DtoHydratorTest extends DtoDragonTestCase
 
         PropertyHydratorsSingleton::getInstance()->clear();
 
-        $dtoReflectorFactory = new DtoReflectorFactory($emptyDto);
-        $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
-        $actual = $dtoHydrator->hydrate([
+        $factory = new HydratorFactory();
+        $hydrator = $factory($emptyDto);
+        $actual = $hydrator->hydrate([
             'id' => 1,
             'testString' => 'string',
         ]);
@@ -76,9 +75,9 @@ class DtoHydratorTest extends DtoDragonTestCase
         ]);
         $emptyDto = new ServiceDto();
 
-        $dtoReflectorFactory = new DtoReflectorFactory($emptyDto);
-        $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
-        $actual = $dtoHydrator->hydrate([
+        $factory = new HydratorFactory();
+        $hydrator = $factory($emptyDto);
+        $actual = $hydrator->hydrate([
             'id' => 1,
             'type' => 'string',
             'price' => null
@@ -101,9 +100,9 @@ class DtoHydratorTest extends DtoDragonTestCase
         ]);
         $emptyDto = new ServiceDto();
 
-        $dtoReflectorFactory = new DtoReflectorFactory($emptyDto);
-        $dtoHydrator = new DtoHydrator($dtoReflectorFactory);
-        $actual = $dtoHydrator->hydrate([
+        $factory = new HydratorFactory();
+        $hydrator = $factory($emptyDto);
+        $actual = $hydrator->hydrate([
             'type' => 'string',
             'price' => null
         ]);

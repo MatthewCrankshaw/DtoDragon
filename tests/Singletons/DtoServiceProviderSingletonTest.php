@@ -6,6 +6,7 @@ use DtoDragon\Singletons\DtoServiceProviderSingleton;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
+use Mockery;
 
 /**
  * Test the DTO service provider
@@ -18,14 +19,14 @@ class DtoServiceProviderSingletonTest extends DtoDragonTestCase
     {
         $provider = DtoServiceProviderSingleton::getInstance();
 
-        $hydrators = \Mockery::mock(PropertyHydratorsSingleton::class);
+        $hydrators = Mockery::mock(PropertyHydratorsSingleton::class);
         $hydrators->shouldReceive('getInstance')
             ->once()
             ->andReturnSelf();
         $hydrators->shouldReceive('clear')
             ->once();
 
-        $extractors = \Mockery::mock(PropertyExtractorsSingleton::class);
+        $extractors = Mockery::mock(PropertyExtractorsSingleton::class);
         $extractors->shouldReceive('getInstance')
             ->once()
             ->andReturnSelf();

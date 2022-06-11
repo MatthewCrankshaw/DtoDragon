@@ -4,6 +4,7 @@ namespace DtoDragon\Test;
 
 use DtoDragon\Singletons\DtoServiceProviderSingleton;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 /**
  * @covers \DtoDragon\DataTransferObject
@@ -19,7 +20,7 @@ class DtoDragonTestCase extends TestCase
 
     public function callProtectedMethod($object, string $name, array $args)
     {
-        $class = new \ReflectionClass($object);
+        $class = new ReflectionClass($object);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method->invokeArgs($object, $args);
@@ -27,7 +28,7 @@ class DtoDragonTestCase extends TestCase
 
     public function getProtectedProperty($object, string $property)
     {
-        $class = new \ReflectionClass($object);
+        $class = new ReflectionClass($object);
         $property = $class->getProperty($property);
         $property->setAccessible(true);
         return $property->getValue($object);
@@ -35,7 +36,7 @@ class DtoDragonTestCase extends TestCase
 
     public function setReflectionPropertyValue($object, string $property, $value): void
     {
-        $class = new \ReflectionClass($object);
+        $class = new ReflectionClass($object);
         $property = $class->getProperty($property);
         $property->setAccessible(true);
         $property->setValue($object, $value);

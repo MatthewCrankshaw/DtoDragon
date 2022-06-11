@@ -12,29 +12,14 @@ use DtoDragon\DataTransferObject;
 class DtoReflectorFactory
 {
     /**
-     * The data transfer object we would like the factory to create a reflector for
-     *
-     * @var DataTransferObject
-     */
-    public DataTransferObject $dto;
-
-    /**
-     * Construct the data transfer object reflector factory
+     * Create the data transfer reflector for the DTO
      *
      * @param DataTransferObject $dto
-     */
-    public function __construct(DataTransferObject $dto)
-    {
-        $this->dto = $dto;
-    }
-
-    /**
-     * Create the data transfer reflector for the DTO
      *
      * @return DtoReflector
      */
-    public function create(): ReflectorInterface
+    public function __invoke(DataTransferObject $dto): ReflectorInterface
     {
-        return new DtoReflector($this->dto);
+        return new DtoReflector($dto);
     }
 }

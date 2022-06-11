@@ -3,14 +3,10 @@
 namespace DtoDragon\Services\Extractor;
 
 use DtoDragon\Exceptions\PropertyExtractorNotFoundException;
-use DtoDragon\Singletons\NamingStrategySingleton;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Services\DtoReflector;
-use DtoDragon\Services\DtoReflectorFactory;
 use DtoDragon\Services\ReflectorInterface;
-use DtoDragon\Services\Strategies\MatchNameStrategy;
 use DtoDragon\Services\Strategies\NamingStrategyInterface;
-use JetBrains\PhpStorm\Pure;
 use ReflectionProperty;
 
 /**
@@ -25,20 +21,26 @@ class DtoExtractor implements DtoExtractorInterface
      *
      * @var DtoReflector
      */
-    private ReflectorInterface $reflector;
+    protected ReflectorInterface $reflector;
 
-    private NamingStrategyInterface $namingStrategy;
+    /**
+     * The strategy used when converting extracting data in order to have the
+     * keys extracted to the correct naming format
+     *
+     * @var NamingStrategyInterface
+     */
+    protected NamingStrategyInterface $namingStrategy;
 
-    public function __construct(DtoReflectorFactory $factory)
-    {
-        $this->reflector = $factory->create();
-        $this->namingStrategy = NamingStrategySingleton::getInstance()->get();
-    }
+    protected PropertyOmitterInterface $propertyOmitter;
 
-    #[Pure]
-    protected function createNamingStrategy(): NamingStrategyInterface
-    {
-        return new MatchNameStrategy();
+    public function __construct(
+        ReflectorInterface $reflector,
+        NamingStrategyInterface $namingStrategy,
+        PropertyOmitterInterface $propertyOmitter
+    ) {
+        $this->reflector = $reflector;
+        $this->namingStrategy = $namingStrategy;
+        $this->propertyOmitter = $propertyOmitter;
     }
 
     /**
@@ -49,6 +51,9 @@ class DtoExtractor implements DtoExtractorInterface
         $array = [];
         foreach ($this->reflector->getProperties() as $property) {
             $fieldName = $property->getName();
+            if (in_array($fieldName, $this->propertyOmitter->omitted())) {
+                continue;
+            }
             $key = $this->namingStrategy->fieldToArrayKey($fieldName);
             $array[$key] = $this->extractProperty($property);
         }

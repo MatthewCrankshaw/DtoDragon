@@ -2,14 +2,11 @@
 
 namespace DtoDragon;
 
+use DtoDragon\Services\Extractor\ExtractorFactory;
+use DtoDragon\Services\Hydrator\HydratorFactory;
 use DtoDragon\Singletons\DtoServiceProviderSingleton;
-use DtoDragon\Singletons\NamingStrategySingleton;
-use DtoDragon\Services\DtoReflectorFactory;
-use DtoDragon\Services\Extractor\DtoExtractor;
 use DtoDragon\Services\Extractor\DtoExtractorInterface;
-use DtoDragon\Services\Hydrator\DtoHydrator;
 use DtoDragon\Services\Hydrator\DtoHydratorInterface;
-use DtoDragon\Services\Strategies\MatchNameStrategy;
 
 /**
  * The base implementation of a data transfer object
@@ -45,10 +42,10 @@ class DataTransferObject
     public function __construct(?array $data = null)
     {
         DtoServiceProviderSingleton::getInstance()->boot();
-        NamingStrategySingleton::getInstance()->register(new MatchNameStrategy());
-        $factory = new DtoReflectorFactory($this);
-        $this->extractor = new DtoExtractor($factory);
-        $this->hydrator = new DtoHydrator($factory);
+        $extractorFactory = new ExtractorFactory();
+        $hydratorFactory = new HydratorFactory();
+        $this->extractor = $extractorFactory($this);
+        $this->hydrator = $hydratorFactory($this);
         if (!empty($data)) {
             $this->hydrator->hydrate($data);
         }

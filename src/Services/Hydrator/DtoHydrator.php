@@ -5,10 +5,9 @@ namespace DtoDragon\Services\Hydrator;
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
-use DtoDragon\Singletons\NamingStrategySingleton;
+use DtoDragon\Services\ReflectorInterface;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Services\DtoReflector;
-use DtoDragon\Services\DtoReflectorFactory;
 use DtoDragon\Services\Strategies\NamingStrategyInterface;
 use ReflectionProperty;
 
@@ -32,12 +31,13 @@ class DtoHydrator implements DtoHydratorInterface
     /**
      * Construct the DtoHydrator object
      *
-     * @param DtoReflectorFactory $factory
+     * @param ReflectorInterface $reflector
+     * @param NamingStrategyInterface $namingStrategy
      */
-    public function __construct(DtoReflectorFactory $factory)
+    public function __construct(ReflectorInterface $reflector, NamingStrategyInterface $namingStrategy)
     {
-        $this->reflector = $factory->create();
-        $this->namingStrategy = NamingStrategySingleton::getInstance()->get();
+        $this->reflector = $reflector;
+        $this->namingStrategy = $namingStrategy;
     }
 
     /**
@@ -66,7 +66,7 @@ class DtoHydrator implements DtoHydratorInterface
      * If the value is an array then recursively hydrate the nested DTO's
      *
      * @param ReflectionProperty $property
-     * @param mixed $data
+     * @param mixed $value
      *
      * @return void
      */

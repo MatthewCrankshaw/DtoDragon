@@ -12,15 +12,15 @@ use DtoDragon\Services\DtoReflectorFactory;
  */
 class DtoReflectorFactoryTest extends DtoDragonTestCase
 {
-    public function testCreate(): void
+    public function testInvoke(): void
     {
         $dto = new ServiceDto([
             'id' => 1,
             'type' => 'service',
             'price' => null,
         ]);
-        $factory = new DtoReflectorFactory($dto);
-        $actual = $factory->create();
+        $factory = new DtoReflectorFactory();
+        $actual = $factory($dto);
 
         $this->assertInstanceOf(DtoReflector::class, $actual);
     }
