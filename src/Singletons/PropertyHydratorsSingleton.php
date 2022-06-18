@@ -54,6 +54,7 @@ class PropertyHydratorsSingleton extends Singleton
      */
     public function hasPropertyHydrator(string $type): bool
     {
+        $type = $this->mapPrimitives($type);
         if ($this->isDto($type)) {
             return isset($this->propertyHydrators[DataTransferObject::class]);
         } elseif ($this->isCollection($type)) {
@@ -76,6 +77,7 @@ class PropertyHydratorsSingleton extends Singleton
      */
     public function getPropertyHydrator(string $type): PropertyHydratorInterface
     {
+        $type = $this->mapPrimitives($type);
         if ($this->isDto($type)) {
             return $this->propertyHydrators[DataTransferObject::class];
         } elseif ($this->isCollection($type)) {
@@ -111,5 +113,17 @@ class PropertyHydratorsSingleton extends Singleton
     private function isCollection(string $type): bool
     {
         return is_subclass_of($type, DataTransferObjectCollection::class);
+    }
+
+    protected function mapPrimitives(string $type): string
+    {
+        $primitives = [
+            'string',
+            'array',
+            'float',
+            'int',
+        ];
+
+        return in_array($type, $primitives) ? 'primitive' : $type;
     }
 }
