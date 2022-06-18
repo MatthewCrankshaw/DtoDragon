@@ -54,6 +54,7 @@ class PropertyExtractorsSingleton extends Singleton
      */
     public function hasPropertyExtractor(string $type): bool
     {
+        $type = $this->mapPrimitives($type);
         if ($this->isDto($type)) {
             return isset($this->propertyExtractors[DataTransferObject::class]);
         } elseif ($this->isCollection($type)) {
@@ -76,6 +77,7 @@ class PropertyExtractorsSingleton extends Singleton
      */
     public function getPropertyExtractor(string $type): PropertyExtractorInterface
     {
+        $type = $this->mapPrimitives($type);
         if ($this->isDto($type)) {
             return $this->propertyExtractors[DataTransferObject::class];
         } elseif ($this->isCollection($type)) {
@@ -111,5 +113,17 @@ class PropertyExtractorsSingleton extends Singleton
     private function isCollection(string $type): bool
     {
         return is_subclass_of($type, DataTransferObjectCollection::class);
+    }
+
+    protected function mapPrimitives(string $type): string
+    {
+        $primitives = [
+            'string',
+            'array',
+            'float',
+            'int',
+        ];
+
+        return in_array($type, $primitives) ? 'primitive' : $type;
     }
 }

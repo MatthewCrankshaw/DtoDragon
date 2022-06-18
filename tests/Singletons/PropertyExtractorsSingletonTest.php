@@ -2,13 +2,13 @@
 
 namespace DtoDragon\Test\Singletons;
 
+use DtoDragon\Services\Extractor\PropertyExtractors\PrimitivePropertyExtractor;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Test\TestDtos\ServiceCollection;
 use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Services\Extractor\PropertyExtractors\CollectionPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\DtoPropertyExtractor;
-use DtoDragon\Services\Extractor\PropertyExtractors\IntegerPropertyExtractor;
 use Exception;
 
 /**
@@ -36,7 +36,7 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testRegister(): void
     {
-        $this->singleton->register(new IntegerPropertyExtractor());
+        $this->singleton->register(new PrimitivePropertyExtractor());
         $propertyExtractors = $this->getProtectedProperty($this->singleton, 'propertyExtractors');
 
         $this->assertCount(1, $propertyExtractors);
@@ -44,10 +44,10 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testGetPropertyExtractor(): void
     {
-        $this->singleton->register(new IntegerPropertyExtractor());
+        $this->singleton->register(new PrimitivePropertyExtractor());
         $propertyExtractor = $this->singleton->getPropertyExtractor('int');
 
-        $this->assertInstanceOf(IntegerPropertyExtractor::class, $propertyExtractor);
+        $this->assertInstanceOf(PrimitivePropertyExtractor::class, $propertyExtractor);
     }
 
     public function testHasPropertyExtractor(): void

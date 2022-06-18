@@ -5,7 +5,7 @@ namespace DtoDragon\Singletons;
 use DtoDragon\Services\Extractor\PropertyExtractors\ArrayPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\CollectionPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\DtoPropertyExtractor;
-use DtoDragon\Services\Extractor\PropertyExtractors\FloatPropertyExtractor;
+use DtoDragon\Services\Extractor\PropertyExtractors\PrimitivePropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\IntegerPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\StringPropertyExtractor;
 use DtoDragon\Services\Hydrator\PropertyHydrators\ArrayPropertyHydrator;
@@ -76,10 +76,7 @@ class DtoServiceProviderSingleton extends Singleton
      */
     protected function registerBasicPropertyExtractors(): void
     {
-        PropertyExtractorsSingleton::getInstance()->register(new IntegerPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new StringPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new ArrayPropertyExtractor());
-        PropertyExtractorsSingleton::getInstance()->register(new FloatPropertyExtractor());
+        PropertyExtractorsSingleton::getInstance()->register(new PrimitivePropertyExtractor());
         PropertyExtractorsSingleton::getInstance()->register(new DtoPropertyExtractor());
         PropertyExtractorsSingleton::getInstance()->register(new CollectionPropertyExtractor());
     }
