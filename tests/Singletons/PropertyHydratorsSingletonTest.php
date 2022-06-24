@@ -5,8 +5,6 @@ namespace DtoDragon\Test\Singletons;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\TestDtos\ServiceCollection;
-use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\DtoPropertyHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\PropertyHydratorInterface;
@@ -81,7 +79,7 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(new DtoPropertyHydrator());
 
-        $actual = $propertyHydrators->hasPropertyHydrator(ServiceDto::class);
+        $actual = $propertyHydrators->hasPropertyHydrator(get_class($this->createTestDto()));
         $this->assertTrue(true, $actual);
     }
 
@@ -90,7 +88,7 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(new CollectionPropertyHydrator());
 
-        $actual = $propertyHydrators->hasPropertyHydrator(ServiceCollection::class);
+        $actual = $propertyHydrators->hasPropertyHydrator(get_class($this->createTestDtoCollection()));
         $this->assertTrue(true, $actual);
     }
 
@@ -104,7 +102,7 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(new DtoPropertyHydrator());
 
-        $hydrator = $propertyHydrators->getPropertyHydrator(ServiceDto::class);
+        $hydrator = $propertyHydrators->getPropertyHydrator(get_class($this->createTestDto()));
         $this->assertInstanceOf(DtoPropertyHydrator::class, $hydrator);
     }
 
@@ -119,7 +117,7 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $propertyHydrators->register(new CollectionPropertyHydrator());
 
-        $hydrator = $propertyHydrators->getPropertyHydrator(ServiceCollection::class);
+        $hydrator = $propertyHydrators->getPropertyHydrator(get_class($this->createTestDtoCollection()));
         $this->assertInstanceOf(CollectionPropertyHydrator::class, $hydrator);
     }
 

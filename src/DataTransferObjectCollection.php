@@ -31,9 +31,9 @@ abstract class DataTransferObjectCollection implements Iterator
     /**
      * Construct a data transfer object collection
      *
-     * @param array $items
+     * @param DataTransferObject[] $items
      */
-    public function __construct(array $items)
+    public function __construct(array $items = [])
     {
         $this->position = 0;
         $this->items = $items;

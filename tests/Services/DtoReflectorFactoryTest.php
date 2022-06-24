@@ -1,9 +1,8 @@
 <?php
 
-namespace DtoDragon\Test\Utilities;
+namespace DtoDragon\Test\Services;
 
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\TestDtos\ServiceDto;
 use DtoDragon\Services\DtoReflector;
 use DtoDragon\Services\DtoReflectorFactory;
 
@@ -14,11 +13,7 @@ class DtoReflectorFactoryTest extends DtoDragonTestCase
 {
     public function testInvoke(): void
     {
-        $dto = new ServiceDto([
-            'id' => 1,
-            'type' => 'service',
-            'price' => null,
-        ]);
+        $dto = $this->createTestDto();
         $factory = new DtoReflectorFactory();
         $actual = $factory($dto);
 

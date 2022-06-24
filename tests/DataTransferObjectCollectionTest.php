@@ -2,95 +2,62 @@
 
 namespace DtoDragon\Test;
 
-use DtoDragon\Test\TestDtos\ServiceCollection;
-use DtoDragon\Test\TestDtos\ServiceDto;
+use DtoDragon\DataTransferObject;
+use DtoDragon\DataTransferObjectCollection;
 
 /**
  * @covers \DtoDragon\DataTransferObjectCollection
  */
 class DataTransferObjectCollectionTest extends DtoDragonTestCase
 {
-    public function provideCollectionData(): array
+    /**
+     * @return void
+     */
+    public function testConstructEmptyCollection(): void
     {
-        return [
-            'simple dto data' => [
-                'dto data' => [
-                    [
-                        'id' => 1,
-                        'type' => 'tax',
-                        'price' => null,
-                    ],
-                    [
-                        'id' => 2,
-                        'type' => 'tax',
-                        'price' => 10.0,
-                    ],
-                    [
-                        'id' => 3,
-                        'type' => 'tax',
-                        'price' => 0.11,
-                    ],
-                ]
-            ],
-        ];
+        $collection = $this->createTestDtoCollection();
+
+        static::assertInstanceOf(DataTransferObjectCollection::class, $collection);
+        static::assertEmpty($collection->items());
+        static::assertSame($collection->key(), 0);
     }
 
     /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
-     *
      * @return void
      */
-    public function testCreateCollection(array $arrayData): void
+    public function testCurrentItem(): void
     {
         $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
+        for ($i = 1; $i < 3; $i++) {
+            $dto = $this->createTestDto();
+            $dto->setId($i);
+            $dtos[] = $dto;
         }
-        $collection = new ServiceCollection($dtos);
 
-        $this->assertInstanceOf(ServiceCollection::class, $collection);
-    }
+        $collection = $this->createTestDtoCollection($dtos);
 
-    /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
-     *
-     * @return void
-     */
-    public function testCurrentItem(array $arrayData): void
-    {
-        $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
-        }
-        $collection = new ServiceCollection($dtos);
-
-        /** @var ServiceDto $service */
-        $service = $collection->current();
+        $dto1 = $collection->current();
         $collection->next();
-        $service2 = $collection->current();
+        $dto2 = $collection->current();
 
-        $this->assertSame(1, $service->getId());
-        $this->assertSame(2, $service2->getId());
+        static::assertSame(1, $dto1->getId());
+        static::assertSame(2, $dto2->getId());
     }
 
     /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
      *
      * @return void
      */
-    public function testNextItem(array $arrayData): void
+    public function testNextItem(): void
     {
         $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
+        for ($i = 1; $i < 3; $i++) {
+            $dto = $this->createTestDto();
+            $dto->setId($i);
+            $dtos[] = $dto;
         }
-        $collection = new ServiceCollection($dtos);
+
+        $collection = $this->createTestDtoCollection($dtos);
 
         $actual = $this->getProtectedProperty($collection, 'position');
         $this->assertSame(0, $actual);
@@ -107,19 +74,19 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
     }
 
     /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
      *
      * @return void
      */
-    public function testKey(array $arrayData): void
+    public function testKey(): void
     {
         $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
+        for ($i = 1; $i < 3; $i++) {
+            $dto = $this->createTestDto();
+            $dto->setId($i);
+            $dtos[] = $dto;
         }
-        $collection = new ServiceCollection($dtos);
+
+        $collection = $this->createTestDtoCollection($dtos);
 
         $this->assertSame(0, $collection->key());
 
@@ -133,19 +100,18 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
     }
 
     /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
-     *
      * @return void
      */
-    public function testValid(array $arrayData): void
+    public function testValid(): void
     {
         $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
+        for ($i = 1; $i < 4; $i++) {
+            $dto = $this->createTestDto();
+            $dto->setId($i);
+            $dtos[] = $dto;
         }
-        $collection = new ServiceCollection($dtos);
+
+        $collection = $this->createTestDtoCollection($dtos);
 
         $this->assertTrue($collection->valid());
         $collection->next();
@@ -157,19 +123,18 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
     }
 
     /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
-     *
      * @return void
      */
-    public function testRewind(array $arrayData): void
+    public function testRewind(): void
     {
         $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
+        for ($i = 1; $i < 4; $i++) {
+            $dto = $this->createTestDto();
+            $dto->setId($i);
+            $dtos[] = $dto;
         }
-        $collection = new ServiceCollection($dtos);
+
+        $collection = $this->createTestDtoCollection($dtos);
 
         $collection->rewind();
         $actual = $this->getProtectedProperty($collection, 'position');
@@ -183,47 +148,23 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
     }
 
     /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
-     *
      * @return void
      */
-    public function testItems(array $arrayData): void
+    public function testItems(): void
     {
         $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
+        for ($i = 1; $i < 4; $i++) {
+            $dto = $this->createTestDto();
+            $dto->setId($i);
+            $dtos[] = $dto;
         }
-        $collection = new ServiceCollection($dtos);
+
+        $collection = $this->createTestDtoCollection($dtos);
 
         $actual = $collection->items();
 
         $this->assertIsArray($actual);
-        $this->assertInstanceOf(ServiceDto::class, $actual[0]);
-        $this->assertCount(3, $actual);
-    }
-
-    /**
-     * @dataProvider provideCollectionData
-     *
-     * @param array $arrayData
-     *
-     * @return void
-     */
-    public function testToArray(array $arrayData): void
-    {
-        $dtos = [];
-        foreach ($arrayData as $data) {
-            $dtos[] = new ServiceDto($data);
-        }
-        $collection = new ServiceCollection($dtos);
-
-        $actual = $collection->toArray();
-
-        $this->assertIsArray($actual);
-        $this->assertIsArray($actual[0]);
-        $this->assertSame($arrayData, $actual);
+        $this->assertInstanceOf(DataTransferObject::class, $actual[0]);
         $this->assertCount(3, $actual);
     }
 }

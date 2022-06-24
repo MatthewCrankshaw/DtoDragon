@@ -15,9 +15,10 @@ interface DtoHydratorInterface
     /**
      * Hydrate the DTO object with data from the array
      *
+     * @param DataTransferObject $dto
      * @param array $data
      *
      * @return DataTransferObject
      */
-    public function hydrate(array $data): DataTransferObject;
+    public function hydrate(DataTransferObject $dto, array $data): DataTransferObject;
 }

@@ -5,7 +5,6 @@ namespace DtoDragon\Services\Hydrator;
 use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\NonNullablePropertyException;
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
-use DtoDragon\Services\ReflectorInterface;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Services\DtoReflector;
 use DtoDragon\Services\Strategies\NamingStrategyInterface;
@@ -18,47 +17,39 @@ use ReflectionProperty;
  */
 class DtoHydrator implements DtoHydratorInterface
 {
-    /**
-     * The class reflector for the given dto
-     * Hydration occurs through the reflector
-     *
-     * @var DtoReflector
-     */
-    private DtoReflector $reflector;
-
     private NamingStrategyInterface $namingStrategy;
 
     /**
      * Construct the DtoHydrator object
      *
-     * @param ReflectorInterface $reflector
      * @param NamingStrategyInterface $namingStrategy
      */
-    public function __construct(ReflectorInterface $reflector, NamingStrategyInterface $namingStrategy)
+    public function __construct(NamingStrategyInterface $namingStrategy)
     {
-        $this->reflector = $reflector;
         $this->namingStrategy = $namingStrategy;
     }
 
     /**
      * Hydrate the dto object with data from the provided array
      *
+     * @param DataTransferObject $dto
      * @param array $data
      *
      * @return DataTransferObject
      */
-    public function hydrate(array $data): DataTransferObject
+    public function hydrate(DataTransferObject $dto, array $data): DataTransferObject
     {
-        $properties = $this->reflector->getProperties();
+        $reflector = new DtoReflector($dto);
+        $properties = $reflector->getProperties();
         foreach ($properties as $property) {
             $key = $this->getPropertyDataArrayKey($property);
             if (!array_key_exists($key, $data)) {
                 continue;
             }
             $value = $this->getPropertyValueFromDataArray($key, $data);
-            $this->hydrateProperty($property, $value);
+            $this->hydrateProperty($reflector, $property, $value);
         }
-        return $this->reflector->getDto();
+        return $reflector->getDto();
     }
 
     /**
@@ -70,21 +61,21 @@ class DtoHydrator implements DtoHydratorInterface
      *
      * @return void
      */
-    private function hydrateProperty(ReflectionProperty $property, $value)
+    private function hydrateProperty(DtoReflector $reflector, ReflectionProperty $property, $value)
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
         $type = $property->getType()->getName();
 
         if (is_null($value)) {
-            if ($this->reflector->propertyIsNullable($property)) {
-                $this->reflector->setPropertyValue($property, null);
+            if ($reflector->propertyIsNullable($property)) {
+                $reflector->setPropertyValue($property, null);
             } else {
                 throw new NonNullablePropertyException($property->getName());
             }
         } elseif ($propertyHydrators->hasPropertyHydrator($type)) {
             $hydrator = $propertyHydrators->getPropertyHydrator($type);
             $value = $hydrator->hydrate($property, $value);
-            $this->reflector->setPropertyValue($property, $value);
+            $reflector->setPropertyValue($property, $value);
         } else {
             throw new PropertyHydratorNotFoundException($type);
         }

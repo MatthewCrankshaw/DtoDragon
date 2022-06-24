@@ -6,50 +6,37 @@ use DtoDragon\Exceptions\PropertyExtractorNotFoundException;
 use DtoDragon\Services\Extractor\ExtractorFactory;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\TestDtos\MultiTypeDto;
 
 /**
  * @covers \DtoDragon\Services\Extractor\DtoExtractor
  */
 class DtoExtractorTest extends DtoDragonTestCase
 {
-    public function provideExtract():array
+    public function testExtract(): void
     {
-        return [
-            'flat extract' => [
-                [
-                    'id' => 10,
-                    'testString' => 'this is a string',
-                ]
-            ],
-        ];
-    }
+        $dto = $this->createTestDto();
+        $dto->setId(10)
+            ->setType('example');
 
-    /**
-     * @dataProvider provideExtract
-     */
-    public function testExtract(array $data): void
-    {
-        $dto = new MultiTypeDto($data);
         $extractorFactory = new ExtractorFactory();
-        $extractor = $extractorFactory($dto);
+        $extractor = $extractorFactory();
 
-        $actual = $extractor->extract();
+        $actual = $extractor->extract($dto);
 
         $this->assertIsArray($actual);
     }
 
     public function testPropertyExtractorNotExist(): void
     {
-        $dto = new MultiTypeDto([
-            'id' => 10,
-            'testString' => 'testing',
-        ]);
+        $dto = $this->createTestDto();
+        $dto->setId(10)
+            ->setType('testing');
+
         PropertyExtractorsSingleton::getInstance()->clear();
         $extractorFactory = new ExtractorFactory();
-        $extractor = $extractorFactory($dto);
+        $extractor = $extractorFactory();
 
         $this->expectException(PropertyExtractorNotFoundException::class);
-        $extractor->extract();
+        $extractor->extract($dto);
     }
 }

@@ -8,104 +8,87 @@ use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
 use DtoDragon\Services\Hydrator\HydratorFactory;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
-use DtoDragon\Test\TestDtos\MultiTypeDto;
-use DtoDragon\Test\TestDtos\ServiceDto;
 
 /**
  * @covers \DtoDragon\Services\Hydrator\DtoHydrator
  */
 class DtoHydratorTest extends DtoDragonTestCase
 {
-    public function provideHydrate():array
+    public function testHydrate(): void
     {
-        return [
-            'flat hydrate' => [
-                [
-                    'id' => 10,
-                    'testString' => 'this is a string',
-                ]
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider provideHydrate
-     */
-    public function testHydrate(array $data): void
-    {
-        $dto = new MultiTypeDto();
         $factory = new HydratorFactory();
-        $hydrator = $factory($dto);
+        $hydrator = $factory();
 
-        $actual = $hydrator->hydrate($data);
+        $actual = $hydrator->hydrate($this->createTestDto(), ['id' => 10, 'type' => 'example']);
 
         $this->assertInstanceOf(DataTransferObject::class, $actual);
+        $this->assertSame(10, $actual->getId());
+        $this->assertSame('example', $actual->getType());
     }
 
     public function testHydrateNonNullableWithNull(): void
     {
-        $this->expectException(NonNullablePropertyException::class);
-        $dto = new MultiTypeDto([
+        $dto = $this->createTestDto();
+        $factory = new HydratorFactory();
+        $hydrator = $factory();
+        $data = [
             'id' => null,
-            'testString' => 'string',
-        ]);
+            'type' => null,
+        ];
+
+        $this->expectException(NonNullablePropertyException::class);
+
+        $hydrator->hydrate($dto, $data);
     }
 
     public function testHydratePropertyHydratorNotFound(): void
     {
         $this->expectException(PropertyHydratorNotFoundException::class);
-        $emptyDto = new MultiTypeDto();
+        $emptyDto = $this->createTestDto();
+        $data = [
+            'id' => 10,
+            'type' => 'string'
+        ];
 
         PropertyHydratorsSingleton::getInstance()->clear();
 
         $factory = new HydratorFactory();
-        $hydrator = $factory($emptyDto);
-        $actual = $hydrator->hydrate([
-            'id' => 1,
-            'testString' => 'string',
-        ]);
+        $hydrator = $factory();
+
+        $hydrator->hydrate($emptyDto, $data);
     }
 
     public function testNullablePropertyHydrator(): void
     {
-        $expected = new ServiceDto([
+        $expected = $this->createTestDto();
+        $expected->setId(1)
+            ->setType('string');
+
+        $data = [
             'id' => 1,
             'type' => 'string',
-            'price' => null
-        ]);
-        $emptyDto = new ServiceDto();
+        ];
+
+        $emptyDto = $this->createTestDto();
 
         $factory = new HydratorFactory();
-        $hydrator = $factory($emptyDto);
-        $actual = $hydrator->hydrate([
-            'id' => 1,
-            'type' => 'string',
-            'price' => null
-        ]);
+        $hydrator = $factory();
+        $actual = $hydrator->hydrate($emptyDto, $data);
 
         $this->assertEquals($actual, $expected);
     }
 
-    /**
-     * You should be able to hydrate a dto partially through the constructor
-     * if the property is not filled it will be left unset
-     *
-     * @return void
-     */
     public function testUnsetPropertyHydrator(): void
     {
-        $expected = new ServiceDto([
-            'type' => 'string',
-            'price' => null
-        ]);
-        $emptyDto = new ServiceDto();
+        $data = ['id' => 1];
+        $expected = $this->createTestDto();
+        $expected->setId(1);
+
+        $emptyDto = $this->createTestDto();
 
         $factory = new HydratorFactory();
-        $hydrator = $factory($emptyDto);
-        $actual = $hydrator->hydrate([
-            'type' => 'string',
-            'price' => null
-        ]);
+        $hydrator = $factory();
+        $actual = $hydrator->hydrate($emptyDto, $data);
 
         $this->assertEquals($actual, $expected);
     }

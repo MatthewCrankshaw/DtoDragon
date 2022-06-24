@@ -2,10 +2,10 @@
 
 namespace DtoDragon\Services\Extractor;
 
+use DtoDragon\DataTransferObject;
 use DtoDragon\Exceptions\PropertyExtractorNotFoundException;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Services\DtoReflector;
-use DtoDragon\Services\ReflectorInterface;
 use DtoDragon\Services\Strategies\NamingStrategyInterface;
 use ReflectionProperty;
 
@@ -17,13 +17,6 @@ use ReflectionProperty;
 class DtoExtractor implements DtoExtractorInterface
 {
     /**
-     * An object to reflect the data transfer object
-     *
-     * @var DtoReflector
-     */
-    protected ReflectorInterface $reflector;
-
-    /**
      * The strategy used when converting extracting data in order to have the
      * keys extracted to the correct naming format
      *
@@ -34,11 +27,9 @@ class DtoExtractor implements DtoExtractorInterface
     protected PropertyOmitterInterface $propertyOmitter;
 
     public function __construct(
-        ReflectorInterface $reflector,
         NamingStrategyInterface $namingStrategy,
         PropertyOmitterInterface $propertyOmitter
     ) {
-        $this->reflector = $reflector;
         $this->namingStrategy = $namingStrategy;
         $this->propertyOmitter = $propertyOmitter;
     }
@@ -46,16 +37,17 @@ class DtoExtractor implements DtoExtractorInterface
     /**
      * @inheritDoc
      */
-    public function extract(): array
+    public function extract(DataTransferObject $dto): array
     {
+        $reflector = new DtoReflector($dto);
         $array = [];
-        foreach ($this->reflector->getProperties() as $property) {
+        foreach ($reflector->getProperties() as $property) {
             $fieldName = $property->getName();
             if (in_array($fieldName, $this->propertyOmitter->omitted())) {
                 continue;
             }
             $key = $this->namingStrategy->fieldToArrayKey($fieldName);
-            $array[$key] = $this->extractProperty($property);
+            $array[$key] = $this->extractProperty($reflector, $property);
         }
         return $array;
     }
@@ -68,7 +60,7 @@ class DtoExtractor implements DtoExtractorInterface
      *
      * @return mixed
      */
-    private function extractProperty(ReflectionProperty $property)
+    private function extractProperty(DtoReflector $reflector, ReflectionProperty $property)
     {
         /** @var PropertyExtractorsSingleton $propertyExtractors */
         $propertyExtractors = PropertyExtractorsSingleton::getInstance();
@@ -76,7 +68,7 @@ class DtoExtractor implements DtoExtractorInterface
 
         if ($propertyExtractors->hasPropertyExtractor($type)) {
             $extractor = $propertyExtractors->getPropertyExtractor($type);
-            $value = $extractor->extract($this->reflector->getDto(), $property);
+            $value = $extractor->extract($reflector->getDto(), $property);
         } else {
             throw new PropertyExtractorNotFoundException($type);
         }
