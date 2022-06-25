@@ -2,18 +2,14 @@
 
 namespace DtoDragon\Singletons;
 
-use DtoDragon\Services\Extractor\PropertyExtractors\ArrayPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\CollectionPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\DtoPropertyExtractor;
 use DtoDragon\Services\Extractor\PropertyExtractors\PrimitivePropertyExtractor;
-use DtoDragon\Services\Extractor\PropertyExtractors\IntegerPropertyExtractor;
-use DtoDragon\Services\Extractor\PropertyExtractors\StringPropertyExtractor;
-use DtoDragon\Services\Hydrator\PropertyHydrators\ArrayPropertyHydrator;
+use DtoDragon\Services\Hydrator\DtoHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\DtoPropertyHydrator;
-use DtoDragon\Services\Hydrator\PropertyHydrators\FloatPropertyHydrator;
-use DtoDragon\Services\Hydrator\PropertyHydrators\IntegerPropertyHydrator;
 use DtoDragon\Services\Hydrator\PropertyHydrators\PrimitivePropertyHydrator;
+use DtoDragon\Services\Strategies\MatchNameStrategy;
 
 /**
  * Service provider for the data transfer object
@@ -64,9 +60,12 @@ class DtoServiceProviderSingleton extends Singleton
      */
     protected function registerBasicPropertyHydrators(): void
     {
-        PropertyHydratorsSingleton::getInstance()->register(new PrimitivePropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new DtoPropertyHydrator());
-        PropertyHydratorsSingleton::getInstance()->register(new CollectionPropertyHydrator());
+        $primitiveHydrator = new PrimitivePropertyHydrator();
+        $dtoHydrator = new DtoPropertyHydrator(new DtoHydrator(new MatchNameStrategy()));
+        $collectionHydrator = new CollectionPropertyHydrator(new DtoHydrator(new MatchNameStrategy()));
+        PropertyHydratorsSingleton::getInstance()->register($primitiveHydrator);
+        PropertyHydratorsSingleton::getInstance()->register($dtoHydrator);
+        PropertyHydratorsSingleton::getInstance()->register($collectionHydrator);
     }
 
     /**

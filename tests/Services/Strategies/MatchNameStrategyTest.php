@@ -46,7 +46,7 @@ class MatchNameStrategyTest extends DtoDragonTestCase
 
         $actual = $strategy->fieldToArrayKey($field);
 
-        $this->assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 
     /**
@@ -63,6 +63,6 @@ class MatchNameStrategyTest extends DtoDragonTestCase
 
         $actual = $strategy->arrayKeyToField($field);
 
-        $this->assertSame($expected, $actual);
+        static::assertSame($expected, $actual);
     }
 }

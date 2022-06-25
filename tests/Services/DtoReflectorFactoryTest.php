@@ -17,6 +17,6 @@ class DtoReflectorFactoryTest extends DtoDragonTestCase
         $factory = new DtoReflectorFactory();
         $actual = $factory($dto);
 
-        $this->assertInstanceOf(DtoReflector::class, $actual);
+        static::assertInstanceOf(DtoReflector::class, $actual);
     }
 }

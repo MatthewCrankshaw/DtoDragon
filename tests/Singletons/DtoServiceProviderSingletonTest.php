@@ -36,7 +36,7 @@ class DtoServiceProviderSingletonTest extends DtoDragonTestCase
         $provider->clear();
 
         $actual = $this->getProtectedProperty($provider, 'booted');
-        $this->assertFalse($actual);
+        static::assertFalse($actual);
     }
 
     /**
@@ -52,7 +52,7 @@ class DtoServiceProviderSingletonTest extends DtoDragonTestCase
         $provider->boot();
 
         $booted = $this->getProtectedProperty($provider, 'booted');
-        $this->assertTrue($booted);
+        static::assertTrue($booted);
     }
 
     public function provideSetBooted(): array
@@ -80,6 +80,6 @@ class DtoServiceProviderSingletonTest extends DtoDragonTestCase
         $provider->setBooted($booted);
 
         $booted = $this->getProtectedProperty($provider, 'booted');
-        $this->assertEquals($expected, $booted);
+        static::assertEquals($expected, $booted);
     }
 }

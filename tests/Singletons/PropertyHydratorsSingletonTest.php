@@ -3,6 +3,8 @@
 namespace DtoDragon\Test\Singletons;
 
 use DtoDragon\Exceptions\PropertyHydratorNotFoundException;
+use DtoDragon\Services\Hydrator\DtoHydrator;
+use DtoDragon\Services\Strategies\MatchNameStrategy;
 use DtoDragon\Singletons\PropertyHydratorsSingleton;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator;
@@ -37,14 +39,16 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
     public function testClear(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
-        $propertyHydrators->register(new DtoPropertyHydrator());
-        $propertyHydrators->register(new CollectionPropertyHydrator());
+        $dtoPropertyHydrator = new DtoPropertyHydrator(new DtoHydrator(new MatchNameStrategy()));
+        $collectionPropertyHydrator = new CollectionPropertyHydrator(new DtoHydrator(new MatchNameStrategy()));
+        $propertyHydrators->register($dtoPropertyHydrator);
+        $propertyHydrators->register($collectionPropertyHydrator);
 
         $propertyHydrators->clear();
 
         $actual = $this->getProtectedProperty($propertyHydrators, 'propertyHydrators');
-        $this->assertIsArray($actual);
-        $this->assertEmpty($actual);
+        static::assertIsArray($actual);
+        static::assertEmpty($actual);
     }
 
     /**
@@ -71,25 +75,25 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
         );
 
         $hydrator = $propertyHydrators->getPropertyHydrator('type');
-        $this->assertInstanceOf(PropertyHydratorInterface::class, $hydrator);
+        static::assertInstanceOf(PropertyHydratorInterface::class, $hydrator);
     }
 
     public function testHasDtoPropertyHydrator(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
-        $propertyHydrators->register(new DtoPropertyHydrator());
+        $propertyHydrators->register(new DtoPropertyHydrator(new DtoHydrator(new MatchNameStrategy())));
 
         $actual = $propertyHydrators->hasPropertyHydrator(get_class($this->createTestDto()));
-        $this->assertTrue(true, $actual);
+        static::assertTrue(true, $actual);
     }
 
     public function testHasCollectionPropertyHydrator(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
-        $propertyHydrators->register(new CollectionPropertyHydrator());
+        $propertyHydrators->register(new CollectionPropertyHydrator(new DtoHydrator(new MatchNameStrategy())));
 
         $actual = $propertyHydrators->hasPropertyHydrator(get_class($this->createTestDtoCollection()));
-        $this->assertTrue(true, $actual);
+        static::assertTrue(true, $actual);
     }
 
     /**
@@ -100,10 +104,10 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
     public function testGetDtoPropertyHydrator(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
-        $propertyHydrators->register(new DtoPropertyHydrator());
+        $propertyHydrators->register(new DtoPropertyHydrator(new DtoHydrator(new MatchNameStrategy())));
 
         $hydrator = $propertyHydrators->getPropertyHydrator(get_class($this->createTestDto()));
-        $this->assertInstanceOf(DtoPropertyHydrator::class, $hydrator);
+        static::assertInstanceOf(DtoPropertyHydrator::class, $hydrator);
     }
 
     /**
@@ -115,10 +119,10 @@ class PropertyHydratorsSingletonTest extends DtoDragonTestCase
     public function testGetCollectionPropertyHydrator(): void
     {
         $propertyHydrators = PropertyHydratorsSingleton::getInstance();
-        $propertyHydrators->register(new CollectionPropertyHydrator());
+        $propertyHydrators->register(new CollectionPropertyHydrator(new DtoHydrator(new MatchNameStrategy())));
 
         $hydrator = $propertyHydrators->getPropertyHydrator(get_class($this->createTestDtoCollection()));
-        $this->assertInstanceOf(CollectionPropertyHydrator::class, $hydrator);
+        static::assertInstanceOf(CollectionPropertyHydrator::class, $hydrator);
     }
 
     /**

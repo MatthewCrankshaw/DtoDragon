@@ -3,6 +3,7 @@
 namespace DtoDragon\Services\Hydrator\PropertyHydrators;
 
 use DtoDragon\DataTransferObject;
+use DtoDragon\Services\Hydrator\DtoHydratorInterface;
 use ReflectionProperty;
 
 /**
@@ -12,6 +13,13 @@ use ReflectionProperty;
  */
 class DtoPropertyHydrator implements PropertyHydratorInterface
 {
+    protected DtoHydratorInterface $hydrator;
+
+    public function __construct(DtoHydratorInterface $hydrator)
+    {
+        $this->hydrator = $hydrator;
+    }
+
     /**
      * @inheritDoc
      */
@@ -28,9 +36,15 @@ class DtoPropertyHydrator implements PropertyHydratorInterface
      *
      * @return DataTransferObject
      */
-    public function hydrate(ReflectionProperty $property, $value)
+    public function hydrate(ReflectionProperty $property, $value): DataTransferObject
     {
         $dtoType = $property->getType()->getName();
-        return new $dtoType($value);
+        $dto = $this->createDto($dtoType);
+        return $this->hydrator->hydrate($dto, $value);
+    }
+
+    protected function createDto(string $dtoClass): DataTransferObject
+    {
+        return new $dtoClass();
     }
 }

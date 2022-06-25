@@ -16,8 +16,7 @@ class DataTransferObject
 {
     /**
      * Construct a new data transfer object
-     * If a data array is provided hydrate the DTO
-     * Otherwise remain leave values unset
+     * boot the service provider if it has not already been booted
      */
     public function __construct()
     {

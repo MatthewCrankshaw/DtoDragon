@@ -2,6 +2,7 @@
 
 namespace DtoDragon\Test\Services;
 
+use DtoDragon\DataTransferObject;
 use DtoDragon\Test\DtoDragonTestCase;
 use DtoDragon\Services\DtoReflector;
 
@@ -10,13 +11,24 @@ use DtoDragon\Services\DtoReflector;
  */
 class DtoReflectorTest extends DtoDragonTestCase
 {
+    public function testGetDto(): void
+    {
+        $dto = $this->createTestDto();
+        $dtoReflector = new DtoReflector($dto);
+
+        $actual = $dtoReflector->getDto();
+
+        static::assertSame($dto, $actual);
+        static::assertInstanceOf(DataTransferObject::class, $actual);
+    }
+
     public function testGetPropertiesIsArray(): void
     {
         $dto = $this->createTestDto();
         $dtoReflector = new DtoReflector($dto);
         $properties = $dtoReflector->getProperties();
 
-        $this->assertIsArray($properties);
+        static::assertIsArray($properties);
     }
 
     public function testGetPropertiesCount(): void
@@ -25,7 +37,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $dtoReflector = new DtoReflector($dto);
         $properties = $dtoReflector->getProperties();
 
-        $this->assertCount(2, $properties);
+        static::assertCount(2, $properties);
     }
 
     public function testGetPropertiesProtected(): void
@@ -35,7 +47,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $properties = $dtoReflector->getProperties();
 
         foreach ($properties as $property) {
-            $this->assertTrue($property->isProtected());
+            static::assertTrue($property->isProtected());
         }
     }
 
@@ -48,7 +60,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $properties = $reflector->getProperties();
         $id = $reflector->getPropertyValue($properties[0]);
 
-        $this->assertSame(1, $id);
+        static::assertSame(1, $id);
     }
 
     public function testSetPropertyValue(): void
@@ -60,7 +72,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $reflector->setPropertyValue($properties[0], 10);
         $id = $reflector->getPropertyValue($properties[0]);
 
-        $this->assertSame(10, $id);
+        static::assertSame(10, $id);
     }
 
     public function testPropertyIsNullable() {
@@ -72,7 +84,7 @@ class DtoReflectorTest extends DtoDragonTestCase
         $idActual = $reflector->propertyIsNullable($idProperty);
         $typeActual = $reflector->propertyIsNullable($typeProperty);
 
-        $this->assertSame(false, $idActual);
-        $this->assertSame(true, $typeActual);
+        static::assertSame(false, $idActual);
+        static::assertSame(true, $typeActual);
     }
 }

@@ -23,7 +23,7 @@ class DtoExtractorTest extends DtoDragonTestCase
 
         $actual = $extractor->extract($dto);
 
-        $this->assertIsArray($actual);
+        static::assertIsArray($actual);
     }
 
     public function testPropertyExtractorNotExist(): void

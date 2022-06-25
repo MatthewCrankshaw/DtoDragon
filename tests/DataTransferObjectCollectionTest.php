@@ -60,17 +60,17 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
         $collection = $this->createTestDtoCollection($dtos);
 
         $actual = $this->getProtectedProperty($collection, 'position');
-        $this->assertSame(0, $actual);
+        static::assertSame(0, $actual);
 
         $collection->next();
 
         $actual = $this->getProtectedProperty($collection, 'position');
-        $this->assertSame(1, $actual);
+        static::assertSame(1, $actual);
 
         $collection->next();
 
         $actual = $this->getProtectedProperty($collection, 'position');
-        $this->assertSame(2, $actual);
+        static::assertSame(2, $actual);
     }
 
     /**
@@ -88,15 +88,15 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
 
         $collection = $this->createTestDtoCollection($dtos);
 
-        $this->assertSame(0, $collection->key());
+        static::assertSame(0, $collection->key());
 
         $collection->next();
 
-        $this->assertSame(1, $collection->key());
+        static::assertSame(1, $collection->key());
 
         $collection->next();
 
-        $this->assertSame(2, $collection->key());
+        static::assertSame(2, $collection->key());
     }
 
     /**
@@ -113,13 +113,13 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
 
         $collection = $this->createTestDtoCollection($dtos);
 
-        $this->assertTrue($collection->valid());
+        static::assertTrue($collection->valid());
         $collection->next();
-        $this->assertTrue($collection->valid());
+        static::assertTrue($collection->valid());
         $collection->next();
-        $this->assertTrue($collection->valid());
+        static::assertTrue($collection->valid());
         $collection->next();
-        $this->assertFalse($collection->valid());
+        static::assertFalse($collection->valid());
     }
 
     /**
@@ -138,13 +138,13 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
 
         $collection->rewind();
         $actual = $this->getProtectedProperty($collection, 'position');
-        $this->assertSame(0, $actual);
+        static::assertSame(0, $actual);
 
         $collection->next();
         $collection->next();
         $collection->rewind();
         $actual = $this->getProtectedProperty($collection, 'position');
-        $this->assertSame(0, $actual);
+        static::assertSame(0, $actual);
     }
 
     /**
@@ -163,8 +163,8 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
 
         $actual = $collection->items();
 
-        $this->assertIsArray($actual);
-        $this->assertInstanceOf(DataTransferObject::class, $actual[0]);
-        $this->assertCount(3, $actual);
+        static::assertIsArray($actual);
+        static::assertInstanceOf(DataTransferObject::class, $actual[0]);
+        static::assertCount(3, $actual);
     }
 }

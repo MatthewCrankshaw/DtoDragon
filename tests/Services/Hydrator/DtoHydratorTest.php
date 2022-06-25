@@ -21,9 +21,9 @@ class DtoHydratorTest extends DtoDragonTestCase
 
         $actual = $hydrator->hydrate($this->createTestDto(), ['id' => 10, 'type' => 'example']);
 
-        $this->assertInstanceOf(DataTransferObject::class, $actual);
-        $this->assertSame(10, $actual->getId());
-        $this->assertSame('example', $actual->getType());
+        static::assertInstanceOf(DataTransferObject::class, $actual);
+        static::assertSame(10, $actual->getId());
+        static::assertSame('example', $actual->getType());
     }
 
     public function testHydrateNonNullableWithNull(): void
@@ -75,7 +75,7 @@ class DtoHydratorTest extends DtoDragonTestCase
         $hydrator = $factory();
         $actual = $hydrator->hydrate($emptyDto, $data);
 
-        $this->assertEquals($actual, $expected);
+        static::assertEquals($actual, $expected);
     }
 
     public function testUnsetPropertyHydrator(): void
@@ -90,6 +90,6 @@ class DtoHydratorTest extends DtoDragonTestCase
         $hydrator = $factory();
         $actual = $hydrator->hydrate($emptyDto, $data);
 
-        $this->assertEquals($actual, $expected);
+        static::assertEquals($actual, $expected);
     }
 }

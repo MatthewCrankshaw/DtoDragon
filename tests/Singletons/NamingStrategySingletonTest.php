@@ -20,7 +20,7 @@ class NamingStrategySingletonTest extends DtoDragonTestCase
 
         $actual = $this->getProtectedProperty($singleton, 'strategy');
 
-        $this->assertInstanceOf(NamingStrategyInterface::class, $actual);
+        static::assertInstanceOf(NamingStrategyInterface::class, $actual);
     }
 
     public function testGet(): void
@@ -31,6 +31,6 @@ class NamingStrategySingletonTest extends DtoDragonTestCase
 
         $actual = $singleton->get();
 
-        $this->assertInstanceOf(NamingStrategyInterface::class, $actual);
+        static::assertInstanceOf(NamingStrategyInterface::class, $actual);
     }
 }

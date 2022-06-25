@@ -2,7 +2,9 @@
 
 namespace DtoDragon\Services\Hydrator\PropertyHydrators;
 
+use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
+use DtoDragon\Services\Hydrator\DtoHydratorInterface;
 use ReflectionProperty;
 
 /**
@@ -12,6 +14,13 @@ use ReflectionProperty;
  */
 class CollectionPropertyHydrator implements PropertyHydratorInterface
 {
+    public DtoHydratorInterface $dtoHydrator;
+
+    public function __construct(DtoHydratorInterface $dtoHydrator)
+    {
+        $this->dtoHydrator = $dtoHydrator;
+    }
+
     /**
      * @inheritDoc
      */
@@ -30,13 +39,24 @@ class CollectionPropertyHydrator implements PropertyHydratorInterface
      */
     public function hydrate(ReflectionProperty $property, $value)
     {
-        $propertyType = $property->getType();
-        $collection = $propertyType->getName();
-        $collectArray = [];
+        $collection = $this->newCollection($property);
         foreach ($value as $item) {
-            $dtoType = $collection::dtoType();
-            $collectArray[] = new $dtoType($item);
+            $dto = $this->hydrateDto($collection, $item);
+            $collection->append($dto);
         }
-        return new $collection($collectArray);
+        return $collection;
+    }
+
+    protected function newCollection(ReflectionProperty $property): DataTransferObjectCollection
+    {
+        $propertyType = $property->getType();
+        $collectionClass = $propertyType->getName();
+        return new $collectionClass();
+    }
+
+    protected function hydrateDto(DataTransferObjectCollection $collection, array $data): DataTransferObject
+    {
+        $dtoType = $collection->dtoType();
+        return $this->dtoHydrator->hydrate(new $dtoType(), $data);
     }
 }

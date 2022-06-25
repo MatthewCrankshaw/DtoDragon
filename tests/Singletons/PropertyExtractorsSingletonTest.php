@@ -26,11 +26,11 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
     public function testClear(): void
     {
         $propertyExtractors = $this->getProtectedProperty($this->singleton, 'propertyExtractors');
-        $this->assertNotEmpty($propertyExtractors);
+        static::assertNotEmpty($propertyExtractors);
 
         $this->singleton->clear();
         $propertyExtractors = $this->getProtectedProperty($this->singleton, 'propertyExtractors');
-        $this->assertEmpty($propertyExtractors);
+        static::assertEmpty($propertyExtractors);
     }
 
     public function testRegister(): void
@@ -38,7 +38,7 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
         $this->singleton->register(new PrimitivePropertyExtractor());
         $propertyExtractors = $this->getProtectedProperty($this->singleton, 'propertyExtractors');
 
-        $this->assertCount(1, $propertyExtractors);
+        static::assertCount(1, $propertyExtractors);
     }
 
     public function testGetPropertyExtractor(): void
@@ -46,29 +46,29 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
         $this->singleton->register(new PrimitivePropertyExtractor());
         $propertyExtractor = $this->singleton->getPropertyExtractor('int');
 
-        $this->assertInstanceOf(PrimitivePropertyExtractor::class, $propertyExtractor);
+        static::assertInstanceOf(PrimitivePropertyExtractor::class, $propertyExtractor);
     }
 
     public function testHasPropertyExtractor(): void
     {
-        $this->assertTrue($this->singleton->hasPropertyExtractor('int'));
+        static::assertTrue($this->singleton->hasPropertyExtractor('int'));
     }
 
     public function testHasDtoPropertyExtractor(): void
     {
         $this->singleton->register(new DtoPropertyExtractor());
-        $this->assertTrue($this->singleton->hasPropertyExtractor(get_class($this->createTestDto())));
+        static::assertTrue($this->singleton->hasPropertyExtractor(get_class($this->createTestDto())));
     }
 
     public function testHasCollectionPropertyExtractor(): void
     {
         $this->singleton->register(new CollectionPropertyExtractor());
-        $this->assertTrue($this->singleton->hasPropertyExtractor(get_class($this->createTestDtoCollection())));
+        static::assertTrue($this->singleton->hasPropertyExtractor(get_class($this->createTestDtoCollection())));
     }
 
     public function testDoesNotHavePropertyExtractor(): void
     {
-        $this->assertFalse($this->singleton->hasPropertyExtractor(PropertyExtractorsSingletonTest::class));
+        static::assertFalse($this->singleton->hasPropertyExtractor(PropertyExtractorsSingletonTest::class));
     }
 
     public function testGetDtoPropertyExtractor(): void
@@ -76,7 +76,7 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
         $this->singleton->register(new DtoPropertyExtractor());
 
         $extractor = $this->singleton->getPropertyExtractor(get_class($this->createTestDto()));
-        $this->assertInstanceOf(DtoPropertyExtractor::class, $extractor);
+        static::assertInstanceOf(DtoPropertyExtractor::class, $extractor);
     }
 
     public function testGetCollectionPropertyController(): void
@@ -84,7 +84,7 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
         $this->singleton->register(new CollectionPropertyExtractor());
 
         $extractor = $this->singleton->getPropertyExtractor(get_class($this->createTestDtoCollection()));
-        $this->assertInstanceOf(CollectionPropertyExtractor::class, $extractor);
+        static::assertInstanceOf(CollectionPropertyExtractor::class, $extractor);
     }
 
     public function testCannotGetPropertyExtractor(): void

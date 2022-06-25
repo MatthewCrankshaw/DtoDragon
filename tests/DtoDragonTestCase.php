@@ -78,9 +78,9 @@ class DtoDragonTestCase extends TestCase
     public function createTestDtoCollection(array $items = []): DataTransferObjectCollection
     {
         return new class($items) extends DataTransferObjectCollection {
-            public static function dtoType(): string
+            public function dtoType(): string
             {
-                return 'type';
+                return DataTransferObjectCollection::class;
             }
         };
     }

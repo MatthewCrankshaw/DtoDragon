@@ -44,7 +44,7 @@ abstract class DataTransferObjectCollection implements Iterator
      *
      * @return string
      */
-    abstract public static function dtoType(): string;
+    abstract public function dtoType(): string;
 
     /**
      * Get the current data transfer object
@@ -106,17 +106,8 @@ abstract class DataTransferObjectCollection implements Iterator
         return $this->items;
     }
 
-    /**
-     * Convert the collection of items to an array recursively
-     *
-     * @return array
-     */
-    public function toArray(): array
+    public function append(DataTransferObject $dto): void
     {
-        $array = [];
-        foreach ($this->items as $item) {
-            $array[] = $item->toArray();
-        }
-        return $array;
+        $this->items[] = $dto;
     }
 }
