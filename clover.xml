@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1656124448">
-  <project timestamp="1656124448">
+<coverage generated="1656127800">
+  <project timestamp="1656127800">
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObject.php">
       <class name="DtoDragon\DataTransferObject" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="23" type="stmt" count="3"/>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="23" type="stmt" count="1"/>
       <metrics loc="26" ncloc="14" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/DataTransferObjectCollection.php">
@@ -164,39 +164,39 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/Hydrator/DtoHydrator.php">
       <class name="DtoDragon\Services\Hydrator\DtoHydrator" namespace="global">
-        <metrics complexity="10" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="24" elements="30" coveredelements="28"/>
+        <metrics complexity="10" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="25" elements="30" coveredelements="30"/>
       </class>
       <line num="27" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="29" type="stmt" count="6"/>
-      <line num="40" type="method" name="hydrate" visibility="public" complexity="3" crap="3" count="5"/>
-      <line num="42" type="stmt" count="5"/>
-      <line num="43" type="stmt" count="5"/>
-      <line num="44" type="stmt" count="5"/>
-      <line num="45" type="stmt" count="5"/>
-      <line num="46" type="stmt" count="5"/>
+      <line num="40" type="method" name="hydrate" visibility="public" complexity="3" crap="3" count="6"/>
+      <line num="42" type="stmt" count="6"/>
+      <line num="43" type="stmt" count="6"/>
+      <line num="44" type="stmt" count="6"/>
+      <line num="45" type="stmt" count="6"/>
+      <line num="46" type="stmt" count="6"/>
       <line num="47" type="stmt" count="1"/>
-      <line num="49" type="stmt" count="5"/>
-      <line num="50" type="stmt" count="5"/>
-      <line num="52" type="stmt" count="3"/>
-      <line num="64" type="method" name="hydrateProperty" visibility="private" complexity="4" crap="4.01" count="5"/>
-      <line num="66" type="stmt" count="5"/>
-      <line num="67" type="stmt" count="5"/>
-      <line num="69" type="stmt" count="5"/>
-      <line num="70" type="stmt" count="1"/>
-      <line num="71" type="stmt" count="0"/>
-      <line num="73" type="stmt" count="1"/>
-      <line num="75" type="stmt" count="4"/>
-      <line num="76" type="stmt" count="3"/>
-      <line num="77" type="stmt" count="3"/>
-      <line num="78" type="stmt" count="3"/>
+      <line num="49" type="stmt" count="6"/>
+      <line num="50" type="stmt" count="6"/>
+      <line num="52" type="stmt" count="4"/>
+      <line num="64" type="method" name="hydrateProperty" visibility="private" complexity="4" crap="4" count="6"/>
+      <line num="66" type="stmt" count="6"/>
+      <line num="67" type="stmt" count="6"/>
+      <line num="69" type="stmt" count="6"/>
+      <line num="70" type="stmt" count="2"/>
+      <line num="71" type="stmt" count="1"/>
+      <line num="73" type="stmt" count="2"/>
+      <line num="75" type="stmt" count="5"/>
+      <line num="76" type="stmt" count="4"/>
+      <line num="77" type="stmt" count="4"/>
+      <line num="78" type="stmt" count="4"/>
       <line num="80" type="stmt" count="1"/>
-      <line num="92" type="method" name="getPropertyValueFromDataArray" visibility="private" complexity="1" crap="1" count="5"/>
-      <line num="94" type="stmt" count="5"/>
-      <line num="104" type="method" name="getPropertyDataArrayKey" visibility="protected" complexity="1" crap="1" count="5"/>
-      <line num="106" type="stmt" count="5"/>
-      <line num="107" type="stmt" count="5"/>
-      <line num="108" type="stmt" count="5"/>
-      <metrics loc="111" ncloc="69" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="24" elements="30" coveredelements="28"/>
+      <line num="92" type="method" name="getPropertyValueFromDataArray" visibility="private" complexity="1" crap="1" count="6"/>
+      <line num="94" type="stmt" count="6"/>
+      <line num="104" type="method" name="getPropertyDataArrayKey" visibility="protected" complexity="1" crap="1" count="6"/>
+      <line num="106" type="stmt" count="6"/>
+      <line num="107" type="stmt" count="6"/>
+      <line num="108" type="stmt" count="6"/>
+      <metrics loc="111" ncloc="69" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="25" elements="30" coveredelements="30"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/Hydrator/DtoHydratorInterface.php">
       <metrics loc="25" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -212,11 +212,11 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/Hydrator/PropertyHydrators/AbstractPropertyHydrator.php">
       <class name="DtoDragon\Services\Hydrator\PropertyHydrators\AbstractPropertyHydrator" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="29" type="method" name="hydrate" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <metrics loc="34" ncloc="16" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      <line num="29" type="method" name="hydrate" visibility="public" complexity="1" crap="1" count="6"/>
+      <line num="31" type="stmt" count="6"/>
+      <metrics loc="34" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/Hydrator/PropertyHydrators/CollectionPropertyHydrator.php">
       <class name="DtoDragon\Services\Hydrator\PropertyHydrators\CollectionPropertyHydrator" namespace="global">
@@ -259,11 +259,11 @@
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/Hydrator/PropertyHydrators/PrimitivePropertyHydrator.php">
       <class name="DtoDragon\Services\Hydrator\PropertyHydrators\PrimitivePropertyHydrator" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
-      <line num="15" type="method" name="registeredType" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <metrics loc="20" ncloc="12" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      <line num="15" type="method" name="registeredType" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="17" type="stmt" count="1"/>
+      <metrics loc="20" ncloc="12" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/home/runner/work/DtoDragon/DtoDragon/src/Services/Hydrator/PropertyHydrators/PropertyHydratorInterface.php">
       <metrics loc="35" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -292,11 +292,11 @@
       <line num="37" type="stmt" count="1"/>
       <line num="38" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
-      <line num="47" type="method" name="boot" visibility="public" complexity="2" crap="2" count="3"/>
-      <line num="49" type="stmt" count="3"/>
+      <line num="47" type="method" name="boot" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="49" type="stmt" count="1"/>
       <line num="50" type="stmt" count="1"/>
       <line num="51" type="stmt" count="1"/>
-      <line num="53" type="stmt" count="3"/>
+      <line num="53" type="stmt" count="1"/>
       <line num="61" type="method" name="registerBasicPropertyHydrators" visibility="protected" complexity="1" crap="1" count="1"/>
       <line num="63" type="stmt" count="1"/>
       <line num="64" type="stmt" count="1"/>
@@ -398,13 +398,13 @@
       <class name="DtoDragon\Singletons\Singleton" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
       </class>
-      <line num="27" type="method" name="getInstance" visibility="public" complexity="2" crap="2" count="4"/>
-      <line num="29" type="stmt" count="4"/>
-      <line num="31" type="stmt" count="4"/>
+      <line num="27" type="method" name="getInstance" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
       <line num="32" type="stmt" count="1"/>
-      <line num="35" type="stmt" count="4"/>
+      <line num="35" type="stmt" count="2"/>
       <metrics loc="38" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
     </file>
-    <metrics files="30" loc="1479" ncloc="860" classes="23" methods="70" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="175" coveredstatements="150" elements="245" coveredelements="204"/>
+    <metrics files="30" loc="1479" ncloc="860" classes="23" methods="70" coveredmethods="57" conditionals="0" coveredconditionals="0" statements="175" coveredstatements="153" elements="245" coveredelements="210"/>
   </project>
 </coverage>
