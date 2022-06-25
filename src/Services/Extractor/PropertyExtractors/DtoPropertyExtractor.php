@@ -3,6 +3,7 @@
 namespace DtoDragon\Services\Extractor\PropertyExtractors;
 
 use DtoDragon\DataTransferObject;
+use DtoDragon\Services\Extractor\DtoExtractor;
 use ReflectionProperty;
 
 /**
@@ -13,6 +14,13 @@ use ReflectionProperty;
  */
 class DtoPropertyExtractor extends AbstractPropertyExtractor
 {
+    protected DtoExtractor $extractor;
+
+    public function __construct(DtoExtractor $extractor)
+    {
+        $this->extractor = $extractor;
+    }
+
     /**
      * @inheritDoc
      */
@@ -31,11 +39,12 @@ class DtoPropertyExtractor extends AbstractPropertyExtractor
      */
     public function extract(DataTransferObject $dto, ReflectionProperty $property)
     {
+        /** @var DataTransferObject|null $value */
         $value = $property->getValue($dto);
         if (is_null($value)) {
             return null;
         }
 
-        return $value->toArray();
+        return $this->extractor->extract($value);
     }
 }

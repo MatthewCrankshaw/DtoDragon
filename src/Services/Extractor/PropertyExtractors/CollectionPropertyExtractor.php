@@ -4,6 +4,7 @@ namespace DtoDragon\Services\Extractor\PropertyExtractors;
 
 use DtoDragon\DataTransferObject;
 use DtoDragon\DataTransferObjectCollection;
+use DtoDragon\Services\Extractor\DtoExtractor;
 use ReflectionProperty;
 
 /**
@@ -14,6 +15,13 @@ use ReflectionProperty;
  */
 class CollectionPropertyExtractor extends AbstractPropertyExtractor
 {
+    protected DtoExtractor $extractor;
+
+    public function __construct(DtoExtractor $extractor)
+    {
+        $this->extractor = $extractor;
+    }
+
     /**
      * @inheritDoc
      */
@@ -28,15 +36,21 @@ class CollectionPropertyExtractor extends AbstractPropertyExtractor
      * @param DataTransferObject $dto
      * @param ReflectionProperty $property
      *
-     * @return mixed|null
+     * @return array
      */
     public function extract(DataTransferObject $dto, ReflectionProperty $property)
     {
-        $value = $property->getValue($dto);
-        if (is_null($value)) {
+        /** @var DataTransferObjectCollection|null $collection */
+        $collection = $property->getValue($dto);
+        if (is_null($collection)) {
             return null;
         }
 
-        return $value->toArray();
+        $data = [];
+        foreach ($collection->items() as $dto) {
+            $data[] = $this->extractor->extract($dto);
+        }
+
+        return $data;
     }
 }

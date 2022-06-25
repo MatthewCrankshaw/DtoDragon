@@ -2,6 +2,7 @@
 
 namespace DtoDragon\Test\Singletons;
 
+use DtoDragon\Services\Extractor\ExtractorFactory;
 use DtoDragon\Services\Extractor\PropertyExtractors\PrimitivePropertyExtractor;
 use DtoDragon\Singletons\PropertyExtractorsSingleton;
 use DtoDragon\Singletons\Singleton;
@@ -56,13 +57,15 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testHasDtoPropertyExtractor(): void
     {
-        $this->singleton->register(new DtoPropertyExtractor());
+        $factory = new ExtractorFactory();
+        $this->singleton->register(new DtoPropertyExtractor($factory()));
         static::assertTrue($this->singleton->hasPropertyExtractor(get_class($this->createTestDto())));
     }
 
     public function testHasCollectionPropertyExtractor(): void
     {
-        $this->singleton->register(new CollectionPropertyExtractor());
+        $factory = new ExtractorFactory();
+        $this->singleton->register(new CollectionPropertyExtractor($factory()));
         static::assertTrue($this->singleton->hasPropertyExtractor(get_class($this->createTestDtoCollection())));
     }
 
@@ -73,7 +76,8 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testGetDtoPropertyExtractor(): void
     {
-        $this->singleton->register(new DtoPropertyExtractor());
+        $factory = new ExtractorFactory();
+        $this->singleton->register(new DtoPropertyExtractor($factory()));
 
         $extractor = $this->singleton->getPropertyExtractor(get_class($this->createTestDto()));
         static::assertInstanceOf(DtoPropertyExtractor::class, $extractor);
@@ -81,7 +85,8 @@ class PropertyExtractorsSingletonTest extends DtoDragonTestCase
 
     public function testGetCollectionPropertyController(): void
     {
-        $this->singleton->register(new CollectionPropertyExtractor());
+        $factory = new ExtractorFactory();
+        $this->singleton->register(new CollectionPropertyExtractor($factory()));
 
         $extractor = $this->singleton->getPropertyExtractor(get_class($this->createTestDtoCollection()));
         static::assertInstanceOf(CollectionPropertyExtractor::class, $extractor);
