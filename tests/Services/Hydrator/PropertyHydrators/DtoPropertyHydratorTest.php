@@ -10,8 +10,10 @@ use DtoDragon\Test\ConcreteDto;
 use DtoDragon\Test\DtoDragonTestCase;
 use ReflectionNamedType;
 use ReflectionProperty;
-use ReflectionType;
 
+/**
+ * @covers \DtoDragon\Services\Hydrator\PropertyHydrators\DtoPropertyHydrator
+ */
 class DtoPropertyHydratorTest extends DtoDragonTestCase
 {
     public function testConstruct(): void

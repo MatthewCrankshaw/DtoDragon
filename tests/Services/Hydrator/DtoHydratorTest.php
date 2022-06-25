@@ -41,6 +41,25 @@ class DtoHydratorTest extends DtoDragonTestCase
         $hydrator->hydrate($dto, $data);
     }
 
+    public function testHydrateIsNullableWithNull(): void
+    {
+        $expected = $this->createTestDto();
+        $expected->setId(10)
+            ->setType(null);
+
+        $dto = $this->createTestDto();
+        $factory = new HydratorFactory();
+        $hydrator = $factory();
+        $data = [
+            'id' => 10,
+            'type' => null,
+        ];
+
+        $actual = $hydrator->hydrate($dto, $data);
+
+        static::assertEquals($expected, $actual);
+    }
+
     public function testHydratePropertyHydratorNotFound(): void
     {
         $this->expectException(PropertyHydratorNotFoundException::class);
