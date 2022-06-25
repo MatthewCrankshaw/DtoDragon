@@ -106,6 +106,11 @@ abstract class DataTransferObjectCollection implements Iterator
         return $this->items;
     }
 
+    /**
+     * @param DataTransferObject $dto
+     *
+     * @return void
+     */
     public function append(DataTransferObject $dto): void
     {
         $this->items[] = $dto;

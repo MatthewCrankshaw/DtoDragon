@@ -4,6 +4,9 @@ namespace DtoDragon\Services\Extractor;
 
 class PropertyOmitter implements PropertyOmitterInterface
 {
+    /**
+     * @var string[]
+     */
     protected array $properties;
 
     public function __construct()
@@ -16,6 +19,9 @@ class PropertyOmitter implements PropertyOmitterInterface
         $this->properties[] = $property;
     }
 
+    /**
+     * @return string[]
+     */
     public function omitted(): array
     {
         return $this->properties;

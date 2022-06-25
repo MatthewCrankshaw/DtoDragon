@@ -167,4 +167,17 @@ class DataTransferObjectCollectionTest extends DtoDragonTestCase
         static::assertInstanceOf(DataTransferObject::class, $actual[0]);
         static::assertCount(3, $actual);
     }
+
+    public function testAppend(): void
+    {
+        $dto = $this->createTestDto();
+        $collection = $this->createTestDtoCollection();
+
+        static::assertEmpty($collection->items());
+        $collection->append($dto);
+        static::assertCount(1, $collection->items());
+
+        $actual = $collection->items();
+        static::assertSame([$dto], $actual);
+    }
 }

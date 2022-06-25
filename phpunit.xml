@@ -29,7 +29,6 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
-            <directory>src/Exceptions</directory>
         </exclude>
         <report>
             <clover outputFile="clover.xml" />
